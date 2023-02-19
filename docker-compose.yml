@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: sqhg_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - envs/postgres.env
+
+  spring:
+    container_name: sqhg_sb
+    build:
+      context: ./backend
+    working_dir: /code
+    env_file:
+      - envs/postgres.env
+    volumes:
+      - ./backend/:/code/
+    ports:
+      - 0.0.0.0:8080:8080
+    depends_on:
+      - postgres
+    environment:
+      MODE: development
+      LOGS_ROOT: /code/logs/development
+      SPRING_SECRET: notreallyasecret
+
+volumes:
+  postgres_data:
