@@ -6,11 +6,16 @@ services:
     container_name: sqhg_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     env_file:
       - envs/postgres.env
+    networks:
+      - sqhg
 
   spring:
     container_name: sqhg_sb
+    restart: always
     build:
       context: ./backend
     working_dir: /code
@@ -19,13 +24,19 @@ services:
     volumes:
       - ./backend/:/code/
     ports:
-      - 0.0.0.0:8080:8080
+      - 8080:8080
     depends_on:
       - postgres
     environment:
       MODE: development
       LOGS_ROOT: /code/logs/development
       SPRING_SECRET: notreallyasecret
+    networks:
+      - sqhg
 
 volumes:
   postgres_data:
+
+networks:
+  sqhg:
+    external: true
