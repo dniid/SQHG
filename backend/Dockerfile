@@ -2,11 +2,9 @@ FROM eclipse-temurin:17-jdk-focal
 
 WORKDIR /code
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+COPY . /code
 
-COPY src ./src
+RUN chmod +x mvnw && ./mvnw dependency:go-offline
 
 EXPOSE 8080
 STOPSIGNAL SIGINT

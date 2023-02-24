@@ -39,4 +39,3 @@ volumes:
 
 networks:
   sqhg:
-    external: true
