@@ -1,41 +1,25 @@
 version: "3.7"
 
 services:
-  postgres:
+  sqhg_fastapi:
+    container_name: sqhg_fastapi
+    volumes:
+      - ./backend:/usr/src/app
+    env_file:
+      - ./envs/postgres.env
+    depends_on:
+      - sqhg_db
+
+  sqhg_db:
     image: postgres:14
     container_name: sqhg_db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
     ports:
       - 5432:5432
     env_file:
       - envs/postgres.env
-    networks:
-      - sqhg
-
-  spring:
-    container_name: sqhg_sb
-    restart: always
-    build:
-      context: ./backend
-    working_dir: /code
-    env_file:
-      - envs/postgres.env
     volumes:
-      - ./backend/:/code/
-    ports:
-      - 8080:8080
-    depends_on:
-      - postgres
-    environment:
-      MODE: development
-      LOGS_ROOT: /code/logs/development
-      SPRING_SECRET: notreallyasecret
-    networks:
-      - sqhg
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
-
-networks:
-  sqhg:
