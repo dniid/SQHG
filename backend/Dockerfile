@@ -1,12 +1,18 @@
-FROM eclipse-temurin:17-jdk-focal
+FROM python:3.11
 
-WORKDIR /code
-
-COPY . /code
-
-RUN chmod +x mvnw && ./mvnw dependency:go-offline
-
-EXPOSE 8080
+ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+WORKDIR "/usr/src/app"
 STOPSIGNAL SIGINT
 
-CMD ["./mvnw", "spring-boot:run"]
+ARG MODE
+
+COPY ["requirements/", "docker/build.sh", "/tmp/"]
+RUN sh /tmp/build.sh /tmp/
+
+ADD [".", "/usr/src/app"]
+
+EXPOSE 8000
+
+ENTRYPOINT ["/usr/src/app/docker/start.sh"]
