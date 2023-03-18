@@ -1,0 +1,28 @@
+strictness: veryhigh
+max-line-length: 119
+
+pylint:
+  options:
+    max-args: 6
+  disable:
+    - broad-exception-caught
+    - too-few-public-methods
+    - not-callable
+
+pycodestyle:
+  disable:
+    - N802  # pylint: invalid-name
+
+pyflakes:
+  disable:
+    - F841  # pylint: unused-variable
+
+mccabe:
+  options:
+    max-complexity: 12
+
+bandit:
+  run: true
+
+pyroma:
+  run: true
