@@ -26,10 +26,10 @@ jobs:
           cd backend
           prospector -X  .
       # Custom action
-      - name: Bandit
-        uses: ./.github/actions/bandit
-        with:
-          basePath: ./backend
+      - name: Safety
+        run: |
+          cd backend
+          safety check
 
       - name: Setup Docker Compose
         uses: KengoTODA/actions-setup-docker-compose@main
