@@ -7,3 +7,4 @@ SQLAlchemy~=2.0
 psycopg2~=2.9
 alembic~=1.10
 alembic-autogen-check~=1.1
+setuptools~=67.6

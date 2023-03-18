@@ -1,0 +1,18 @@
+name: 'Tests'
+description: 'Run Python Tests present in the project.'
+inputs:
+  dockerImage:
+    description: 'Docker image to run'
+    default: "."
+  script:
+    description: 'Script to run tests'
+    default: coverage run -a manage.py test
+
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: ${{ github.action_path }}/docker.sh
+      env:
+        IMAGE: ${{ inputs.dockerImage }}
+        SCRIPT: ${{ inputs.script }}
