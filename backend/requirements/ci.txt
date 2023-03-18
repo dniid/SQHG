@@ -1,5 +1,5 @@
 pylint~=2.16
-prospector~=1.8
+prospector[with_pyroma]~=1.8
 bandit~=1.7
 pycodestyle~=2.10
 safety~=2.3
