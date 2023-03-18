@@ -16,8 +16,10 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install ci dependencies
-        run: pip3 install -r ./backend/requirements/ci.txt
+      - name: Install dependencies
+        run: |
+          pip3 install -r ./backend/requirements/ci.txt
+          pip3 install -r ./backend/requirements/main.txt
 
       - name: Prospector
         run: |
