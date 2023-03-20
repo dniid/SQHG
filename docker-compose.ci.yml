@@ -22,3 +22,9 @@ services:
   sqhg_db:
     networks:
       - sqhg
+
+volumes:
+  postgres_data:
+
+networks:
+  sqhg:
