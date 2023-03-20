@@ -25,7 +25,7 @@ jobs:
         run: |
           cd backend
           prospector -X  .
-      # Custom action
+
       - name: Safety
         run: |
           cd backend

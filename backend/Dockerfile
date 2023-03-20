@@ -14,5 +14,3 @@ RUN sh /tmp/build.sh /tmp/
 ADD [".", "/usr/src/app"]
 
 EXPOSE 8000
-
-ENTRYPOINT ["/usr/src/app/docker/start.sh"]
