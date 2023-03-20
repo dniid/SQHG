@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 set -x
 
 echo "Starting SQHG Backend as `whoami`"
-if [[ $MODE == "development" ]]; then
+if [ "$MODE" = "development" ]; then
     uvicorn main:app --host $HOST --port $PORT --reload
 else
     mkdir -p $LOGS_ROOT/backend_data.log

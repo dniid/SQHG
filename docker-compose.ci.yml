@@ -9,7 +9,7 @@ services:
     environment:
       MODE: ci
       LOGS_ROOT: /var/log/backend
-    command: ["./docker/ci.sh"]
+    command: sh -c "sh ./docker/ci.sh"
     ports:
       - "8000:8000"
     env_file:
