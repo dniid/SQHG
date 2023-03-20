@@ -1,11 +1,6 @@
 version: "3.7"
 
 services:
-  postgres:
-    networks:
-      - sqhg
-
-
   sqhg_fastapi:
     build:
       context: ./backend
@@ -21,5 +16,9 @@ services:
       - ./envs/postgres.env
     depends_on:
       - sqhg_db
+    networks:
+      - sqhg
+
+  sqhg_db:
     networks:
       - sqhg
