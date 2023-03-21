@@ -7,11 +7,10 @@ from core.schemas import BaseSchema
 
 
 class AreaBase(BaseSchema):
-    nome: str
-    data_cadastro: date
-    data_inativacao: Optional[date] = None
+    name: str
+    activatino_date: date
+    deactivation_date: Optional[date] = None
     status: int
-    tipo: int
 
 
 class AreaSchema(AreaBase):
@@ -23,22 +22,21 @@ class AreaCreate(AreaBase):
 
 
 class AreaUpdate(BaseSchema):
-    nome: Optional[str]
-    data_cadastro: Optional[date]
-    data_inativacao: Optional[date]
+    name: Optional[str]
+    register_date: Optional[date]
+    deactivation_date: Optional[date]
     status: Optional[int]
-    tipo: Optional[int]
 
 
 class SuperiorBase(BaseSchema):
-    nome: str
-    cargo: str
+    name: str
+    position: str
     area_id: int
+
+
+class SuperiorSchema(SuperiorBase):
+    id: int
 
 
 class SuperiorCreate(SuperiorBase):
     pass
-
-
-class Superior(SuperiorBase):
-    id: int

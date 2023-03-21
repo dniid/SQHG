@@ -4,7 +4,7 @@ services:
   sqhg_fastapi:
     container_name: sqhg_fastapi
     volumes:
-      - ./backend:/usr/src/app
+      - ./sqhg:/usr/src/app
     env_file:
       - ./envs/postgres.env
     depends_on:
