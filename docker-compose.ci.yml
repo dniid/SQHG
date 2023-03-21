@@ -3,12 +3,12 @@ version: "3.7"
 services:
   sqhg_fastapi:
     build:
-      context: ./backend
+      context: ./sqhg
       args:
         MODE: ci
     environment:
       MODE: ci
-      LOGS_ROOT: /var/log/backend
+      LOGS_ROOT: /var/log/sqhg
     command: sh -c "sh ./docker/ci.sh"
     ports:
       - "8000:8000"

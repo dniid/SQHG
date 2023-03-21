@@ -18,17 +18,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip3 install -r ./backend/requirements/ci.txt
-          pip3 install -r ./backend/requirements/main.txt
+          pip3 install -r ./sqhg/requirements/ci.txt
+          pip3 install -r ./sqhg/requirements/main.txt
 
       - name: Prospector
         run: |
-          cd backend
+          cd sqhg
           prospector -X  .
 
       - name: Safety
         run: |
-          cd backend
+          cd sqhg
           safety check
 
       - name: Setup Docker Compose
