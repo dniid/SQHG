@@ -3,14 +3,14 @@
 
 from fastapi import FastAPI
 
-# import module.router
+from core.database import BaseModel, engine
 
+import sap.router
+
+
+BaseModel.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 
-@app.get('/')
-async def hello():
-    return "Hello!"
-
-# app.include_router(modules.router.router, prefix='/modules', tags=['Modules'])
+app.include_router(sap.router.router, prefix='/sap', tags=['SAP'])
