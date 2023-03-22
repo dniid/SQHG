@@ -12,23 +12,23 @@
 </head>
 <body class="w-full h-screen">
     <div class="w-full h-full">
-        <div class="h-full flex p-3 space-x-3">
-            <nav class="sm:w-1/6 xl:w-[10%] bg-[var(--honey-flower)] h-full rounded-xl flex flex-col px-3 pt-5 items-center space-y-7">
-                <a class="p-2" href="">
+        <div class="w-full h-full flex p-3 sm:space-x-3">
+            <nav id="nav" class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full rounded-xl sm:flex flex-col px-3 pt-5 items-center space-y-7 ease-in duration-300">
+                <a class="p-2 flex justify-center" href="">
                     <img class="w-32" src="../static/assets/prati-logo.png" alt="">
                 </a>
-                <div class="w-full space-y-5">
+                <div class="w-full space-y-3">
                     <!-- Items 1 -->
                     <div class="w-full space-y-3">
-                        <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                        <div id="nav-click-1" class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
                             <div>
                                 <i class="fa-solid fa-user"></i>
                             </div>
-                            <span>Usuários</span>
-                            <div id="nav-chevron-down" class="hidden">
+                            <span class="select-none">Usuários</span>
+                            <div id="nav-chevron-down-1" class="hidden">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div id="nav-chevron-up">
+                            <div id="nav-chevron-up-1">
                                 <i class="fa-solid fa-chevron-up"></i>
                             </div>
                         </div>
@@ -47,22 +47,22 @@
                     </div>
                     <!-- Items 2 -->
                     <div class="w-full space-y-3">
-                        <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                        <div id="nav-click-2" class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
                             <div>
                                 <i class="fa-solid fa-question"></i>
                             </div>
-                            <span>Questionários</span>
-                            <div id="nav-chevron-down" class="hidden">
+                            <span class="select-none">Questionários</span>
+                            <div id="nav-chevron-down-2" class="hidden">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div id="nav-chevron-up">
+                            <div id="nav-chevron-up-2">
                                 <i class="fa-solid fa-chevron-up"></i>
                             </div>
                         </div>
                         <div id="nav-sub-items-2" class="w-full flex justify-center space-x-3">
                             <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
                                 <a href="">
-                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <i class="fa-solid fa-object-ungroup"></i>
                                 </a>
                             </div>
                             <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
@@ -72,12 +72,36 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Items 3 -->
+                    <div class="w-full space-y-3">
+                        <div id="nav-click-2" class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                            <span class="select-none">Relatórios</span>
+                            <div id="nav-chevron-down-2" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="invisible" id="nav-chevron-up-2">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
-            <section class="sm:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-xl">
+            <section id="content" class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-xl">
+                <nav class="w-fit h-fit rounded-tl-xl px-5 py-2 shadow bg-[var(--honey-flower)] sm:hidden text-white">
+                    <div class="hover:bg-[var(--vivid-violet)] rounded-xl px-4 py-2.5 w-fit">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </div>
+                    <div class="w-8/12">
+
+                    </div>
+                </nav>
                 &nbsp;
             </section>
         </div>
     </div>
+    <script src="../static/js/navbar.js"></script>
 </body>
 </html>
