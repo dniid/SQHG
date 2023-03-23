@@ -7,6 +7,10 @@ const navChevD2 = document.getElementById("nav-chevron-down-2");
 const navChevU1 = document.getElementById("nav-chevron-up-1");
 const navChevU2 = document.getElementById("nav-chevron-up-2");
 
+const mobileNavClick = document.getElementById("mobile-nav-click");
+const mobileMenu = document.getElementById("mobile-menu");
+const content = document.getElementById("content");
+
 
 navClick1.addEventListener("click", (event) => {
     if (navSubItens1.classList.contains("hidden")) {
@@ -30,4 +34,14 @@ navClick2.addEventListener("click", (event) => {
         navChevU2.classList.add("hidden");
         navChevD2.classList.remove("hidden");
     }
-})
+});
+
+mobileNavClick.addEventListener("click", (event) => {
+    if (mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        content.classList.remove("hidden");
+    } else {
+        mobileMenu.classList.remove("hidden");
+        content.classList.add("hidden");
+    }
+});
