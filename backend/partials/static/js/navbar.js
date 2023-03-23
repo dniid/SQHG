@@ -38,10 +38,10 @@ navClick2.addEventListener("click", (event) => {
 
 mobileNavClick.addEventListener("click", (event) => {
     if (mobileMenu.classList.contains("hidden")) {
-        mobileMenu.classList.add("hidden");
-        content.classList.remove("hidden");
-    } else {
         mobileMenu.classList.remove("hidden");
         content.classList.add("hidden");
+    } else {
+        mobileMenu.classList.add("hidden");
+        content.classList.remove("hidden");
     }
 });
