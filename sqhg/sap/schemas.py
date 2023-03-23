@@ -8,7 +8,7 @@ from core.schemas import BaseSchema
 
 class AreaBase(BaseSchema):
     name: str
-    activatino_date: date
+    activation_date: date
     deactivation_date: Optional[date] = None
     status: int
 
