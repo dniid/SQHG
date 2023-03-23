@@ -9,7 +9,8 @@ services:
     environment:
       MODE: ci
       LOGS_ROOT: /var/log/sqhg
-    command: sh -c "sh ./docker/ci.sh"
+      WAIT_HOSTS: sqhg_db:5432
+    command: sh -c "/wait && sh ./docker/ci.sh"
     ports:
       - "8000:8000"
     env_file:
