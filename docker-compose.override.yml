@@ -3,14 +3,15 @@ version: "3.7"
 services:
   sqhg_fastapi:
     build:
-      context: ./backend
+      context: ./sqhg
       args:
         MODE: development
     environment:
       MODE: development
       PORT: 8000
       HOST: 0.0.0.0
-      LOGS_ROOT: /var/log/backend
+      LOGS_ROOT: /var/log/sqhg
+    command: sh -c "sh ./docker/start.sh"
     ports:
       - "8000:8000"
     env_file:
