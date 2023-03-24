@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+    <title>Login</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+
+                        honeyFlower: '#5C2472',
+
+                        vividViolet: '#853A9E',
+
+                        whiteViolet: '#C167F9',
+
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .content-auto {
+            content-visibility: auto;
+          }
+        }
+      </style>
+
+</head>
+
+<body class="bg-honeyFlower">
+
+    <div class="my-60">
+        <form action="/#" class="my-1">
+            <div class="w-96  p-1 mx-auto rounded-x1 space-y-1">
+                <input id="email" name="email" type="email"
+                    class="w-full placeholder-white text-white bg-whiteViolet px-3 py-1 border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
+                    placeholder="Login">
+            </div>
+
+        </form>
+
+        <form action="/#" class="my-1">
+            <div class="w-96 p-1  mx-auto rounded-x1 space-y-1">
+                <input id="password" name="password" type="password"
+                    class="w-full placeholder-white text-white bg-whiteViolet px-3 py-1  border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
+                    placeholder="Senha">
+            </div>
+        </form>
+
+        <form action="/#" class=" w-96  p-1 mx-auto rounded-x1my-1">
+            <button type="button"
+                class="w-full bg-vividViolet px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-center">
+                <span>Entrar</span>
+            </button>
+        </form>
+
+        <form action="/#" class="my-1">
+            <div class="w-96  p-8 px-3 py-0 mt-0 mx-auto rounded-x1 space-y-1">
+                <a href="#" class="text-xs text-whiteViolet">Esqueceu a senha?</a>
+            </div>
+        </form>
+
+        <form action="/#" class="my-1">
+            <div class="w-96  p-8 px-3 py-0  mt-0 mx-auto rounded-x1 space-y-1">
+                <a href="#" class="text-xs text-whiteViolet">voltar</a>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
