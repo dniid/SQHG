@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        crossorigin="anonymous" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
+
+        <div class="flex flex-col items-center">
+            <img class="w-40 mb-5" src="../../static/assets/prati-logo.png">
+
+
+            <form action="/#" class="my-1">
+                <div class="w-96  p-1 mx-auto space-y-1  "></div>
+                <a class="w-full  text-white px-3 py-1 cursor-default   ">Digite seu e-mail e enviaremos um link para redefinir a senha</a>
+            </form>
+
+            <form action="/#" class="my-1">
+                <div class="w-96  p-1 mx-auto rounded-x1 space-y-1">
+                    <input id="email" name="email" type="email"
+                        class="w-full placeholder-white text-white bg-[var(--white-violet)] px-3 py-1 border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
+                        placeholder="E-mail">
+                </div>
+            </form>
+
+            <div class=" inline-flex space-x-4 py-2 ">
+                <form action="/#" class=" w-48  px-3 mx-auto rounded-x1my-1">
+                    <button type="button"
+                        class="w-full bg-[var(--vivid-violet)] px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-center">
+                        <span>Cancelar</span>
+                    </button>
+                </form>
+
+                <form action="/#" class=" w-48 px-3 mx-auto rounded-x1my-1">
+                    <button type="button"
+                        class="w-full bg-[var(--vivid-violet)] px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-center">
+                        <span>Enviar</span>
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
