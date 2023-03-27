@@ -27,9 +27,10 @@ app.include_router(user.router.router, prefix='/user', tags=['User'])
 
 static_dirs = find_dirs('.', 'static')
 for dir in static_dirs:
-    app.mount(f"/static/{dir}", StaticFiles(directory=dir), name=dir)
+    app.mount(f'/static', StaticFiles(directory=dir), name=dir)
 
 templates = Jinja2Templates(directory=find_dirs('.', 'templates'))
+templates.env.static_dirs = static_dirs
 templates.env.add_extension(StaticFilesExtension)
 
 
