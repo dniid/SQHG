@@ -31,9 +31,9 @@ def find_dirs(root_dir, dir_name):
     returns their absolute paths.
     """
     dirs = []
-    for dirpath, dirnames, filenames in os.walk(root_dir):
+    for dirpath, dirnames, filename in os.walk(root_dir):  # pylint: disable=unused-argument
         if dir_name in dirnames:
-            dir = os.path.join(dirpath, dir_name)
-            dirs.append(dir)
+            directory = os.path.join(dirpath, dir_name)
+            dirs.append(directory)
 
     return dirs
