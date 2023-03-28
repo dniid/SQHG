@@ -37,4 +37,4 @@ templates.env.add_extension(StaticFilesExtension)
 @app.get('/', response_class=HTMLResponse)
 async def homepage(request: Request):
     context = {'request': request}
-    return templates.TemplateResponse('components/navbar.html', context)
+    return templates.TemplateResponse('base.html', context)
