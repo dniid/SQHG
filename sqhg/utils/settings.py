@@ -22,18 +22,3 @@ def getlist(key, default=None, separator=','):
     default = [] if default is None else default
     value = os.getenv(key, '').strip()
     return value.split(separator) if value else default
-
-
-def find_dirs(root_dir, dir_name):
-    """
-    Searches for all directories 'dir_name'
-    within the specified root directory and
-    returns their absolute paths.
-    """
-    dirs = []
-    for dirpath, dirnames, filename in os.walk(root_dir):  # pylint: disable=unused-variable
-        if dir_name in dirnames:
-            directory = os.path.join(dirpath, dir_name)
-            dirs.append(directory)
-
-    return dirs

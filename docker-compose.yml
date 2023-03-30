@@ -3,7 +3,6 @@ version: "3.7"
 services:
   sqhg_fastapi:
     container_name: sqhg_fastapi
-    restart: unless-stopped
     volumes:
       - ./sqhg:/usr/src/app
     env_file:

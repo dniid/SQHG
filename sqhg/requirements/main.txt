@@ -8,4 +8,3 @@ psycopg2~=2.9
 alembic~=1.10
 alembic-autogen-check~=1.1
 setuptools~=67.6
-Jinja2~=3.1
