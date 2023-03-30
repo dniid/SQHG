@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Title</title>
+
+    <!-- [Links Partial here] -->
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        crossorigin="anonymous" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <!-- Basic website structure -->
+    <div class="w-full h-screen">
+        <div class="w-full h-full flex flex-col sm:flex-row p-3 sm:space-x-3">
+            <!-- Navbar -->
+            <!-- [Navbar Partial here] -->
+            <!-- Mobile Nav -->
+            <nav class="w-full h-fit rounded-t-xl px-5 py-2 shadow bg-[var(--honey-flower)] sm:hidden text-white flex">
+                <div class="w-full h-full flex items-center">
+                    <a href="">
+                        <img class="h-14" src="../../static/assets/prati_minilogo.png" alt="" />
+                    </a>
+                </div>
+                <div id="mobileOpenMenu" class="hover:bg-[var(--vivid-violet)] rounded-xl px-4 py-2.5 w-fit">
+                    <i class="fa-solid fa-bars text-3xl"></i>
+                </div>
+            </nav>
+            <!-- Desktop Nav -->
+            <nav id="nav"
+                class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full rounded-xl sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
+                <a class="p-2 flex justify-center" href="">
+                    <img class="w-32" src="../../static/assets/prati-logo.png" alt="" />
+                </a>
+                <div class="flex flex-col w-full h-full space-y-3">
+                    <!-- Items 1 -->
+                    <div class="w-full h-fit space-y-3">
+                        <div id="openUserSubItems"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="select-none">Usuários</span>
+                            <div id="userChevronDown" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="userChevronUp">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                        <div id="userSubItems" class="w-full flex justify-center space-x-3">
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a class="block" href="">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            </div>
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a class="block" href="">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Items 2 -->
+                    <div class="w-full h-fit space-y-3">
+                        <div id="openQuestionnairesSubItems"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                            <span class="select-none">Questionários</span>
+                            <div id="questionnairesChevronDown" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="questionnairesChevronUp">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                        <div id="questionnairesSubItems" class="w-full flex justify-center space-x-3">
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a href="">
+                                    <i class="fa-solid fa-object-ungroup"></i>
+                                </a>
+                            </div>
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a href="">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Items 3 -->
+                    <div class="w-full h-fit space-y-3">
+                        <div id="nav-click-2"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                            <span class="select-none">Relatórios</span>
+                            <div id="nav-chevron-down-2" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="invisible" id="nav-chevron-up-2">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="tel:4521031166">
+                        <div class="w-full h-full space-x-3 items-center flex flex-col">
+                            <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
+                                <div class="flex justify-center" href="">
+                                    <img class="w-24" src="../../static/assets/atendimento-geral.svg" alt="" />
+                                </div>
+                                <div class="flex flex-col items-center text-xl space-y-2">
+                                    <span class="w-40 text-center">Atendimento Geral</span>
+                                    <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+            <!-- Mobile Menu -->
+            <section id="mobileMenu"
+                class="hidden h-full w-full rounded-b-xl flex flex-col px-3 pt-5 items-center space-y-7 bg-[var(--honey-flower)] sm:hidden">
+                <div class="w-full space-y-3">
+                    <!-- Items 1 -->
+                    <div class="w-full space-y-3">
+                        <div id="mobileOpenUserSubItems"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="select-none">Usuários</span>
+                            <div id="mobileUserChevronDown" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="mobileUserChevronUp">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                        <div id="mobileUserSubItems" class="w-full flex justify-center space-x-3">
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a class="block" href="">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            </div>
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a class="block" href="">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Items 2 -->
+                    <div class="w-full space-y-3">
+                        <div id="mobileOpenQuestionnairesSubItems"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                            <span class="select-none">Questionários</span>
+                            <div id="mobileQuestionnairesChevronDown" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="mobileQuestionnairesChevronUp">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                        <div id="mobileQuestionnairesSubItems" class="w-full flex justify-center space-x-3">
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a href="">
+                                    <i class="fa-solid fa-object-ungroup"></i>
+                                </a>
+                            </div>
+                            <div
+                                class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+                                <a href="">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Items 3 -->
+                    <div class="w-full space-y-3">
+                        <div id="movile-nav-click-2"
+                            class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                            <div>
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                            <span class="select-none">Relatórios</span>
+                            <div id="mobile-nav-chevron-down-2" class="hidden">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="invisible" id="mobile-nav-chevron-up-2">
+                                <i class="fa-solid fa-chevron-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="tel:4521031166">
+                        <div class="w-full h-full space-x-3 items-center flex flex-col">
+                            <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
+                                <div class="flex justify-center" href="">
+                                    <img class="w-24" src="../../static/assets/atendimento-geral.svg" alt="" />
+                                </div>
+                                <div class="flex flex-col items-center text-xl space-y-2">
+                                    <span class="w-40 text-center">Atendimento Geral</span>
+                                    <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Content -->
+            <section id="bodyContent"
+                class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto pt-3 px-5 h-full">
+                <div class="flex flex-col items-center">
+                    <div class="top-bar bg-white h-65 rounded-xl w-full">
+                        <div class="title">
+                            <div class="text-center">
+                                <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
+                                    Enviar Questionário
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row justify-start py-10">
+                        <div class="w-full md:w-40 mr-24">
+                            <div class="Titile-collum">
+                                <h1 class="text-2xl font-bold py-2 text-[var(--vivid-violet)]">
+                                    Área
+                                </h1>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-purple-800">
+                                <div class="flex flex-col justify-start">
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Financeiro</span>
+                                    </label>
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Administrativo</span>
+                                    </label>
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">RH</span>
+                                    </label>
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Produção</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-40 ">
+                            <div class="Titile-collum">
+                                <h1 class="text-2xl font-bold py-2 text-[var(--vivid-violet)]">
+                                    Cargo
+                                </h1>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-purple-800">
+                                <div class="flex flex-col justify-start">
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Supervisor</span>
+                                    </label>
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Gerente</span>
+                                    </label>
+                                    <label class="inline-flex">
+                                        <input type="checkbox" class="form-checkbox" />
+                                        <span class="ml-2">Diretor</span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-end">
+                            <div class="flex flex-col input w-full p-5 xl:p-0 xl:w-1/2 space-y-5">
+                                <div class="flex flex-col justify-start">
+                                    <div class="input-box">
+                                        <label class="w-fit text-[#853A9E] font-bold" for="txtDataInicio">Data
+                                            Inicio</label>
+                                        <input id="txtDataInicio" type="date" required
+                                            class="w-full  border border-purple-800 rounded-md">
+                                    </div>
+
+                                    <div class="imput-box">
+                                        <label class="w-fit text-[#853A9E] font-bold" for="HoraInicio">Hora Inicio</label>
+                                        <input id="HoraInicio" type="number" required
+                                            class="w-full border border-purple-800 rounded-md">
+                                    </div>
+
+                                    <div class="input-box">
+                                        <label class="w-fit text-[#853A9E] font-bold" for="txtDataFinal">Data
+                                            Final</label>
+                                        <input id="txtDataFinal" type="date" required
+                                            class="w-full  border border-purple-800 rounded-md">
+                                    </div>
+
+                                    <div class="imput-box">
+                                        <label class="w-fit text-[#853A9E] font-bold" for="HoraInicio">Hora Inicio</label>
+                                        <input id="HoraInicio" type="number" required
+                                            class="w-full border border-purple-800 rounded-md">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="w-full md:w-2/3 py-1">
+                        <div
+                            class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                            <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                            Área
+                                        </th>
+
+                                        <th
+                                            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                            Cargo
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                            Nome
+                                        </th>
+
+                                        <th
+                                            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                            Ações
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                            RH
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                            Supervisor
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                            Matheus
+                                        </td>
+
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                            <div class="flex justify-center">
+
+                                                <a>
+                                                    <button type="button"
+                                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
+                                                            class="fa-solid fa-pen-to-square"></i></button>
+                                                </a>
+                                                <form>
+                                                    <button type="submit"
+                                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
+                                                        <i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="w-fit flex justify-end py-10 w-full">
+                            <div class="Criar-button">
+                                <button
+                                    class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
+                                    Novo Modelo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+
+        </section>
+    </div>
+
+    <!-- [Scripts Partial here] -->
+    <script src="../../static/js/navbar.js"></script>
+</body>
+
+</html>
