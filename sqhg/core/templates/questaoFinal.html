@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Title</title>
+
+    <!-- [Links Partial here] -->
+    
+</head>
+
+<body>
+    <!-- Basic website structure -->
+    <div class="w-full h-screen">
+        <div class="w-full h-full flex flex-col sm:flex-row p-3 sm:space-x-3">
+            <!-- Navbar -->
+            <!-- Mobile Nav -->
+            <nav class="w-full h-fit rounded-t-xl px-5 py-2 shadow bg-[var(--honey-flower)] sm:hidden text-white flex">
+                <div class="w-full h-full flex items-center">
+                    <a href="">
+                        <img class="h-14" src="../../static/assets/prati_minilogo.png" alt="">
+                    </a>
+                </div>
+            </nav>
+            <!-- Desktop Nav -->
+            <nav id="nav"
+                class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full rounded-xl sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
+                <a class="p-2 flex justify-center" href="">
+                    <img class="w-32" src="../../static/assets/prati-logo.png" alt="">
+                </a>
+            </nav>
+
+            <!-- Content -->
+            <section id="bodyContent"
+                class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto pt-3 px-5">
+                <div class="flex justify-center">
+
+                    <div class="py-5 w-full md:w-5/6">
+
+                        <div class="w-full flex justify-between px-5 mb-3 text-[var(--honey-flower)] font-bold text-xl">
+                            <div class="border-b-4 border-[var(--honey-flower)] px-3 rounded-md">
+                                Questão 3
+                            </div>
+                            <div class="border-b-4 border-[var(--honey-flower)] px-3 rounded-md">
+                                Avaliado
+                            </div>
+                        </div>
+
+                        <div class="mx-auto overflow-x-auto rounded-xl border border border-[var(--vivid-violet)] late-50">
+
+                            <div class="w-full text-sm bg-white min-w-fit">
+                                <div class="bg-[var(--honey-flower)] px-4 py-10 font-medium text-white text-2xl text-center w-full">
+                                    Estamos te ouvindo. Deixe um comentário sobre seu superior!
+                                </div>
+                                <div class="w-full flex justify-center py-5 px-5">
+                                                <textarea class="w-full h-44 bg-[var(--iron)] rounded-xl p-3"></textarea>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-between py-5">
+                            <button
+                                class="bg-[var(--honey-flower)] w-40 py-2  rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                                Anterior
+                            </button>
+                            <button
+                                class="bg-[var(--honey-flower)] w-40 py-2  rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                                Enviar
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- [Scripts Partial here] -->
+</body>
+
+</html>
