@@ -5,7 +5,7 @@ from typing import Any
 from fastapi import HTTPException, status
 
 
-class BaseException(HTTPException):
+class BaseDetailException(HTTPException):
     STATUS_CODE = status.HTTP_500_INTERNAL_SERVER_ERROR
     DETAIL = "Server error"
 
@@ -13,7 +13,7 @@ class BaseException(HTTPException):
         super().__init__(status_code=self.STATUS_CODE, detail=self.DETAIL, **kwargs)
 
 
-class CredentialsException(HTTPException):
+class CredentialsException(BaseDetailException):
     STATUS_CODE = status.HTTP_401_UNAUTHORIZED
     DETAIL = "Could not validate credentials"
 
@@ -21,7 +21,7 @@ class CredentialsException(HTTPException):
         super().__init__(headers={"WWW-Authenticate": "Bearer"})
 
 
-class InvalidCredentials(HTTPException):
+class InvalidCredentials(BaseDetailException):
     STATUS_CODE = status.HTTP_401_UNAUTHORIZED
     DETAIL = "Invalid email or password"
 

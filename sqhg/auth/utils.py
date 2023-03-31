@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Annotated
 
 from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
@@ -39,7 +39,7 @@ def authenticate_user(user: Admin, password: str):
     return user
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -58,8 +58,8 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)],
         if email is None:
             raise CredentialsException
         token_data = TokenData(email=email)
-    except JWTError:
-        raise CredentialsException
+    except JWTError as error:
+        raise CredentialsException from error
     user = database.query(Admin).filter(Admin.email == token_data.email).first()
     if user is None:
         raise CredentialsException

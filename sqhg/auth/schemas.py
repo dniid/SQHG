@@ -1,5 +1,7 @@
 """Auth's Pydantic schemas for SQHG's backend."""
 
+from typing import Optional
+
 from core.schemas import BaseSchema
 
 
@@ -9,4 +11,4 @@ class JWToken(BaseSchema):
 
 
 class TokenData(BaseSchema):
-    email: str | None = None
+    email: Optional[str] = None
