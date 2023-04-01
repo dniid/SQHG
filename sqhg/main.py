@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Main FastAPI app for SQHG's backend."""
 
+from logging.config import dictConfig
+import logging
+
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from core.database import BaseModel, engine
+from core.logger import LogConfig
 from core.template import Template
 
 from utils.settings import find_dirs
@@ -16,6 +20,9 @@ import auth.router
 import survey.router
 import user.router
 
+
+dictConfig(LogConfig().dict())
+logger = logging.getLogger('sqhg')
 
 BaseModel.metadata.create_all(bind=engine)
 
