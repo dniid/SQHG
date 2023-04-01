@@ -9,3 +9,6 @@ alembic~=1.10
 alembic-autogen-check~=1.1
 setuptools~=67.6
 Jinja2~=3.1
+python-jose[cryptography]~=3.3
+passlib[bcrypt]~=1.7.4
+python-multipart==0.0.6

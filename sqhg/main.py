@@ -12,6 +12,7 @@ from core.template import Template
 from utils.settings import find_dirs
 
 import admin.router
+import auth.router
 import survey.router
 import user.router
 
@@ -23,6 +24,7 @@ app = FastAPI()
 app.include_router(admin.router.router, prefix='/admin', tags=['Admin'])
 app.include_router(survey.router.router, prefix='/survey', tags=['Survey'])
 app.include_router(user.router.router, prefix='/user', tags=['User'])
+app.include_router(auth.router.router, tags=['Auth'])
 
 
 # Searches for directories named 'static' and then mount them dynamically
@@ -33,4 +35,4 @@ for static in find_dirs('.', 'static'):
 @app.get('/', response_class=HTMLResponse)
 async def homepage(request: Request, templates: Jinja2Templates = Depends(Template)):
     context = {'request': request}
-    return templates.TemplateResponse('components/navbar.html', context)
+    return templates.TemplateResponse('base.html', context)
