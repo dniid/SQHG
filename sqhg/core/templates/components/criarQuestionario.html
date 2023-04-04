@@ -264,65 +264,66 @@
                         </div>
 
                         <div class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-                            <div class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
+                            <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
                                 <div class="w-full text-center">
-                                    <h1>Questão 1</h1>
-                                    <input id="novoTitulo" class="w-full text-center hidden" type="text">
+                                    <h1 id="quest[01]" class="font-bold">Questão 1</h1>
+                                    <input id="title[01]"
+                                        class="w-full text-center hidden border border-[var(--flushed-violet)] rounded"
+                                        type="text" autocomplete="off">
                                 </div>
-                                <div class="w-fit px-5 flex items-center">
-                                    <i id="editarTitulo" class="fa-solid fa-pencil"></i>
+                            </span>
+                            <div id="questBody01"
+                                class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
+                                <span class="text-4xl text-[var(--flushed-violet)]">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <div class="hidden w-full">
+                                    De 0 a 10
                                 </div>
-                            </div>
-                            <div class="w-full flex space-x-10 justify-center">
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[1][]">
-                                    <label for="scales">0 a 10</label>
+                                <div class="hidden w-full">
+                                    Alternativas
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[1][]">
-                                    <label for="scales">Alternativas</label>
+                                <div class="hidden w-full">
+                                    Múltipla Escolha
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[1][]">
-                                    <label for="scales">Múltipla Escolha</label>
+                                <div class="hidden w-full">
+                                    Aberta
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[1][]">
-                                    <label for="scales">Aberta</label>
-                                </div>
+                                <span class="text-4xl text-[var(--flushed-violet)]">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
 
                         <div class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-                            <div class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
+                            <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
                                 <div class="w-full text-center">
-                                    <h1>Questão 2</h1>
-                                    <input id="novoTitulo" class="w-full text-center hidden" type="text">
+                                    <h1 id="quest[02]" class="font-bold">Questão 2</h1>
+                                    <input id="title[02]"
+                                        class="w-full text-center hidden border border-[var(--flushed-violet)] rounded"
+                                        type="text" autocomplete="off">
                                 </div>
-                                <div class="w-fit px-5 flex items-center">
-                                    <i id="editarTitulo" class="fa-solid fa-pencil"></i>
+                            </span>
+                            <div id="questBody02"
+                                class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
+                                <span class="text-4xl text-[var(--flushed-violet)]">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <div class="hidden w-full">
+                                    De 0 a 10
                                 </div>
-                            </div>
-                            <div class="w-full flex space-x-10 justify-center">
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[2][]">
-                                    <label for="scales">0 a 10</label>
+                                <div class="hidden w-full">
+                                    Alternativas
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[2][]">
-                                    <label for="scales">Alternativas</label>
+                                <div class="hidden w-full">
+                                    Múltipla Escolha
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[2][]">
-                                    <label for="scales">Múltipla Escolha</label>
+                                <div class="hidden w-full">
+                                    Aberta
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" id="scales" name="fooby[2][]">
-                                    <label for="scales">Aberta</label>
-                                </div>
-                            </div>
-                            <div>
-
+                                <span class="text-4xl text-[var(--flushed-violet)]">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -342,9 +343,9 @@
                 // If checkbox is checked
                 if (this.checked) {
                     // Get all checkboxes with the same name
-                    const group = document.querySelectorAll(`input[type="checkbox"][name="${this.name}"]`);
+                    const checkboxGroup = document.querySelectorAll(`input[type="checkbox"][name="${this.name}"]`);
                     // Uncheck all checkboxes in the group except for the one clicked
-                    group.forEach(function (checkbox) {
+                    checkboxGroup.forEach(function (checkbox) {
                         checkbox.checked = false;
                     });
                     this.checked = true; // Check the clicked checkbox
@@ -353,6 +354,119 @@
                 }
             });
         });
+
+        // Get references to all h1 tags with ids that start with "quest"
+        const h1s = document.querySelectorAll('h1[id^="quest"]');
+
+        // Add a click event listener to each h1 tag
+        h1s.forEach(h1 => {
+            h1.addEventListener('click', () => {
+                // Extract the number from the h1 tag id
+                const number = h1.id.slice(6, 8); // Assumes the id is "quest[01]"
+
+                // Find the input tag with id "title[01]"
+                const input = document.querySelector(`#title\\[${number}\\]`);
+
+                h1.classList.add("hidden");
+                input.classList.remove("hidden");
+                input.focus();
+
+                // Add a blur event listener to the input
+                input.addEventListener('blur', () => {
+                    // Show the alert "hello" when the input loses focus
+                    const inputValue = input.value;
+
+                    if (!(input.value.trim() === "")) {
+                        h1.innerHTML = inputValue;
+                        h1.classList.remove("hidden");
+                        input.classList.add("hidden");
+                    }
+
+
+                });
+            });
+        });
+
+
+        // change content of a div
+        const questBodys = document.querySelectorAll('div[id^="questBody"]');
+
+        questBodys.forEach(questBody => {
+
+            const numberBody = questBody.id.slice(9, 11); // Assumes the id is "questBody01"
+
+            // Find the input tag with id "title[01]"
+            const bodyDiv = `questBody${numberBody}`;
+
+            const divs = document.querySelectorAll(`#${bodyDiv} > div`);
+            let index = 0;
+            divs[index].classList.remove("hidden");
+
+            const myDiv = document.getElementById(`${bodyDiv}`);
+            myDiv.addEventListener("click", function () {
+                myDiv.focus();
+            });
+
+            let touchStartX = null;
+            myDiv.addEventListener("touchstart", function (e) {
+                if (myDiv !== document.activeElement) {
+
+                    return;
+                }
+                touchStartX = e.touches[0].clientX;
+            });
+
+            myDiv.addEventListener("touchmove", function (e) {
+                if (myDiv !== document.activeElement || touchStartX === null) {
+                    return;
+                }
+
+                const touchEndX = e.touches[0].clientX;
+                const delta = touchEndX - touchStartX;
+
+                if (delta > 0) { // Swipe right
+                    divs[index].classList.add("hidden");
+                    index--;
+                    if (index < 0) {
+                        index = divs.length - 1;
+                    }
+                    divs[index].classList.remove("hidden");
+                } else if (delta < 0) { // Swipe left
+                    divs[index].classList.add("hidden");
+                    index++;
+                    if (index >= divs.length) {
+                        index = 0;
+                    }
+                    divs[index].classList.remove("hidden");
+                }
+
+                touchStartX = null;
+            });
+
+            document.addEventListener("keydown", function (e) {
+                if (myDiv !== document.activeElement) {
+                    return;
+                }
+
+                if (e.keyCode === 37) { // Left arrow
+                    divs[index].classList.add("hidden");
+                    index--;
+                    if (index < 0) {
+                        index = divs.length - 1;
+                    }
+                    divs[index].classList.remove("hidden");
+                } else if (e.keyCode === 39) { // Right arrow
+                    divs[index].classList.add("hidden");
+                    index++;
+                    if (index >= divs.length) {
+                        index = 0;
+                    }
+                    divs[index].classList.remove("hidden");
+                }
+            });
+
+        });
+
     </script>
 </body>
 

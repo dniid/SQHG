@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myDiv">
+        <span>Click me to focus</span>
+        <div id="he" class="hidden">he</div>
+        <div id="she" class="hidden">she</div>
+        <div id="it" class="hidden">it</div>
+    </div>
+      
+      <style>
+        .hidden {
+          display: none;
+        }
+      </style>
+      
+      <script>
+        const divs = document.querySelectorAll("#myDiv > div");
+        let index = 0;
+        divs[index].classList.remove("hidden");
+      
+        const myDiv = document.getElementById("myDiv");
+        myDiv.addEventListener("click", function() {
+          myDiv.focus();
+        });
+      
+        let touchStartX = null;
+        myDiv.addEventListener("touchstart", function(e) {
+          touchStartX = e.touches[0].clientX;
+        });
+      
+        myDiv.addEventListener("touchmove", function(e) {
+          if (touchStartX === null) {
+            return;
+          }
+      
+          const touchEndX = e.touches[0].clientX;
+          const delta = touchEndX - touchStartX;
+      
+          if (delta > 0) { // Swipe right
+            divs[index].classList.add("hidden");
+            index--;
+            if (index < 0) {
+              index = divs.length - 1;
+            }
+            divs[index].classList.remove("hidden");
+          } else if (delta < 0) { // Swipe left
+            divs[index].classList.add("hidden");
+            index++;
+            if (index >= divs.length) {
+              index = 0;
+            }
+            divs[index].classList.remove("hidden");
+          }
+      
+          touchStartX = null;
+        });
+      
+        document.addEventListener("keydown", function(e) {
+          if (e.keyCode === 37) { // Left arrow
+            divs[index].classList.add("hidden");
+            index--;
+            if (index < 0) {
+              index = divs.length - 1;
+            }
+            divs[index].classList.remove("hidden");
+          } else if (e.keyCode === 39) { // Right arrow
+            divs[index].classList.add("hidden");
+            index++;
+            if (index >= divs.length) {
+              index = 0;
+            }
+            divs[index].classList.remove("hidden");
+          }
+        });
+      </script>
+</body>
+</html>
