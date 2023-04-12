@@ -19,17 +19,12 @@ services:
       - "8000:8000"
     env_file:
       - ./envs/postgres.env
-    depends_on:
-      - sqhg_db
     networks:
       - sqhg
 
   sqhg_db:
     networks:
       - sqhg
-
-volumes:
-  postgres_data:
 
 networks:
   sqhg:
