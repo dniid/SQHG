@@ -227,8 +227,8 @@
 
             <!-- Content -->
             <section id="bodyContent"
-                class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto pt-3 px-5">
-                <div class="flex flex-col items-center">
+                class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto py-3 px-5">
+                <div class="flex flex-col items-center h-full">
                     <div class="top-bar bg-white h-65 rounded-xl w-full mb-5">
                         <div class="title">
                             <div class="text-center">
@@ -239,111 +239,64 @@
                         </div>
                     </div>
 
-                    <div id="questions" class="w-full flex flex-col space-y-3 md:w-2/3 ">
-                        <div
-                            class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] space-y-1">
-
+                    <div id="surveyForm" class="w-full md:w-2/3 h-full flex flex-col">
+                        <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3">
                             <div class="w-full flex items-center">
                                 <div class="w-full text-center">
-                                    <h1 id="mQuest[01]" class="font-bold cursor-pointer" tabindex="0">Nome do Relatório</h1>
-                                    <input id="mTitle[01]" class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
+                                    <h1 id="surveyName" class="font-bold cursor-pointer" tabindex="0">Nome do Questionário</h1>
+                                    <input id="surveyNameInput" class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
                                 </div>
                             </div>
                             <div class="w-full flex items-center italic text-lg text-[var(--flash-grey)]">
                                 <div class="w-full text-center">
-                                    <h1 id="mQuest[02]" class="cursor-pointer" tabindex="0">Descrição do modelo do questionário</h1>
-                                    <input id="mTitle[02]" class="w-full text-center italic hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
+                                    <h1 id="surveyDescription" class="cursor-pointer" tabindex="0">Descrição do modelo do questionário</h1>
+                                    <input id="surveyDescriptionInput" class="w-full text-center italic hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
                                 </div>
                             </div>
                         </div>
 
-                        <div id="question[01]" class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-                            <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
-                                <div class="w-full text-center">
-                                    <h1 id="quest[01]" class="font-bold cursor-pointer" tabindex="0">Questão 01</h1>
-                                    <input id="title[01]"
-                                        class="w-full text-center font-bold hidden border border-[var(--flushed-violet)] rounded"
-                                        type="text" autocomplete="off">
+                        <div class="questionsContainer">
+                            <div class="question-form-template flex gap-1 w-full mb-3 hidden">
+                                <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
+                                    <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
+                                        <div class="w-full text-center flex justify-start items-center">
+                                            <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-question">
+                                                <i class="fa-solid fa-square-minus"></i>
+                                            </div>
+                                            <label class="font-bold">
+                                                Questão:
+                                            </label>
+                                            <input class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                   type="text" autocomplete="off">
+                                            <select class="border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
+                                                <option value="likert">De 0 a 10</option>
+                                                <option value="alternative">Alternativas</option>
+                                                <option value="multiple">Múltipla Escolha</option>
+                                                <option value="open">Aberta</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="questDelete[01]" class="w-fit flex items-center text-center text-4xl font-bold text-red-900 px-5 cursor-pointer">
-                                    <i class="fa-solid fa-square-minus"></i>
-                                </div>
-                            </span>
-                            <div id="questBody01"
-                                class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
-                                <span class="text-4xl text-[var(--flushed-violet)]">
-                                    <i class="fa-solid fa-chevron-left opacity-50"></i>
-                                </span>
-                                <div class="hidden w-full">
-                                    De 0 a 10
-                                </div>
-                                <div class="hidden w-full">
-                                    Alternativas
-                                </div>
-                                <div class="hidden w-full">
-                                    Múltipla Escolha
-                                </div>
-                                <div class="hidden w-full">
-                                    Aberta
-                                </div>
-                                <span class="text-4xl text-[var(--flushed-violet)]">
-                                    <i class="fa-solid fa-chevron-right  opacity-50"></i>
-                                </span>
                             </div>
                         </div>
 
-                        <div id="question[02]" class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-                            <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
-                                <div class="w-full text-center">
-                                    <h1 id="quest[02]" class="font-bold cursor-pointer" tabindex="0">Questão 02</h1>
-                                    <input id="title[02]"
-                                        class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded"
-                                        type="text" autocomplete="off">
-                                </div>
-                                <div id="questDelete[02]" class="w-fit flex items-center text-center text-4xl font-bold text-red-900 px-5 cursor-pointer">
-                                    <i class="fa-solid fa-square-minus"></i>
-                                </div>
-                            </span>
-                            <div id="questBody02"
-                                class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
-                                <span class="text-4xl text-[var(--flushed-violet)]">
-                                    <i class="fa-solid fa-chevron-left opacity-50"></i>
-                                </span>
-                                <div class="hidden w-full">
-                                    De 0 a 10
-                                </div>
-                                <div class="hidden w-full">
-                                    Alternativas
-                                </div>
-                                <div class="hidden w-full">
-                                    Múltipla Escolha
-                                </div>
-                                <div class="hidden w-full">
-                                    Aberta
-                                </div>
-                                <span class="text-4xl text-[var(--flushed-violet)]">
-                                    <i class="fa-solid fa-chevron-right opacity-50"></i>
-                                </span>
+                        <div class="w-full flex flex-col mb-3">
+                            <div class="flex justify-start w-full">
+                                <button id="addQuestion" class="bg-[var(--vivid-violet)] h-full aspect-w-1 py-2 px-3 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
                             </div>
                         </div>
-                    
-                    </div>
-                    <div class="w-full flex flex-col space-y-3 md:w-2/3">
-                        <div id="addQuestion" class="flex justify-end w-full space-x-5 py-5">
-                            <button
-                                class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-                                <i class="fa-solid fa-square-plus"></i>
-                            </button>
-                        </div>
-                        <div class="flex justify-end w-full space-x-5">
-                            <button
-                                class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-                                Cancelar
-                            </button>
-                            <button
-                                class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-                                Gravar
-                            </button>
+
+                        <div class="w-full flex flex-col">
+                            <div class="flex gap-4 justify-end w-full">
+                                <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                                    Cancelar
+                                </button>
+                                <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                                    Gravar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -353,40 +306,31 @@
     <!-- [Scripts Partial here] -->
     <script src="../../static/js/navbar.js"></script>
     <script>
-        // Get all checkbox input elements
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let addButton = document.getElementById('addQuestion');
+        addButton.addEventListener('click', addNewQuestion);
 
-        // Add click event listeners to each checkbox
-        checkboxes.forEach(function (checkbox) {
-            checkbox.addEventListener('click', function () {
-                // If checkbox is checked
-                if (this.checked) {
-                    // Get all checkboxes with the same name
-                    const checkboxGroup = document.querySelectorAll(`input[type="checkbox"][name="${this.name}"]`);
-                    // Uncheck all checkboxes in the group except for the one clicked
-                    checkboxGroup.forEach(function (checkbox) {
-                        checkbox.checked = false;
-                    });
-                    this.checked = true; // Check the clicked checkbox
-                } else {
-                    this.checked = false; // Uncheck the clicked checkbox
-                }
+        function addNewQuestion() {
+            let questionsContainer = document.querySelector('.questionsContainer');
+            let question = document.querySelector('.question-form-template').cloneNode(true);
+            question.classList.remove('question-form-template', 'hidden');
+            question.classList.add('question-form');
+            questionsContainer.appendChild(question);
+
+            let removeButton = question.querySelector('.btn-remove-question');
+            removeButton.addEventListener('click', (el) => {
+                removeButton.closest('.question-form').remove();
             });
-        });
+        };
 
         // Get references to all h1 tags with ids that start with "quest"
-        const questH1s = document.querySelectorAll('h1[id^="quest"]');
+        let questionHead = document.querySelectorAll('#surveyName, #surveyDescription');
 
         // Add a click event listener to each h1 tag
-        questH1s.forEach(h1 => {
-            h1.addEventListener('focus', () => {
-                // Extract the number from the h1 tag id
-                const number = h1.id.slice(6, 8); // Assumes the id is "quest[01]"
+        questionHead.forEach(el => {
+            el.addEventListener('focus', () => {
+                let input = el.parentNode.querySelector('input');
 
-                // Find the input tag with id "title[01]"
-                const input = document.querySelector(`#title\\[${number}\\]`);
-
-                h1.classList.add("hidden");
+                el.classList.add("hidden");
                 input.classList.remove("hidden");
                 input.focus();
 
@@ -396,198 +340,159 @@
                     const inputValue = input.value;
 
                     if (!(input.value.trim() === "")) {
-                        h1.innerHTML = inputValue;
-                        h1.classList.remove("hidden");
+                        el.innerHTML = inputValue;
+                        el.classList.remove("hidden");
                         input.classList.add("hidden");
                     }
-
-
                 });
             });
         });
 
-
-        const mainQuestAbout = document.querySelectorAll('h1[id^="mQuest"]');
-        // Add a click event listener to each h1 tag
-        mainQuestAbout.forEach(h1 => {
-            h1.addEventListener('focus', () => {
-                // Extract the number from the h1 tag id
-                const number = h1.id.slice(7, 9); // Assumes the id is "mquest[01]"
-
-                // Find the input tag with id "mtitle[01]"
-                const input = document.querySelector(`#mTitle\\[${number}\\]`);
-
-                h1.classList.add("hidden");
-                input.classList.remove("hidden");
-                input.focus();
-
-                // Add a blur event listener to the input
-                input.addEventListener('blur', () => {
-                    // Show the alert "hello" when the input loses focus
-                    const inputValue = input.value;
-
-                    if (!(input.value.trim() === "")) {
-                        h1.innerHTML = inputValue;
-                        h1.classList.remove("hidden");
-                        input.classList.add("hidden");
-                    }
-
-
-                });
-            });
-        });
-        
+        addNewQuestion();
 
 
 
+        // const questBodys = document.querySelectorAll('div[id^="questBody"]');
+        // questBodys.forEach(questBody => {
+        //     const numberBody = questBody.id.slice(9, 11); // Assumes the id is "questBody01"
+        //     // Find the input tag with id "title[01]"
+        //     const bodyDiv = `questBody${numberBody}`;
+        //     const divs = document.querySelectorAll(`#${bodyDiv} > div`);
+        //     let index = 0;
+        //     divs[index].classList.remove("hidden");
 
+        //     const myDiv = document.getElementById(`${bodyDiv}`);
+        //     myDiv.addEventListener("click", function () {
+        //         myDiv.focus();
+        //     });
 
-        
-        const questBodys = document.querySelectorAll('div[id^="questBody"]');
+        //     let touchStartX = null;
+        //     myDiv.addEventListener("touchstart", function (e) {
+        //         if (myDiv !== document.activeElement) {
 
-        questBodys.forEach(questBody => {
+        //             return;
+        //         }
+        //         touchStartX = e.touches[0].clientX;
+        //     });
 
-            const numberBody = questBody.id.slice(9, 11); // Assumes the id is "questBody01"
+        //     myDiv.addEventListener("touchmove", function (e) {
+        //         if (myDiv !== document.activeElement || touchStartX === null) {
+        //             return;
+        //         }
 
-            // Find the input tag with id "title[01]"
-            const bodyDiv = `questBody${numberBody}`;
+        //         const touchEndX = e.touches[0].clientX;
+        //         const delta = touchEndX - touchStartX;
 
-            const divs = document.querySelectorAll(`#${bodyDiv} > div`);
-            let index = 0;
-            divs[index].classList.remove("hidden");
+        //         if (delta > 0) { // Swipe right
+        //             divs[index].classList.add("hidden");
+        //             index--;
+        //             if (index < 0) {
+        //                 index = divs.length - 1;
+        //             }
+        //             divs[index].classList.remove("hidden");
+        //         } else if (delta < 0) { // Swipe left
+        //             divs[index].classList.add("hidden");
+        //             index++;
+        //             if (index >= divs.length) {
+        //                 index = 0;
+        //             }
+        //             divs[index].classList.remove("hidden");
+        //         }
 
-            const myDiv = document.getElementById(`${bodyDiv}`);
-            myDiv.addEventListener("click", function () {
-                myDiv.focus();
-            });
+        //         touchStartX = null;
+        //     });
 
-            let touchStartX = null;
-            myDiv.addEventListener("touchstart", function (e) {
-                if (myDiv !== document.activeElement) {
+        //     document.addEventListener("keydown", function (e) {
+        //         if (myDiv !== document.activeElement) {
+        //             return;
+        //         }
 
-                    return;
-                }
-                touchStartX = e.touches[0].clientX;
-            });
+        //         if (e.keyCode === 37) { // Left arrow
+        //             divs[index].classList.add("hidden");
+        //             index--;
+        //             if (index < 0) {
+        //                 index = divs.length - 1;
+        //             }
+        //             divs[index].classList.remove("hidden");
+        //         } else if (e.keyCode === 39) { // Right arrow
+        //             divs[index].classList.add("hidden");
+        //             index++;
+        //             if (index >= divs.length) {
+        //                 index = 0;
+        //             }
+        //             divs[index].classList.remove("hidden");
+        //         }
+        //     });
 
-            myDiv.addEventListener("touchmove", function (e) {
-                if (myDiv !== document.activeElement || touchStartX === null) {
-                    return;
-                }
-
-                const touchEndX = e.touches[0].clientX;
-                const delta = touchEndX - touchStartX;
-
-                if (delta > 0) { // Swipe right
-                    divs[index].classList.add("hidden");
-                    index--;
-                    if (index < 0) {
-                        index = divs.length - 1;
-                    }
-                    divs[index].classList.remove("hidden");
-                } else if (delta < 0) { // Swipe left
-                    divs[index].classList.add("hidden");
-                    index++;
-                    if (index >= divs.length) {
-                        index = 0;
-                    }
-                    divs[index].classList.remove("hidden");
-                }
-
-                touchStartX = null;
-            });
-
-            document.addEventListener("keydown", function (e) {
-                if (myDiv !== document.activeElement) {
-                    return;
-                }
-
-                if (e.keyCode === 37) { // Left arrow
-                    divs[index].classList.add("hidden");
-                    index--;
-                    if (index < 0) {
-                        index = divs.length - 1;
-                    }
-                    divs[index].classList.remove("hidden");
-                } else if (e.keyCode === 39) { // Right arrow
-                    divs[index].classList.add("hidden");
-                    index++;
-                    if (index >= divs.length) {
-                        index = 0;
-                    }
-                    divs[index].classList.remove("hidden");
-                }
-            });
-
-        });
+        // });
 
 
 
-        let deleteQuestions = document.querySelectorAll('div[id^="questDelete"]');
-        // Add a click event listener to each h1 tag
-        deleteQuestions.forEach(deleteQuestion => {
-            deleteQuestion.addEventListener('click', () => {
-                // Extract the number from the deleteQuestion tag id
-                const number = deleteQuestion.id.slice(12, 14); // Assumes the id is "questDelete[01]"
+        // let deleteQuestions = document.querySelectorAll('div[id^="questDelete"]');
+        // // Add a click event listener to each h1 tag
+        // deleteQuestions.forEach(deleteQuestion => {
+        //     deleteQuestion.addEventListener('click', () => {
+        //         // Extract the number from the deleteQuestion tag id
+        //         const number = deleteQuestion.id.slice(12, 14); // Assumes the id is "questDelete[01]"
 
-                // Find the input tag with id "mtitle[01]"
-                const question = document.querySelector(`#question\\[${number}\\]`);
+        //         // Find the input tag with id "mtitle[01]"
+        //         const question = document.querySelector(`#question\\[${number}\\]`);
 
-                if (confirm(`Tem certeza que deseja deletar a questão ${number}?`)) {
-                    question.remove();
-                } else {
-                    
-                }
-            });
-        });
+        //         if (confirm(`Tem certeza que deseja deletar a questão ${number}?`)) {
+        //             question.remove();
+        //         } else {
 
-        const addQuestion = document.getElementById('addQuestion');
-        addQuestion.addEventListener('click', () => {
-            let questionsNumbers = document.querySelectorAll('h1[id^="quest"]');
-            let lastQuestion = questionsNumbers[questionsNumbers.length - 1];
-            let lastQuestionNumber = lastQuestion.id.slice(6, 8);
-            let newQuestionNumber = "0" + (parseInt(lastQuestionNumber) + 1);
+        //         }
+        //     });
+        // });
 
-            const questions = document.getElementById('questions');
+        // const addQuestion = document.getElementById('oldId');
+        // addQuestion.addEventListener('click', () => {
+        //     let questionsNumbers = document.querySelectorAll('h1[id^="quest"]');
+        //     let lastQuestion = questionsNumbers[questionsNumbers.length - 1];
+        //     let lastQuestionNumber = lastQuestion.id.slice(6, 8);
+        //     let newQuestionNumber = "0" + (parseInt(lastQuestionNumber) + 1);
 
-            questions.innerHTML += `
-                <div id="question[${newQuestionNumber}]" class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-                    <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
-                        <div class="w-full text-center">
-                            <h1 id="quest[${newQuestionNumber}]" class="font-bold cursor-pointer" tabindex="0">Questão ${newQuestionNumber}</h1>
-                            <input id="title[${newQuestionNumber}]"
-                                class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded"
-                                type="text" autocomplete="off">
-                        </div>
-                        <div id="questDelete[${newQuestionNumber}]" class="w-fit flex items-center text-center text-4xl font-bold text-red-900 px-5 cursor-pointer">
-                            <i class="fa-solid fa-square-minus"></i>
-                        </div>
-                    </span>
-                    <div id="questBody${newQuestionNumber}"
-                        class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
-                        <span class="text-4xl text-[var(--flushed-violet)]">
-                            <i class="fa-solid fa-chevron-left opacity-50"></i>
-                        </span>
-                        <div class="hidden w-full">
-                            De 0 a 10
-                        </div>
-                        <div class="hidden w-full">
-                            Alternativas
-                        </div>
-                        <div class="hidden w-full">
-                            Múltipla Escolha
-                        </div>
-                        <div class="hidden w-full">
-                            Aberta
-                        </div>
-                        <span class="text-4xl text-[var(--flushed-violet)]">
-                            <i class="fa-solid fa-chevron-right opacity-50"></i>
-                        </span>
-                    </div>
-                </div>
-            
-            `;
-        });
+        //     const questions = document.getElementById('questions');
+
+        //     questions.innerHTML += `
+        //         <div id="question[${newQuestionNumber}]" class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
+        //             <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
+        //                 <div class="w-full text-center">
+        //                     <h1 id="quest[${newQuestionNumber}]" class="font-bold cursor-pointer" tabindex="0">Questão ${newQuestionNumber}</h1>
+        //                     <input id="title[${newQuestionNumber}]"
+        //                         class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded"
+        //                         type="text" autocomplete="off">
+        //                 </div>
+        //                 <div id="questDelete[${newQuestionNumber}]" class="w-fit flex items-center text-center text-4xl font-bold text-red-900 px-5 cursor-pointer">
+        //                     <i class="fa-solid fa-square-minus"></i>
+        //                 </div>
+        //             </span>
+        //             <div id="questBody${newQuestionNumber}"
+        //                 class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
+        //                 <span class="text-4xl text-[var(--flushed-violet)]">
+        //                     <i class="fa-solid fa-chevron-left opacity-50"></i>
+        //                 </span>
+        //                 <div class="hidden w-full">
+        //                     De 0 a 10
+        //                 </div>
+        //                 <div class="hidden w-full">
+        //                     Alternativas
+        //                 </div>
+        //                 <div class="hidden w-full">
+        //                     Múltipla Escolha
+        //                 </div>
+        //                 <div class="hidden w-full">
+        //                     Aberta
+        //                 </div>
+        //                 <span class="text-4xl text-[var(--flushed-violet)]">
+        //                     <i class="fa-solid fa-chevron-right opacity-50"></i>
+        //                 </span>
+        //             </div>
+        //         </div>
+
+        //     `;
+        // });
 
     </script>
 </body>
