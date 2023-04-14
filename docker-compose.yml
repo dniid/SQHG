@@ -9,12 +9,18 @@ services:
     env_file:
       - ./envs/postgres.env
     depends_on:
-      - sqhg_db
+      sqhg_db:
+        condition: service_healthy
 
   sqhg_db:
     image: postgres:14
     container_name: sqhg_db
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "--host=localhost", "--username=sqhg", "--port=5432"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     ports:
       - 5432:5432
     env_file:
