@@ -10,7 +10,5 @@ ARG MODE
 
 EXPOSE 8000
 
-COPY ["requirements/", "docker/build.sh", "/tmp/"]
-RUN sh /tmp/build.sh /tmp/
-
-ADD [".", "/usr/src/app"]
+COPY [".", "/usr/src/app"]
+RUN sh docker/build.sh requirements
