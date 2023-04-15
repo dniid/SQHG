@@ -240,17 +240,17 @@
                     </div>
 
                     <div id="surveyForm" class="w-full md:w-2/3 h-full flex flex-col">
-                        <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3">
+                        <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3 space-y-2 h-fit">
                             <div class="w-full flex items-center">
-                                <div class="w-full text-center">
-                                    <h1 id="surveyName" class="font-bold cursor-pointer" tabindex="0">Nome do Questionário</h1>
-                                    <input id="surveyNameInput" class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
+                                <div class="w-full text-center flex justify-center">
+                                    <span id="surveyName" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Questionário</span>
+                                    <input id="surveyNameInput" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off">
                                 </div>
                             </div>
                             <div class="w-full flex items-center italic text-lg text-[var(--flash-grey)]">
-                                <div class="w-full text-center">
-                                    <h1 id="surveyDescription" class="cursor-pointer" tabindex="0">Descrição do modelo do questionário</h1>
-                                    <input id="surveyDescriptionInput" class="w-full text-center italic hidden border border-[var(--flushed-violet)] rounded" type="text" autocomplete="off">
+                                <div class="w-full text-center flex justify-center">
+                                    <div id="surveyDescription" class="cursor-pointer border-b w-full px-5 break-normal" tabindex="0">Descrição do modelo do questionário</div>
+                                    <input id="surveyDescriptionInput" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -259,21 +259,78 @@
                             <div class="question-form-template flex gap-1 w-full mb-3 hidden">
                                 <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
                                     <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
-                                        <div class="w-full text-center flex justify-start items-center">
-                                            <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-question">
-                                                <i class="fa-solid fa-square-minus"></i>
+                                        <div class="flex flex-col space-y-3">
+                                            <div class="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 text-center flex justify-start items-center">
+                                                <div class="flex w-full">
+                                                    <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-question">
+                                                        <i class="fa-solid fa-square-minus"></i>
+                                                    </div>
+                                                    <label class="font-bold">
+                                                        Questão:
+                                                    </label>
+                                                    <input class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                        type="text" autocomplete="off">
+                                                </div>
+                                                <select class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
+                                                    <option value="likert">De 0 a 10</option>
+                                                    <option value="alternative">Alternativas</option>
+                                                    <option value="multiple">Múltipla Escolha</option>
+                                                    <option value="open">Aberta</option>
+                                                </select>
                                             </div>
-                                            <label class="font-bold">
-                                                Questão:
-                                            </label>
-                                            <input class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
-                                                   type="text" autocomplete="off">
-                                            <select class="border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                                                <option value="likert">De 0 a 10</option>
-                                                <option value="alternative">Alternativas</option>
-                                                <option value="multiple">Múltipla Escolha</option>
-                                                <option value="open">Aberta</option>
-                                            </select>
+                                            <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
+                                                <div class="type likert-type flex justify-center space-x-5 p-5 flex-wrap pointer-events-none opacity-50">
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>0</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>1</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>2</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>3</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>4</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>5</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>6</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>7</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>8</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>9</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox">
+                                                        <label>10</label>
+                                                    </div>
+                                                </div>
+                                                <div class="type alternative-type hidden">a</div>
+                                                <div class="type multiple-type hidden">b</div>
+                                                <div class="type open-type hidden flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
+                                                    <textarea class="w-full h-32"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -320,6 +377,26 @@
             removeButton.addEventListener('click', (el) => {
                 removeButton.closest('.question-form').remove();
             });
+
+            let questionType = question.querySelector('.question-type');
+            let questionTypeBody = question.querySelector('.question-type-body');
+            questionType.addEventListener('change', (qt) => {
+                let selectedType = qt.target.value;
+                let divsNotHidden = questionTypeBody.querySelectorAll('.type:not(.hidden)')
+                divsNotHidden.forEach(dnh => {
+                    dnh.classList.add('hidden');
+                });
+
+                if (selectedType == 'likert') {
+                    (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
+                } else if (selectedType === 'alternative') {
+                    (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
+                } else if (selectedType === 'multiple') {
+                    (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
+                } else if (selectedType === 'open') {
+                    (questionTypeBody.querySelector('.open-type')).classList.remove('hidden');
+                }
+            });
         };
 
         // Get references to all h1 tags with ids that start with "quest"
@@ -349,150 +426,6 @@
         });
 
         addNewQuestion();
-
-
-
-        // const questBodys = document.querySelectorAll('div[id^="questBody"]');
-        // questBodys.forEach(questBody => {
-        //     const numberBody = questBody.id.slice(9, 11); // Assumes the id is "questBody01"
-        //     // Find the input tag with id "title[01]"
-        //     const bodyDiv = `questBody${numberBody}`;
-        //     const divs = document.querySelectorAll(`#${bodyDiv} > div`);
-        //     let index = 0;
-        //     divs[index].classList.remove("hidden");
-
-        //     const myDiv = document.getElementById(`${bodyDiv}`);
-        //     myDiv.addEventListener("click", function () {
-        //         myDiv.focus();
-        //     });
-
-        //     let touchStartX = null;
-        //     myDiv.addEventListener("touchstart", function (e) {
-        //         if (myDiv !== document.activeElement) {
-
-        //             return;
-        //         }
-        //         touchStartX = e.touches[0].clientX;
-        //     });
-
-        //     myDiv.addEventListener("touchmove", function (e) {
-        //         if (myDiv !== document.activeElement || touchStartX === null) {
-        //             return;
-        //         }
-
-        //         const touchEndX = e.touches[0].clientX;
-        //         const delta = touchEndX - touchStartX;
-
-        //         if (delta > 0) { // Swipe right
-        //             divs[index].classList.add("hidden");
-        //             index--;
-        //             if (index < 0) {
-        //                 index = divs.length - 1;
-        //             }
-        //             divs[index].classList.remove("hidden");
-        //         } else if (delta < 0) { // Swipe left
-        //             divs[index].classList.add("hidden");
-        //             index++;
-        //             if (index >= divs.length) {
-        //                 index = 0;
-        //             }
-        //             divs[index].classList.remove("hidden");
-        //         }
-
-        //         touchStartX = null;
-        //     });
-
-        //     document.addEventListener("keydown", function (e) {
-        //         if (myDiv !== document.activeElement) {
-        //             return;
-        //         }
-
-        //         if (e.keyCode === 37) { // Left arrow
-        //             divs[index].classList.add("hidden");
-        //             index--;
-        //             if (index < 0) {
-        //                 index = divs.length - 1;
-        //             }
-        //             divs[index].classList.remove("hidden");
-        //         } else if (e.keyCode === 39) { // Right arrow
-        //             divs[index].classList.add("hidden");
-        //             index++;
-        //             if (index >= divs.length) {
-        //                 index = 0;
-        //             }
-        //             divs[index].classList.remove("hidden");
-        //         }
-        //     });
-
-        // });
-
-
-
-        // let deleteQuestions = document.querySelectorAll('div[id^="questDelete"]');
-        // // Add a click event listener to each h1 tag
-        // deleteQuestions.forEach(deleteQuestion => {
-        //     deleteQuestion.addEventListener('click', () => {
-        //         // Extract the number from the deleteQuestion tag id
-        //         const number = deleteQuestion.id.slice(12, 14); // Assumes the id is "questDelete[01]"
-
-        //         // Find the input tag with id "mtitle[01]"
-        //         const question = document.querySelector(`#question\\[${number}\\]`);
-
-        //         if (confirm(`Tem certeza que deseja deletar a questão ${number}?`)) {
-        //             question.remove();
-        //         } else {
-
-        //         }
-        //     });
-        // });
-
-        // const addQuestion = document.getElementById('oldId');
-        // addQuestion.addEventListener('click', () => {
-        //     let questionsNumbers = document.querySelectorAll('h1[id^="quest"]');
-        //     let lastQuestion = questionsNumbers[questionsNumbers.length - 1];
-        //     let lastQuestionNumber = lastQuestion.id.slice(6, 8);
-        //     let newQuestionNumber = "0" + (parseInt(lastQuestionNumber) + 1);
-
-        //     const questions = document.getElementById('questions');
-
-        //     questions.innerHTML += `
-        //         <div id="question[${newQuestionNumber}]" class="w-full flex flex-col p-5 rounded-xl bg-white text-center text-xl">
-        //             <span class="w-full flex items-center text-xl text-[var(--vivid-violet)] mb-5">
-        //                 <div class="w-full text-center">
-        //                     <h1 id="quest[${newQuestionNumber}]" class="font-bold cursor-pointer" tabindex="0">Questão ${newQuestionNumber}</h1>
-        //                     <input id="title[${newQuestionNumber}]"
-        //                         class="w-full font-bold text-center hidden border border-[var(--flushed-violet)] rounded"
-        //                         type="text" autocomplete="off">
-        //                 </div>
-        //                 <div id="questDelete[${newQuestionNumber}]" class="w-fit flex items-center text-center text-4xl font-bold text-red-900 px-5 cursor-pointer">
-        //                     <i class="fa-solid fa-square-minus"></i>
-        //                 </div>
-        //             </span>
-        //             <div id="questBody${newQuestionNumber}"
-        //                 class="w-full flex justify-between items-center text-center h-20 px-10" tabindex="0">
-        //                 <span class="text-4xl text-[var(--flushed-violet)]">
-        //                     <i class="fa-solid fa-chevron-left opacity-50"></i>
-        //                 </span>
-        //                 <div class="hidden w-full">
-        //                     De 0 a 10
-        //                 </div>
-        //                 <div class="hidden w-full">
-        //                     Alternativas
-        //                 </div>
-        //                 <div class="hidden w-full">
-        //                     Múltipla Escolha
-        //                 </div>
-        //                 <div class="hidden w-full">
-        //                     Aberta
-        //                 </div>
-        //                 <span class="text-4xl text-[var(--flushed-violet)]">
-        //                     <i class="fa-solid fa-chevron-right opacity-50"></i>
-        //                 </span>
-        //             </div>
-        //         </div>
-
-        //     `;
-        // });
 
     </script>
 </body>
