@@ -12,7 +12,7 @@ services:
       HOST: 0.0.0.0
       LOGS_ROOT: /var/log/sqhg
       WAIT_HOSTS: sqhg_db:5432
-    command: sh -c "sh ./docker/start.sh"
+    command: bash ./docker/start.sh
     ports:
       - "8000:8000"
     env_file:
