@@ -15,6 +15,13 @@ from core.template import Template
 
 from utils.settings import find_dirs
 
+# Import models for SQLAlchemy's database base metadata
+# pylint: disable=unused-import
+from admin.models import Admin
+from sap.models import Area, Superior
+from survey.models import Survey, SurveyModel, Question, Option, Answer
+from user.models import Token
+
 import admin.router
 import auth.router
 import survey.router
@@ -24,7 +31,7 @@ import user.router
 dictConfig(LogConfig().dict())
 logger = logging.getLogger('sqhg')
 
-BaseModel.metadata.create_all(bind=engine)
+BaseModel.metadata.create_all(bind=engine, checkfirst=True)
 
 app = FastAPI()
 
