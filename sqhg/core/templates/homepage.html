@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+<body>
+    <!-- Basic website structure -->
+    <div class="w-full h-screen">
+        <div class="w-full h-full flex flex-col sm:flex-row p-3 sm:space-x-3">
+            {% include 'navbar.html' %}
+            <!-- fim -->
+
+            <!-- Content -->
+            <section id="bodyContent"
+                class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto pt-3 px-5 text-center">
+                <iframe height="600" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    class="rounded-xl w-full" src="https://www.pratidonaduzzi.com.br/">
+                </iframe><br />
+                <ul>
+                    <li>Desenvolvido por Equipe7 - ADS2k22 Biopark Educação</li>
+                    <li>Marcos Bento - Fernando Sano - Isaac da Silva - Matheus Amaral - Venicius Dobler</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="../../static/js/navbar.js"></script>
+</body>
+
+</html>
