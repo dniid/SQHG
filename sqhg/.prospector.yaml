@@ -1,6 +1,9 @@
 strictness: veryhigh
 max-line-length: 119
 
+ignore-paths:
+  - alembic/versions
+
 pylint:
   options:
     max-args: 6
@@ -16,6 +19,7 @@ pycodestyle:
 pyflakes:
   disable:
     - F841  # pylint: unused-variable
+    - F401  # pylint: unused-import
 
 mccabe:
   options:
