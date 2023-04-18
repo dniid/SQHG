@@ -48,4 +48,4 @@ for static in find_dirs('.', 'static'):
 @app.get('/', response_class=HTMLResponse)
 async def homepage(request: Request, templates: Jinja2Templates = Depends(Template)):
     context = {'request': request}
-    return templates.TemplateResponse('base.html', context)
+    return templates.TemplateResponse('homepage.html', context)
