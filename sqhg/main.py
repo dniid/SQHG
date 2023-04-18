@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Main FastAPI app for SQHG's backend."""
 
-from logging.config import dictConfig
 import logging
 
 from fastapi import FastAPI, Request, Depends
@@ -28,7 +27,7 @@ import survey.router
 import user.router
 
 
-dictConfig(LogConfig().dict())
+logging.config.dictConfig(LogConfig().dict())
 logger = logging.getLogger('sqhg')
 
 BaseModel.metadata.create_all(bind=engine, checkfirst=True)
@@ -49,4 +48,4 @@ for static in find_dirs('.', 'static'):
 @app.get('/', response_class=HTMLResponse)
 async def homepage(request: Request, templates: Jinja2Templates = Depends(Template)):
     context = {'request': request}
-    return templates.TemplateResponse('base.html', context)
+    return templates.TemplateResponse('homepage.html', context)

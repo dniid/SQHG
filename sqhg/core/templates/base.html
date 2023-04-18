@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Title</title>
-    <link rel="stylesheet" href="./components/links.html">
-
-    {% include './components/links.html' %}
-
-    {% block vendors %}
-        <script src="https://cdn.tailwindcss.com"></script>
-    {% endblock %}
+    <title>{% block html_title %}SQHG{% endblock html_title %}</title>
 
     {% block css %}
-        <link rel="stylesheet" href="{% static '/css/style.css' %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" />
+      <link rel="stylesheet" href="{% static '/vendors/fontawesome/css/all.min.css' %}"/>
+      <link rel="stylesheet" href="{% static '/vendors/iziToast/css/iziToast.min.css' %}"/>
+      <link rel="stylesheet" href="{% static '/vendors/sweetalert2/css/sweetalert2.min.css' %}"/>
+
+      <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
     {% endblock %}
-</head>
-<body>
-    <!-- Basic website structure -->
-    <div class="w-full h-screen">
-        <div class="w-full h-full flex flex-col sm:flex-row p-3 sm:space-x-3">
-            <!-- Navbar -->
-            {% include './components/navbar.html' %}
 
-            <!-- Content -->
-            <section id="bodyContent" class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto pt-3 px-5">
+    {% block css_import %}
+    {% endblock css_import %}
+  </head>
+  <body>
+    {% block layout %}
+    {% endblock layout %}
 
-            </section>
-        </div>
-    </div>
     {% block js %}
-        <script src="{% static '/js/navbar.js' %}"></script>
-    {% endblock %}
-</body>
+      <script src="{% static '/vendors/tailwindcss/js/tailwind.min.js' %}"></script>
+      <script src="{% static '/vendors/fontawesome/js/all.min.js' %}"></script>
+      <script src="{% static '/vendors/iziToast/js/iziToast.min.js' %}"></script>
+      <script src="{% static '/vendors/sweetalert2/js/sweetalert2.min.js' %}"></script>
+      <script src="{% static '/vendors/chartjs/js/chart.min.js' %}"></script>
+
+      <script src="{% static '/js/navbar.js' %}"></script>
+    {% endblock js %}
+
+    {% block js_import %}
+      <script>
+      </script>
+    {% endblock js_import %}
+
+    {% block js_variables %}
+      <script>
+      </script>
+    {% endblock js_variables %}
+  </body>
 </html>
