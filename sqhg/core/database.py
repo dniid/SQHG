@@ -20,7 +20,6 @@ BaseModel = declarative_base()
 
 
 async def Database():
-    # pylint: disable=invalid-name
     database = SessionLocal()
     try:
         yield database

@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 119
+
+exclude = [
+    "alembic/versions"
+]
+
+select = ["C90", "E", "F", "PL", "S", "W"]
+
+[tool.ruff.pylint]
+max-args = 5
+
+[tool.ruff.mccabe]
+max-complexity = 12
