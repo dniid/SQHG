@@ -338,7 +338,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex justify-start w-full mt-5">
-                                                        <button id="addAlternative" class="bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
+                                                        <button class="add-alternative-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </button>
                                                     </div>
@@ -403,15 +403,15 @@
                 divsNotHidden.forEach(dnh => {
                     dnh.classList.add('hidden');
                 });
+                let alternativesContainer = questionTypeBody.querySelector('.alternatives-container')
 
                 if (selectedType == 'likert') {
                     (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
                 } else if (selectedType === 'alternative') {
                     (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
-                    // resto do bloco if
-                    let addAlternativeButton = document.getElementById('addAlternative');
-                    addAlternativeButton.addEventListener('click', addNewAlternative);
-                    addNewAlternative();
+                    let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
+                    addAlternativeButton.addEventListener('click', function(){addNewAlternative(alternativesContainer)});
+                    addNewAlternative(alternativesContainer);
                 } else if (selectedType === 'multiple') {
                     (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 } else if (selectedType === 'open') {
@@ -421,7 +421,6 @@
         };
 
         let questionHead = document.querySelectorAll('#surveyName, #surveyDescription');
-        
         questionHead.forEach(el => {
             el.addEventListener('focus', () => {
                 let input = el.parentNode.querySelector('input');
@@ -430,9 +429,7 @@
                 input.classList.remove("hidden");
                 input.focus();
 
-                
                 input.addEventListener('blur', () => {
-                    
                     const inputValue = input.value;
 
                     if (!(input.value.trim() === "")) {
@@ -444,22 +441,17 @@
             });
         });
 
-        // aqui pra baixo
-        function addNewAlternative() {
-            console.log("hello")
-            let alternativesContainer = document.querySelector('.alternatives-container');
-            let alternative = document.querySelector('.alternative-form-template').cloneNode(true);
+        function addNewAlternative(container) {
+            let alternative = container.querySelector('.alternative-form-template').cloneNode(true);
             alternative.classList.remove('alternative-form-template', 'hidden');
             alternative.classList.add('alternative-form');
-            alternativesContainer.appendChild(alternative);
+            container.appendChild(alternative);
 
             let removeAlternativeButton = alternative.querySelector('.btn-remove-alternative');
             removeAlternativeButton.addEventListener('click', (el) => {
                 removeAlternativeButton.closest('.alternative-form').remove();
             });
         };
-
-
 
         addNewQuestion();
 
