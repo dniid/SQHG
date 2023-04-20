@@ -19,8 +19,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 BaseModel = declarative_base()
 
 
-async def Database():
-    # pylint: disable=invalid-name
+async def Database():  # noqa: N802
     database = SessionLocal()
     try:
         yield database

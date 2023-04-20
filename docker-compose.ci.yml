@@ -10,22 +10,17 @@ services:
       MODE: ci
       LOGS_ROOT: /var/log/sqhg
       WAIT_HOSTS: sqhg_db:5432
-    command: sh -c "/wait && sh ./docker/ci.sh"
+    command: bash ./docker/ci.sh
     ports:
       - "8000:8000"
     env_file:
       - ./envs/postgres.env
-    depends_on:
-      - sqhg_db
     networks:
       - sqhg
 
   sqhg_db:
     networks:
       - sqhg
-
-volumes:
-  postgres_data:
 
 networks:
   sqhg:

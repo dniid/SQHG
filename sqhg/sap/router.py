@@ -20,7 +20,7 @@ from sap.schemas import (
 router = APIRouter()
 
 
-@router.post('/area/', response_model=AreaSchema)
+@router.post('/create', response_model=AreaSchema)
 async def create_area(area: AreaCreate, database: Session = Depends(Database)):
     database_area = Area(**area.dict())
     database.add(database_area)
@@ -29,13 +29,12 @@ async def create_area(area: AreaCreate, database: Session = Depends(Database)):
     return database_area
 
 
-@router.get('/area/', response_model=List[AreaSchema])
+@router.get('/', response_model=List[AreaSchema])
 async def read_areas(skip: int = 0, limit: int = 100, database: Session = Depends(Database)):
-    areas = database.query(Area).offset(skip).limit(limit).all()
-    return areas
+    return database.query(Area).offset(skip).limit(limit).all()
 
 
-@router.get('/area/{area_id}/', response_model=AreaSchema)
+@router.get('/{area_id}/', response_model=AreaSchema)
 async def detail_area(area_id: int, database: Session = Depends(Database)):
     database_area = database.query(Area).filter(Area.id == area_id).first()
     if not database_area:
@@ -43,7 +42,7 @@ async def detail_area(area_id: int, database: Session = Depends(Database)):
     return database_area
 
 
-@router.put('/area/{area_id}/', response_model=AreaSchema)
+@router.put('/{area_id}/', response_model=AreaSchema)
 async def update_area(area_id: int, area: AreaUpdate, database: Session = Depends(Database)):
     database_area = database.query(Area).filter(Area.id == area_id).first()
     if not database_area:
@@ -55,7 +54,7 @@ async def update_area(area_id: int, area: AreaUpdate, database: Session = Depend
     return database_area
 
 
-@router.delete('/area/{area_id}/')
+@router.delete('/{area_id}/')
 async def delete_area(area_id: int, database: Session = Depends(Database)):
     database_area = database.query(Area).filter(Area.id == area_id).first()
     if not database_area:

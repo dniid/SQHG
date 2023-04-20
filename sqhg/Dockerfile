@@ -10,10 +10,5 @@ ARG MODE
 
 EXPOSE 8000
 
-COPY ["requirements/", "docker/build.sh", "/tmp/"]
-RUN sh /tmp/build.sh /tmp/
-
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
-RUN chmod +x /wait
-
-ADD [".", "/usr/src/app"]
+COPY [".", "/usr/src/app"]
+RUN sh docker/build.sh requirements

@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 119
+
+exclude = [
+    "alembic/versions"
+]
+
+select = ["ARG", "C4", "C90", "E", "F", "N", "PIE", "PL", "RET", "S", "SIM", "SLF", "T20", "W"]
+
+[tool.ruff.pylint]
+max-args = 5
+
+[tool.ruff.mccabe]
+max-complexity = 12
