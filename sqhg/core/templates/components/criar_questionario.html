@@ -255,7 +255,7 @@
                             </div>
                         </div>
 
-                        <div class="questionsContainer">
+                        <div class="questions-container">
                             <div class="question-form-template flex gap-1 w-full mb-3 hidden">
                                 <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
                                     <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
@@ -325,7 +325,24 @@
                                                         <label>10</label>
                                                     </div>
                                                 </div>
-                                                <div class="type alternative-type hidden">a</div>
+                                                <div class="type alternative-type hidden w-full p-5 flex flex-col">
+                                                    <div class="alternatives-container">
+                                                        <div class="alternative-form-template flex justify-between hidden">
+                                                            <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
+                                                                <i class="fa-solid fa-square-minus"></i>
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                            type="text" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-start w-full mt-5">
+                                                        <button id="addAlternative" class="bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                                 <div class="type multiple-type hidden">b</div>
                                                 <div class="type open-type hidden flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
                                                     <textarea class="w-full h-32"></textarea>
@@ -363,11 +380,11 @@
     <!-- [Scripts Partial here] -->
     <script src="../../static/js/navbar.js"></script>
     <script>
-        let addButton = document.getElementById('addQuestion');
-        addButton.addEventListener('click', addNewQuestion);
+        let addQuestionButton = document.getElementById('addQuestion');
+        addQuestionButton.addEventListener('click', addNewQuestion);
 
         function addNewQuestion() {
-            let questionsContainer = document.querySelector('.questionsContainer');
+            let questionsContainer = document.querySelector('.questions-container');
             let question = document.querySelector('.question-form-template').cloneNode(true);
             question.classList.remove('question-form-template', 'hidden');
             question.classList.add('question-form');
@@ -391,6 +408,10 @@
                     (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
                 } else if (selectedType === 'alternative') {
                     (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
+                    // resto do bloco if
+                    let addAlternativeButton = document.getElementById('addAlternative');
+                    addAlternativeButton.addEventListener('click', addNewAlternative);
+                    addNewAlternative();
                 } else if (selectedType === 'multiple') {
                     (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 } else if (selectedType === 'open') {
@@ -399,10 +420,8 @@
             });
         };
 
-        // Get references to all h1 tags with ids that start with "quest"
         let questionHead = document.querySelectorAll('#surveyName, #surveyDescription');
-
-        // Add a click event listener to each h1 tag
+        
         questionHead.forEach(el => {
             el.addEventListener('focus', () => {
                 let input = el.parentNode.querySelector('input');
@@ -411,9 +430,9 @@
                 input.classList.remove("hidden");
                 input.focus();
 
-                // Add a blur event listener to the input
+                
                 input.addEventListener('blur', () => {
-                    // Show the alert "hello" when the input loses focus
+                    
                     const inputValue = input.value;
 
                     if (!(input.value.trim() === "")) {
@@ -424,6 +443,23 @@
                 });
             });
         });
+
+        // aqui pra baixo
+        function addNewAlternative() {
+            console.log("hello")
+            let alternativesContainer = document.querySelector('.alternatives-container');
+            let alternative = document.querySelector('.alternative-form-template').cloneNode(true);
+            alternative.classList.remove('alternative-form-template', 'hidden');
+            alternative.classList.add('alternative-form');
+            alternativesContainer.appendChild(alternative);
+
+            let removeAlternativeButton = alternative.querySelector('.btn-remove-alternative');
+            removeAlternativeButton.addEventListener('click', (el) => {
+                removeAlternativeButton.closest('.alternative-form').remove();
+            });
+        };
+
+
 
         addNewQuestion();
 
