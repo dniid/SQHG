@@ -1,5 +1,2 @@
-pylint~=2.16
-prospector[with_pyroma]~=1.8
-bandit~=1.7
-pycodestyle~=2.10
+ruff==0.0.261
 safety~=2.3

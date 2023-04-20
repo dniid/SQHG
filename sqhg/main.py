@@ -15,11 +15,10 @@ from core.template import Template
 from utils.settings import find_dirs
 
 # Import models for SQLAlchemy's database base metadata
-# pylint: disable=unused-import
-from admin.models import Admin
-from sap.models import Area, Superior
-from survey.models import Survey, SurveyModel, Question, Option, Answer
-from user.models import Token
+from admin.models import Admin  # noqa: F401
+from sap.models import Area, Superior  # noqa: F401
+from survey.models import Survey, SurveyModel, Question, Option, Answer  # noqa: F401
+from user.models import Token  # noqa: F401
 
 import admin.router
 import auth.router
