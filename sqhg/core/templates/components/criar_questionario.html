@@ -228,7 +228,7 @@
             <!-- Content -->
             <section id="bodyContent"
                 class="w-full sm:4/6 lg:w-5/6 xl:w-[90%] bg-[var(--gallery)] rounded-b-xl sm:rounded-xl overflow-auto py-3 px-5">
-                <div class="flex flex-col items-center h-full">
+                <div class="flex flex-col items-center">
                     <div class="top-bar bg-white h-65 rounded-xl w-full mb-5">
                         <div class="title">
                             <div class="text-center">
@@ -239,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div id="surveyForm" class="w-full md:w-2/3 h-full flex flex-col">
+                    <div id="surveyForm" class="w-full md:w-2/3 flex flex-col">
                         <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3 space-y-2 h-fit">
                             <div class="w-full flex items-center">
                                 <div class="w-full text-center flex justify-center">
@@ -343,7 +343,24 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="type multiple-type hidden">b</div>
+                                                <div class="type multiple-type hidden w-full p-5 flex flex-col">
+                                                    <div class="multiples-container">
+                                                        <div class="multiple-form-template flex justify-between hidden">
+                                                            <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
+                                                                <i class="fa-solid fa-square-minus"></i>
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                            type="text" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-start w-full mt-5">
+                                                        <button class="add-multiple-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                                 <div class="type open-type hidden flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
                                                     <textarea class="w-full h-32"></textarea>
                                                 </div>
@@ -403,17 +420,29 @@
                 divsNotHidden.forEach(dnh => {
                     dnh.classList.add('hidden');
                 });
-                let alternativesContainer = questionTypeBody.querySelector('.alternatives-container')
+                let alternativesContainer = questionTypeBody.querySelector('.alternatives-container');
+                let multiplesContainer = questionTypeBody.querySelector('.multiples-container');
 
                 if (selectedType == 'likert') {
                     (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
                 } else if (selectedType === 'alternative') {
                     (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
                     let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
-                    addAlternativeButton.addEventListener('click', function(){addNewAlternative(alternativesContainer)});
-                    addNewAlternative(alternativesContainer);
+                    addAlternativeButton.addEventListener('click', function(){
+                        addNewAlternative(alternativesContainer)
+                    });
+                    if (!(alternativesContainer.querySelector('.alternative-form'))) {
+                        addNewAlternative(alternativesContainer);
+                    };
                 } else if (selectedType === 'multiple') {
                     (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
+                    let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
+                    addMultipleButton.addEventListener('click', function(){
+                        addNewMultiple(multiplesContainer)
+                    });
+                    if (!(multiplesContainer.querySelector('.multiple-form'))) {
+                        addNewMultiple(multiplesContainer);
+                    };
                 } else if (selectedType === 'open') {
                     (questionTypeBody.querySelector('.open-type')).classList.remove('hidden');
                 }
@@ -450,6 +479,18 @@
             let removeAlternativeButton = alternative.querySelector('.btn-remove-alternative');
             removeAlternativeButton.addEventListener('click', (el) => {
                 removeAlternativeButton.closest('.alternative-form').remove();
+            });
+        };
+
+        function addNewMultiple(container) {
+            let multiple = container.querySelector('.multiple-form-template').cloneNode(true);
+            multiple.classList.remove('multiple-form-template', 'hidden');
+            multiple.classList.add('multiple-form');
+            container.appendChild(multiple);
+
+            let removeMultipleButton = multiple.querySelector('.btn-remove-multiple');
+            removeMultipleButton.addEventListener('click', (el) => {
+                removeMultipleButton.closest('.multiple-form').remove();
             });
         };
 
