@@ -18,8 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip3 install -r ./sqhg/requirements/ci.txt
-          pip3 install -r ./sqhg/requirements/main.txt
+          pip3 --disable-pip-version-check install --no-compile -r ./sqhg/requirements/ci.txt
+          pip3 --disable-pip-version-check install --no-compile -r ./sqhg/requirements/main.txt
 
       - name: Ruff
         run: |
