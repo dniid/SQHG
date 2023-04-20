@@ -21,7 +21,7 @@ class StaticFilesExtension(Extension):
 
         return nodes.CallBlock(self.call_method('_render_static', args), [], [], []).set_lineno(token.lineno)
 
-    def _render_static(self, url, caller):  # pylint: disable=unused-argument
+    def _render_static(self, url, caller):  # noqa: ARG002
         for static_dir in self.static_dirs:
             path = os.path.join(static_dir, url.lstrip('/'))
             if os.path.isfile(path):

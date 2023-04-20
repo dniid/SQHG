@@ -31,8 +31,7 @@ async def create_area(area: AreaCreate, database: Session = Depends(Database)):
 
 @router.get('/', response_model=List[AreaSchema])
 async def read_areas(skip: int = 0, limit: int = 100, database: Session = Depends(Database)):
-    areas = database.query(Area).offset(skip).limit(limit).all()
-    return areas
+    return database.query(Area).offset(skip).limit(limit).all()
 
 
 @router.get('/{area_id}/', response_model=AreaSchema)

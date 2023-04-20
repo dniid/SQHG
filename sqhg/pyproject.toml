@@ -5,7 +5,7 @@ exclude = [
     "alembic/versions"
 ]
 
-select = ["C90", "E", "F", "PL", "S", "W"]
+select = ["ARG", "C4", "C90", "E", "F", "N", "PIE", "PL", "RET", "S", "SIM", "SLF", "T20", "W"]
 
 [tool.ruff.pylint]
 max-args = 5
