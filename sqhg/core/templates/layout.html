@@ -12,3 +12,8 @@
       </div>
     </div>
 {% endblock layout %}
+
+{% block js %}
+{{ super }}
+<script src="{% static '/js/navbar.js' %}"></script>
+{% endblock js %}
