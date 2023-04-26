@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.responses import RedirectResponse
 
 from core.database import BaseModel, engine
 from core.logger import LogConfig
@@ -19,6 +20,8 @@ from admin.models import Admin  # noqa: F401
 from sap.models import Area, Superior  # noqa: F401
 from survey.models import Survey, SurveyModel, Question, Option, Answer  # noqa: F401
 from user.models import Token  # noqa: F401
+
+from auth.utils import get_current_user
 
 import admin.router
 import auth.router
@@ -45,6 +48,10 @@ for static in find_dirs('.', 'static'):
 
 
 @app.get('/', response_class=HTMLResponse)
-async def homepage(request: Request, templates: Jinja2Templates = Depends(Template)):
+async def home_page(request: Request, template: Jinja2Templates = Depends(Template)):
+    if get_current_user:
+        return RedirectResponse(url='/login')
+
     context = {'request': request}
-    return templates.TemplateResponse('homepage.html', context)
+
+    return template.TemplateResponse('homepage.html', context)
