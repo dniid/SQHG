@@ -49,7 +49,7 @@ for static in find_dirs('.', 'static'):
 
 @app.get('/', response_class=HTMLResponse)
 async def home_page(request: Request, template: Jinja2Templates = Depends(Template)):
-    if get_current_user:
+    if not get_current_user(request):
         return RedirectResponse(url='/login')
 
     context = {'request': request}

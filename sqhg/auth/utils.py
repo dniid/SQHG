@@ -1,10 +1,8 @@
 """Security utils for SQHG's backend."""
 
 from datetime import datetime, timedelta
-from typing import Annotated
 
 from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
@@ -17,11 +15,9 @@ from core.settings import (
 )
 
 from auth.exceptions import CredentialsException
-from auth.schemas import TokenData
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def get_password_hash(password):
@@ -45,19 +41,15 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-async def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)],
-    database: Session = Depends(Database)
-):
+async def get_current_user(token: str, database: Session = Depends(Database)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")
         if email is None:
             raise CredentialsException
-        token_data = TokenData(email=email)
     except JWTError as error:
         raise CredentialsException from error
-    user = database.query(Admin).filter(Admin.email == token_data.email).first()
+    user = database.query(Admin).filter(Admin.email == email).first()
     if user is None:
         raise CredentialsException
     return user

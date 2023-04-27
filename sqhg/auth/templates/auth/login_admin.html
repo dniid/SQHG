@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block js_import %}
+<script src="{% static 'auth/js/login_admin.js' %}"></script>
+{% endblock js_import %}
+
 {% block layout %}
     <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
         <div class="flex flex-col items-center">
@@ -7,11 +11,11 @@
                 <img src="{% static '/assets/prati-logo.png' %}" alt="Prati Logo">
             </div>
 
-            <form action="/login" method="POST">
+            <form action="{{ url_for('login') }}" method="POST" id="loginForm">
                 <div class="w-96 p-1 mx-auto rounded-x1 my-1 grid grid-cols-2 gap-2">
                     <div class="w-full col-span-2">
                         <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
-                               id="username" name="username" type="email" placeholder="Login">
+                               id="email" name="email" type="email" placeholder="Login">
                     </div>
 
                     <div class="w-full col-span-2">

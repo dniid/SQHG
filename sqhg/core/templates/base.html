@@ -18,6 +18,8 @@
     {% endblock css_import %}
   </head>
   <body>
+    <script>const CSRFTOKEN = '{{ csrf_token }}';</script>
+
     {% block layout %}
     {% endblock layout %}
 
@@ -31,8 +33,6 @@
     {% endblock js %}
 
     {% block js_import %}
-      <script>
-      </script>
     {% endblock js_import %}
 
     {% block js_variables %}
