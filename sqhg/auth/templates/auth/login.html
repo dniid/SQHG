@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block layout %}
+    <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
+        <div class="flex flex-col items-center">
+            <div class="w-96 mb-5 flex justify-center">
+                <img src="{% static '/assets/prati-logo.png' %}" alt="Prati Logo">
+            </div>
+
+            <form action="/login" class="my-1">
+                <div class="w-96 grid grid-cols-2 gap-2">
+                    <div class="w-full col-span-2">
+                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-0"
+                               id="accessToken" name="accessToken" placeholder="Chave de acesso">
+                    </div>
+
+                    <div class="w-full col-span-2 flex justify-center">
+                        <button type="submit" class="w-full bg-[var(--vivid-violet)] justify-center px-2 py-1 text-white rounded-lg items-center justify-start">
+                            <span>Entrar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="w-96 my-4 flex justify-center">
+                <a href="{{ url_for('login_page') }}?admin=True" class="text-xs text-[var(--light-violet)]">Entrar como Admin</a>
+            </div>
+        </div>
+    </div>
+{% endblock layout %}

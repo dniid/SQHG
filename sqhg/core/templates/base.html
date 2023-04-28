@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block html_title %}SQHG{% endblock html_title %}{% if subtitle %} - {{ subtitle }}{% endif %}</title>
+
+    {% block css %}
+      <link rel="stylesheet" href="{% static '/vendors/fontawesome/css/all.min.css' %}"/>
+      <link rel="stylesheet" href="{% static '/vendors/iziToast/css/iziToast.min.css' %}"/>
+      <link rel="stylesheet" href="{% static '/vendors/sweetalert2/css/sweetalert2.min.css' %}"/>
+
+      <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
+    {% endblock %}
+
+    {% block css_import %}
+    {% endblock css_import %}
+  </head>
+  <body>
+    <script>const CSRFTOKEN = '{{ csrf_token }}';</script>
+
+    {% block layout %}
+    {% endblock layout %}
+
+    {% block js %}
+      <script src="{% static '/vendors/tailwindcss/js/tailwind.min.js' %}"></script>
+      <script src="{% static '/vendors/fontawesome/js/all.min.js' %}"></script>
+      <script src="{% static '/vendors/iziToast/js/iziToast.min.js' %}"></script>
+      <script src="{% static '/vendors/sweetalert2/js/sweetalert2.min.js' %}"></script>
+      <script src="{% static '/vendors/chartjs/js/chart.umd.min.js' %}" type="module"></script>
+      <script src="{% static '/vendors/moment/js/moment.js' %}"></script>
+    {% endblock js %}
+
+    {% block js_import %}
+    {% endblock js_import %}
+
+    {% block js_variables %}
+      <script>
+      </script>
+    {% endblock js_variables %}
+  </body>
+</html>

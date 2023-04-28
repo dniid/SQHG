@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="form">
+        <form action='#'>
+            <div class="form-header">
+                <div class="title">
+                    <div class="text-center">
+                        <h1 class="text-2xl font-bold py-3 text-[var(--flushed-violet)]">
+                            Cadastro de Administradores
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+            <div class="flex justify-center">
+                <div class="flex flex-col input w-full p-5 xl:p-0 xl:w-1/2 space-y-5">
+                    <div class="imput-box">
+                        <label class="text-[var(--flushed-violet)] font-bold" for="cracha">Crachá</label>
+                        <input id="cracha" type="text" placeholder=" Digite seu número de crachá"
+                            required class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+
+                    <div class="imput-box">
+                        <div class="w-fit text-[var(--flushed-violet)] font-bold" for="nomecompleto">
+                            <span>Nome Completo</span>
+                        </div>
+                        <input id="nomecompleto" type="text" placeholder=" Digite seu nome completo"
+                            required class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+
+                    <div class="imput-box">
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="datanascimento">Data de
+                            Nascimento</label>
+                        <input id="datanascimento" type="text"
+                            placeholder=" Digite sua data de nascimento" required
+                            class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+
+                    <div class="imput-box">
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="e-mail">E-mail</label>
+                        <input id="e-mail" type="text" placeholder=" Digite seu E-mail" required
+                            class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+
+                    <div class="imput-box">
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="telefone">Telefone</label>
+                        <input id="telefone" type="text" placeholder=" (xx)xxxx-xxxx" required
+                            class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+
+                    <div class="imput-box">
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="senha">Senha</label>
+                        <input id="senha" type="text" placeholder=" Digite sua senha" required
+                            class="w-full h-8 border border-[var(--flushed-violet)] rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center py-10">
+                <div class="Cancelar-button">
+                    <button class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-96 hover:bg-[var(--honey-flower)]">
+                        Cancelar
+                    </button>
+                </div>
+
+                <div class="Gravar-button">
+                    <button class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-10 hover:bg-[var(--honey-flower)]">
+                        Gravar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

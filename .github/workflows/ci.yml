@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip3 --disable-pip-version-check install --no-compile -r ./sqhg/requirements/ci.txt
+          pip3 --disable-pip-version-check install --no-compile -r ./sqhg/requirements/main.txt
+
+      - name: Ruff
+        run: |
+          cd sqhg
+          ruff check . --show-source
+
+      - name: Safety
+        run: |
+          cd sqhg
+          safety check
+
+      - name: Setup Docker Compose
+        uses: KengoTODA/actions-setup-docker-compose@main
+        with:
+          version: '1.29.2'
+
+      - name: Test Build
+        shell: bash
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --no-cache
+
+      - name: Run Tests
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.ci.yml up sqhg_fastapi
+          docker-compose down
