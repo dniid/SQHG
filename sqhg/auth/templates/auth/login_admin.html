@@ -1,57 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin</title>
+{% block js_import %}
+<script src="{% static 'auth/js/login_admin.js' %}"></script>
+{% endblock js_import %}
 
-    <!-- [Links Partial here] -->
-</head>
-
-<body>
+{% block layout %}
     <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
-
         <div class="flex flex-col items-center">
-            <img class="w-40 mb-5" src="../../static/assets/prati-logo.png">
-            <form action="/#" class="my-1">
-                <div class="w-96  p-1 mx-auto rounded-x1 space-y-1">
-                    <input id="email" name="email" type="email"
-                        class="w-full placeholder-white text-white bg-[var(--white-violet)] px-3 py-1 border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
-                        placeholder="Login">
-                </div>
+            <div class="w-96 mb-5 flex justify-center">
+                <img src="{% static '/assets/prati-logo.png' %}" alt="Prati Logo">
+            </div>
 
-            </form>
+            <form action="{{ url_for('login') }}" method="POST" id="loginForm">
+                <div class="w-96 p-1 mx-auto rounded-x1 my-1 grid grid-cols-2 gap-2">
+                    <div class="w-full col-span-2">
+                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
+                               id="email" name="email" type="email" placeholder="Login">
+                    </div>
 
-            <form action="/#" class="my-1">
-                <div class="w-96 p-1  mx-auto rounded-x1 space-y-1">
-                    <input id="password" name="password" type="password"
-                        class="w-full placeholder-white text-white bg-[var(--white-violet)] px-3 py-1  border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
-                        placeholder="Senha">
-                </div>
-            </form>
+                    <div class="w-full col-span-2">
+                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
+                               id="password" name="password" type="password" placeholder="Senha">
+                    </div>
 
-            <form action="/#" class=" w-96  p-1 mx-auto rounded-x1my-1">
-                <button type="button"
-                    class="w-full bg-[var(--vivid-violet)] px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-center">
-                    <span>Entrar</span>
-                </button>
-            </form>
-
-            <form action="/#" class="my-1">
-                <div class="w-96  p-8 px-3 py-0 mt-0 mx-auto rounded-x1 space-y-1">
-                    <a href="#" class="text-xs text-[var(--white-violet)]">Esqueceu a senha?</a>
+                    <div class="w-full col-span-2 flex justify-center">
+                        <button class="w-full bg-[var(--vivid-violet)] px-2 py-1 text-white rounded-lg items-center"
+                                type="submit">
+                            <span>Entrar</span>
+                        </button>
+                    </div>
                 </div>
             </form>
-
-            <form action="/#" class="my-1">
-                <div class="w-96  p-8 px-3 py-0  mt-0 mx-auto rounded-x1 space-y-1">
-                    <a href="#" class="text-xs text-[var(--white-violet)]">Voltar</a>
+            <div class="w-96 my-1 px-2 flex justify-center">
+                <div class="w-full text-left">
+                    <a href="{{ url_for('login_page') }}" class="text-xs text-[var(--light-violet)]">Voltar</a>
                 </div>
-            </form>
+
+                <div class="w-full text-right">
+                    <a href="#" class="text-xs text-[var(--light-violet)]">Esqueceu a senha?</a>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock layout %}

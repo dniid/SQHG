@@ -4,12 +4,13 @@
 import logging
 
 from fastapi import FastAPI, Request, Depends
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from core.database import BaseModel, engine
 from core.logger import LogConfig
+from core.middlewares import AuthMiddleware
 from core.template import Template
 
 from utils.settings import find_dirs
@@ -32,6 +33,7 @@ logger = logging.getLogger('sqhg')
 BaseModel.metadata.create_all(bind=engine, checkfirst=True)
 
 app = FastAPI()
+app.add_middleware(AuthMiddleware)
 
 app.include_router(admin.router.router, prefix='/admin', tags=['Admin'])
 app.include_router(survey.router.router, prefix='/survey', tags=['Survey'])
@@ -45,6 +47,10 @@ for static in find_dirs('.', 'static'):
 
 
 @app.get('/', response_class=HTMLResponse)
-async def homepage(request: Request, templates: Jinja2Templates = Depends(Template)):
+async def home_page(request: Request, template: Jinja2Templates = Depends(Template)):
+    if not request.state.authenticated:
+        return RedirectResponse('/login')
+
     context = {'request': request}
-    return templates.TemplateResponse('homepage.html', context)
+
+    return template.TemplateResponse('homepage.html', context)

@@ -1,7 +1,7 @@
 <!-- Mobile Nav -->
 <nav class="w-full h-fit rounded-t-xl px-5 py-2 shadow bg-[var(--honey-flower)] sm:hidden text-white flex">
     <div class="w-full h-full flex items-center">
-        <a href="">
+        <a href="{{ url_for('home_page') }}">
             <img class="h-14" src="{% static '/assets/prati_minilogo.png' %}" alt="">
         </a>
     </div>
@@ -11,15 +11,25 @@
 </nav>
 <!-- Desktop Nav -->
 <nav id="nav"
-    class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full rounded-xl sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
-    <a class="p-2 flex justify-center" href="">
+    class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
+    <a class="p-2 flex justify-center" href="{{ url_for('home_page') }}">
         <img class="w-32" src="{% static '/assets/prati-logo.png' %}" alt="">
     </a>
     <div class="flex flex-col w-full h-full space-y-3">
         <!-- Items 1 -->
-        <div class="w-full h-fit  space-y-3">
-            <div id="openUserSubItems"
-                class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+        <div class="w-full h-fit">
+            <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                <a class="w-full flex" href="{{ url_for('home_page') }}">
+                    <div class="w-1/6">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <span class="select-none w-4/6">Home</span>
+                </a>
+            </div>
+        </div>
+        <!-- Items 2 -->
+        <div class="w-full h-fit overflow-hidden relative">
+            <div id="openUserSubItems" class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
                 <div>
                     <i class="fa-solid fa-user"></i>
                 </div>
@@ -31,21 +41,27 @@
                     <i class="fa-solid fa-chevron-up"></i>
                 </div>
             </div>
-            <div id="userSubItems" class="w-full flex justify-center space-x-3">
-                <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a class="block" href="">
-                        <i class="fa-solid fa-plus"></i>
+            <div id="userSubItems" class="w-full flex flex-col justify-end duration-500 transition-y-0">
+                <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
+                    <a class="flex" href="{{ url_for('admin_create_page') }}">
+                        <div class="w-1/6">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <span class="select-none w-4/6">Criar</span>
                     </a>
                 </div>
-                <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a class="block" href="">
-                        <i class="fa-solid fa-list"></i>
+                <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
+                    <a class="flex" href="{{ url_for('admin_list_page') }}">
+                        <div class="w-1/6">
+                            <i class="fa-solid fa-list"></i>
+                        </div>
+                        <span class="select-none w-4/6">Listar</span>
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Items 2 -->
-        <div class="w-full h-fit space-y-3">
+        <!-- Items 3 -->
+        <div class=" w-full h-fit">
             <div id="openQuestionnairesSubItems"
                 class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
                 <div>
@@ -59,48 +75,47 @@
                     <i class="fa-solid fa-chevron-up"></i>
                 </div>
             </div>
-            <div id="questionnairesSubItems" class="w-full flex justify-center space-x-3">
-                <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a href="">
-                        <i class="fa-solid fa-object-ungroup"></i>
+            <div id="questionnairesSubItems" class="w-full flex flex-col justify-center">
+                <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
+                    <a class="flex" href="#">
+                        <div class="w-1/6">
+                            <i class="fa-solid fa-object-ungroup"></i>
+                        </div>
+                        <span class="select-none w-4/6">Criar</span>
                     </a>
                 </div>
-                <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a href="">
-                        <i class="fa-solid fa-list"></i>
+                <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
+                    <a class="flex" href="#">
+                        <div class="w-1/6">
+                            <i class="fa-solid fa-list"></i>
+                        </div>
+                        <span class="select-none w-4/6">Listar</span>
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Items 3 -->
-        <div class="w-full h-fit space-y-3">
-            <div id="nav-click-2"
-                class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <div>
-                    <i class="fa-solid fa-file-lines"></i>
-                </div>
-                <span class="select-none">Relatórios</span>
-                <div id="nav-chevron-down-2" class="hidden">
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="invisible" id="nav-chevron-up-2">
-                    <i class="fa-solid fa-chevron-up"></i>
-                </div>
+        <!-- Items 4 -->
+        <div class="w-full h-fit">
+            <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                <a class="w-full flex" href="#">
+                    <div class="w-1/6">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <span class="select-none w-4/6">Relatórios</span>
+                </a>
             </div>
         </div>
-        <a href="tel:4521031166">
-            <div class="w-full h-full space-x-3 items-center flex flex-col">
-                <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
-                    <div class=" flex justify-center" href="">
-                        <img class="w-24" src="{% static '/assets/atendimento-geral.svg' %}" alt="">
-                    </div>
-                    <div class="flex flex-col items-center text-xl space-y-2">
-                        <span class="w-40 text-center">Atendimento Geral</span>
-                        <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
-                    </div>
-                </div>
+    </div>
+    <div class="w-full h-full items-center flex flex-col justify-end">
+        <div class="bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
+            <div class=" flex justify-center" href="#">
+                <img class="w-24" src="{% static '/assets/atendimento-geral.svg' %}" alt="Telefone">
             </div>
-        </a>
+            <div class="flex flex-col items-center text-xl space-y-2">
+                <span class="w-40 text-center">Atendimento Geral</span>
+                <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+            </div>
+        </div>
     </div>
 </nav>
 <!-- Mobile Menu -->
@@ -108,6 +123,17 @@
     class="hidden h-full w-full rounded-b-xl flex flex-col px-3 pt-5 items-center space-y-7 bg-[var(--honey-flower)] sm:hidden">
     <div class="w-full space-y-3">
         <!-- Items 1 -->
+        <div class="w-full space-y-3">
+            <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                <a href="{{ url_for('home_page') }}">
+                    <div>
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <span class="select-none">Home</span>
+                </a>
+            </div>
+        </div>
+        <!-- Items 2 -->
         <div class="w-full space-y-3">
             <div id="mobileOpenUserSubItems"
                 class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
@@ -124,18 +150,18 @@
             </div>
             <div id="mobileUserSubItems" class="w-full flex justify-center space-x-3">
                 <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a class="block" href="">
+                    <a class="block" href="{{ url_for('admin_create_page') }}">
                         <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
                 <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a class="block" href="">
+                    <a class="block" href="{{ url_for('admin_list_page') }}">
                         <i class="fa-solid fa-list"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Items 2 -->
+        <!-- Items 3 -->
         <div class="w-full space-y-3">
             <div id="mobileOpenQuestionnairesSubItems"
                 class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
@@ -152,45 +178,38 @@
             </div>
             <div id="mobileQuestionnairesSubItems" class="w-full flex justify-center space-x-3">
                 <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a href="">
+                    <a href="#">
                         <i class="fa-solid fa-object-ungroup"></i>
                     </a>
                 </div>
                 <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a href="">
+                    <a href="#">
                         <i class="fa-solid fa-list"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Items 3 -->
+        <!-- Items 4 -->
         <div class="w-full space-y-3">
-            <div id="movile-nav-click-2"
-                class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <div>
-                    <i class="fa-solid fa-file-lines"></i>
-                </div>
-                <span class="select-none">Relatórios</span>
-                <div id="mobile-nav-chevron-down-2" class="hidden">
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="invisible" id="mobile-nav-chevron-up-2">
-                    <i class="fa-solid fa-chevron-up"></i>
-                </div>
+            <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+                <a href="#">
+                    <div>
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <span class="select-none">Relatórios</span>
+                </a>
             </div>
         </div>
-        <a href="tel:4521031166">
-            <div class="w-full h-full space-x-3 items-center flex flex-col">
-                <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
-                    <div class=" flex justify-center" href="">
-                        <img class="w-24" src="{% static '/assets/atendimento-geral.svg' %}" alt="">
-                    </div>
-                    <div class="flex flex-col items-center text-xl space-y-2">
-                        <span class="w-40 text-center">Atendimento Geral</span>
-                        <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
-                    </div>
-                </div>
+    </div>
+    <div class="w-full h-full space-x-3 items-center flex flex-col">
+        <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
+            <div class=" flex justify-center" href="#">
+                <img class="w-24" src="{% static '/assets/atendimento-geral.svg' %}" alt="Telefone">
             </div>
-        </a>
+            <div class="flex flex-col items-center text-xl space-y-2">
+                <span class="w-40 text-center">Atendimento Geral</span>
+                <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+            </div>
+        </div>
     </div>
 </section>

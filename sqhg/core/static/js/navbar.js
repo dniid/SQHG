@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function () {
 // Desktop Constants
     // Open Sub-Items
     const openUserSubItems = document.getElementById("openUserSubItems");
@@ -101,3 +102,4 @@
             mobileQuestionnairesChevronDown.classList.remove("hidden");
         }
     });
+});
