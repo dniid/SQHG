@@ -2,7 +2,7 @@
 
 from datetime import timedelta
 
-from fastapi import APIRouter, Request, Response, Depends, status
+from fastapi import APIRouter, Request, Depends, status
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session

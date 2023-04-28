@@ -23,5 +23,4 @@ class AuthMiddleware(BaseHTTPMiddleware):
                 request.state.user = user
                 request.state.authenticated = True
 
-        response = await call_next(request)
-        return response
+        return await call_next(request)

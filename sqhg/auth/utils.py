@@ -2,13 +2,11 @@
 
 from datetime import datetime, timedelta
 
-from fastapi import Depends
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from admin.models import Admin
-from core.database import Database
 from core.settings import (
     SECRET_KEY,
     ALGORITHM

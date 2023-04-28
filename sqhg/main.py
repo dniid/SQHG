@@ -53,6 +53,4 @@ async def home_page(request: Request, template: Jinja2Templates = Depends(Templa
 
     context = {'request': request}
 
-    print(request.__dict__)
-
     return template.TemplateResponse('homepage.html', context)
