@@ -1,7 +1,7 @@
 <!-- Mobile Nav -->
 <nav class="w-full h-fit rounded-t-xl px-5 py-2 shadow bg-[var(--honey-flower)] sm:hidden text-white flex">
     <div class="w-full h-full flex items-center">
-        <a href="">
+        <a href="{{ url_for('home_page') }}">
             <img class="h-14" src="{% static '/assets/prati_minilogo.png' %}" alt="">
         </a>
     </div>
@@ -12,14 +12,14 @@
 <!-- Desktop Nav -->
 <nav id="nav"
     class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
-    <a class="p-2 flex justify-center" href="">
+    <a class="p-2 flex justify-center" href="{{ url_for('home_page') }}">
         <img class="w-32" src="{% static '/assets/prati-logo.png' %}" alt="">
     </a>
     <div class="flex flex-col w-full h-full space-y-3">
         <!-- Items 1 -->
         <div class="w-full h-fit">
             <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <a class="w-full flex" href="">
+                <a class="w-full flex" href="{{ url_for('home_page') }}">
                     <div class="w-1/6">
                         <i class="fa-solid fa-house"></i>
                     </div>
@@ -43,7 +43,7 @@
             </div>
             <div id="userSubItems" class="w-full flex flex-col justify-end duration-500 transition-y-0">
                 <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
-                    <a class="flex" href="">
+                    <a class="flex" href="{{ url_for('admin_create_page') }}">
                         <div class="w-1/6">
                             <i class="fa-solid fa-plus"></i>
                         </div>
@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
-                    <a class="flex" href="">
+                    <a class="flex" href="{{ url_for('admin_list_page') }}">
                         <div class="w-1/6">
                             <i class="fa-solid fa-list"></i>
                         </div>
