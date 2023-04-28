@@ -2,7 +2,8 @@
 
 from datetime import timedelta
 
-from fastapi import APIRouter, Request, Response, Depends
+from fastapi import APIRouter, Request, Response, Depends, status
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
@@ -30,6 +31,9 @@ async def login_page(
     template: Jinja2Templates = Depends(Template),
     admin: bool = False
 ):
+    if request.state.authenticated:
+        return RedirectResponse('/')
+
     context = {'request': request}
     context['subtitle'] = 'Login'
 
@@ -43,14 +47,19 @@ async def login_page(
 @router.post('/login')
 async def login(credentials: LoginData, database: Session = Depends(Database)):
     form_user = database.query(Admin).filter(Admin.email == credentials.email).first()
+    if not form_user:
+        raise InvalidCredentials
+
     user = authenticate_user(form_user, credentials.password)
     if not user:
         raise InvalidCredentials
+
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={'sub': user.email}, expires_delta=access_token_expires
+        data={'sub': user.email},
+        expires_delta=access_token_expires,
     )
-    response = Response()
-    response.set_cookie(key="session_token", value=access_token)
 
-    return 'test'
+    response = RedirectResponse(url='/', status_code=status.HTTP_302_FOUND)
+    response.set_cookie(key='session_token', value=access_token)
+    return response

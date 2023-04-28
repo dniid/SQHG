@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
         'Content-Type': 'application/json'
       },
       body: data,
+    }).then(response => {
+      if (response.status == 200) {
+        window.location.href = response.url;
+      } else {
+        throw new Error(response.statusText);
+      }
     }).catch(error => {
       console.error(error);
       iziToast.error({
