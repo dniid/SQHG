@@ -77,7 +77,7 @@
             </div>
             <div id="questionnairesSubItems" class="w-full flex flex-col justify-center">
                 <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
-                    <a class="flex" href="#">
+                    <a class="flex" href="{{ url_for('survey_create_page') }}">
                         <div class="w-1/6">
                             <i class="fa-solid fa-object-ungroup"></i>
                         </div>
@@ -85,7 +85,7 @@
                     </a>
                 </div>
                 <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
-                    <a class="flex" href="#">
+                    <a class="flex" href="{{ url_for('survey_sent_page') }}">
                         <div class="w-1/6">
                             <i class="fa-solid fa-list"></i>
                         </div>
@@ -125,11 +125,11 @@
         <!-- Items 1 -->
         <div class="w-full space-y-3">
             <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <a href="{{ url_for('home_page') }}">
-                    <div>
+                <a href="{{ url_for('home_page') }}" class="flex w-full">
+                    <div class="w-1/6">
                         <i class="fa-solid fa-house"></i>
                     </div>
-                    <span class="select-none">Home</span>
+                    <span class="w-4/6 select-none">Home</span>
                 </a>
             </div>
         </div>
@@ -137,14 +137,14 @@
         <div class="w-full space-y-3">
             <div id="mobileOpenUserSubItems"
                 class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <div>
+                <div class="w-1/6">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                <span class="select-none">Usuários</span>
-                <div id="mobileUserChevronDown" class="hidden">
+                <span class="w-4/6 select-none">Usuários</span>
+                <div id="mobileUserChevronDown" class="w-1/6 hidden">
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div id="mobileUserChevronUp">
+                <div id="mobileUserChevronUp" class="w-1/6">
                     <i class="fa-solid fa-chevron-up"></i>
                 </div>
             </div>
@@ -165,20 +165,20 @@
         <div class="w-full space-y-3">
             <div id="mobileOpenQuestionnairesSubItems"
                 class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <div>
+                <div class="w-1/6">
                     <i class="fa-solid fa-question"></i>
                 </div>
-                <span class="select-none">Questionários</span>
-                <div id="mobileQuestionnairesChevronDown" class="hidden">
+                <span class="w-4/6 select-none">Questionários</span>
+                <div id="mobileQuestionnairesChevronDown" class="w-1/6 hidden">
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div id="mobileQuestionnairesChevronUp">
+                <div id="mobileQuestionnairesChevronUp" class="w-1/6">
                     <i class="fa-solid fa-chevron-up"></i>
                 </div>
             </div>
             <div id="mobileQuestionnairesSubItems" class="w-full flex justify-center space-x-3">
                 <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-                    <a href="#">
+                    <a href="{{ url_for('survey_create_page') }}">
                         <i class="fa-solid fa-object-ungroup"></i>
                     </a>
                 </div>
@@ -192,11 +192,11 @@
         <!-- Items 4 -->
         <div class="w-full space-y-3">
             <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-                <a href="#">
-                    <div>
+                <a href="#" class="w-full flex">
+                    <div class="w-1/6">
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
-                    <span class="select-none">Relatórios</span>
+                    <span class="w-4/6 select-none">Relatórios</span>
                 </a>
             </div>
         </div>
