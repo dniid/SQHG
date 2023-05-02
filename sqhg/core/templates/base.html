@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block html_title %}SQHG{% endblock html_title %}{% if subtitle %} - {{ subtitle }}{% endif %}</title>
 
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+
     {% block css %}
       <link rel="stylesheet" href="{% static '/vendors/fontawesome/css/all.min.css' %}"/>
       <link rel="stylesheet" href="{% static '/vendors/iziToast/css/iziToast.min.css' %}"/>
