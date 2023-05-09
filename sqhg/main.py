@@ -8,11 +8,17 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from core.database import BaseModel, engine
+from core.database import BaseModel, engine, SessionLocal
 from core.logger import LogConfig
 from core.middlewares import AuthMiddleware
 from core.template import Template
+from core.settings import (
+    ADMIN_EMAIL,
+    ADMIN_USERNAME,
+    ADMIN_PASSWORD,
+)
 
+from auth.utils import get_password_hash
 from utils.settings import find_dirs
 
 # Import models for SQLAlchemy's database base metadata
@@ -54,3 +60,26 @@ async def home_page(request: Request, template: Jinja2Templates = Depends(Templa
     context = {'request': request}
 
     return template.TemplateResponse('homepage.html', context)
+
+
+@app.on_event("startup")
+async def check_superuser():
+    database = SessionLocal()
+
+    logger.info('Verifying superuser...')
+    admin = database.query(Admin).filter(Admin.email == ADMIN_EMAIL).first()
+    if not admin:
+        logger.info('Creating superuser...')
+        password = get_password_hash(ADMIN_PASSWORD)
+        admin = Admin(
+            tag='000000000000',
+            name=ADMIN_USERNAME,
+            birth_date='2000-01-01',
+            email=ADMIN_EMAIL,
+            phone='00000000000',
+            password=password
+        )
+        database.add(admin)
+        database.commit()
+
+    database.close()
