@@ -17,18 +17,46 @@ document.addEventListener('DOMContentLoaded', function () {
   let returnBtn = document.getElementById('returnBtn');
   let sendBtn = document.getElementById('sendBtn');
   
-  returnBtn.addEventListener('focus', (e) =>{
+  returnBtn.addEventListener('click', (e) =>{
     window.location.href = returnBtn.dataset.href;
   });
-  
-  returning.addEventListener('click', (e) =>{
-    let password = document.getElementById('password').value;
-    let confirmPassword = document.getElementById('confirmPassword').value;
 
-    if (password == confirmPassword) {
 
+  let password = document.getElementById('password');
+  let confirmPassword = document.getElementById('confirmPassword');
+  let errorMessage = document.getElementById('errorMessage');
+
+  password.addEventListener('change', (e) => {
+    if (!(password.value == confirmPassword.value)){
+      sendBtn.setAttribute('disabled', '');
+      console.log(errorMessage.value);
+      if (errorMessage.value == undefined) errorMessage.innerHTML = 'Senhas não conferem.'
     } else {
-      alert('Senhas não conferem!');
+      sendBtn.removeAttribute('disabled');
+      errorMessage.innerHTML = ''
     }
   });
+
+  confirmPassword.addEventListener('change', (e) => {
+    if (!(password.value == confirmPassword.value)){
+      sendBtn.setAttribute('disabled', '');
+      if (errorMessage.value == undefined) errorMessage.innerHTML = 'Senhas não conferem.'
+    } else {
+      sendBtn.removeAttribute('disabled');
+      errorMessage.innerHTML = ''
+    }
+  });
+
 });
+
+// function verifyPassword() {
+//   sendBtn.addEventListener('click', (e) => {
+//     let password = document.getElementById('password').value;
+//     let confirmPassword = document.getElementById('confirm-password').value;
+
+//     if (!(password = confirmPassword)) {
+//       e.preventDefault();
+//       alert('Senhas não conferem!')
+//     }
+//   });
+// }

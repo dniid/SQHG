@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="form">
-        <form action='#'>
+        <form id="admin-form" onsubmit="verifyPassword()" action='/#'>
             <div class="form-header">
                 <div class="title">
                     <div class="text-center">
@@ -34,9 +34,9 @@
                     </div>
 
                     <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="birthDate">Data de
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="birth-date">Data de
                             Nascimento</label>
-                        <input id="birthDate" type="date"
+                        <input id="birth-date" type="date"
                             placeholder="Digite sua data de nascimento" required autocomplete="off"
                             class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
                     </div>
@@ -56,20 +56,23 @@
                     <div class="imput-box">
                         <label class="w-fit text-[var(--flushed-violet)] font-bold" for="password">Senha</label>
                         <input id="password" type="password" placeholder="Digite sua senha" required autocomplete="off"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
+                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" onchange="onChange()">
                     </div>
 
                     <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirmPassword">Confirme a senha</label>
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirm-password">Confirme a senha</label>
                         <input id="confirmPassword" type="password" placeholder="Digite sua senha" required autocomplete="off"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
+                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" onchange="onChange()">
+                    </div>
+                    <div class="">
+                        <span id="errorMessage" class="text-red-500 font-bold"></span>
                     </div>
 
                     <div class="flex justify-end py-10">
                         <div class="cancel-btn">
-                            <button id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-href="{{ url_for('home_page') }}">
+                            <div id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-href="{{ url_for('home_page') }}">
                                 Cancelar
-                            </button>
+                            </div>
                         </div>
         
                         <div class="save-btn">
