@@ -54,38 +54,39 @@
 
                     <tbody class="divide-y divide-gray-200">
                             {% for user in users %}
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                    {{ user.tag }}
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                    {{ user.name }}
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                    {{ user.phone }}
-                                </td>
-    
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                    {{ user.email }}
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                    <div class="flex justify-center">
-    
-                                        <a>
-                                            <button type="button"
-                                                class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
-                                                    class="fa-solid fa-pen-to-square"></i></button>
-                                        </a>
-                                        <form>
-                                            <button type="submit"
-                                                class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
-                                                <i
-                                                    class="fa-solid fa-trash"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <tr>
+                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                        {{ user.tag }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                        {{ user.name }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                        {{ user.phone }}
+                                    </td>
+
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                        {{ user.email }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                        <div class="flex justify-center">
+
+                                            <a href="edit/{{ user.id }}">
+                                                <button type="button"
+                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
+                                                        class="fa-solid fa-pen-to-square"></i></button>
+                                            </a>
+                                            <form>
+                                                <button type="submit"
+                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
+                                                    <i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             {% endfor %}
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -95,7 +96,7 @@
                     <a href="{{ url_for('admin_create_page') }}">
                         <button
                         class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
-                        Novo Modelo
+                        Novo Administrador
                         </button>
                     </a>
                 </div>

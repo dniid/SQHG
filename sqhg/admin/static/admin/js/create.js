@@ -48,15 +48,3 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
-
-// function verifyPassword() {
-//   sendBtn.addEventListener('click', (e) => {
-//     let password = document.getElementById('password').value;
-//     let confirmPassword = document.getElementById('confirm-password').value;
-
-//     if (!(password = confirmPassword)) {
-//       e.preventDefault();
-//       alert('Senhas não conferem!')
-//     }
-//   });
-// }
