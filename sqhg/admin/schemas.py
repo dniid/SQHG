@@ -11,3 +11,4 @@ class AdminSchema(BaseSchema):
     birth_date: date
     email: str
     phone: str
+    password: str

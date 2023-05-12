@@ -8,10 +8,12 @@ from sqlalchemy.orm import Session
 
 from core.template import Template
 
+from admin.schemas import AdminSchema
 from admin.models import Admin
 from core.database import Database
-
-import re
+from auth.utils import get_password_hash
+from auth.exceptions import InvalidCredentials
+from admin.exceptions import AdminException
 
 
 
@@ -59,35 +61,31 @@ async def admin_list_page(request: Request, id: int, template: Jinja2Templates =
     admin = database.query(Admin).filter(Admin.id == id).first()
 
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise AdminException
 
     context['user'] = admin
 
     return template.TemplateResponse('admin/edit.html', context)
 
 
-@router.post('/create', response_class=HTMLResponse)
-async def admin_create_page(request: Request, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+@router.post('/create', status_code=201)
+async def admin_create_page(request: Request, admin_data: AdminSchema, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
     if not request.state.authenticated:
-        return RedirectResponse('/login')
+        raise InvalidCredentials
 
-    form_data = await request.form()
-
-    regex = r"\d+"
-    valid_phone = "".join(re.findall(regex, form_data['phone']))
-
-    admin = Admin()
-    admin.tag = form_data['tag']
-    admin.name = form_data['name']
-    admin.birth_date = form_data['birthDate']
-    admin.email = form_data['email']
-    admin.phone = valid_phone
-    admin.password = form_data['password']
+    admin = Admin(
+        tag=admin_data.tag,
+        name=admin_data.name,
+        birth_date=admin_data.birth_date,
+        email=admin_data.email,
+        phone=admin_data.phone,
+        password=admin_data.password,
+    )
 
     database.add(admin)
     database.commit()
 
-    raise HTTPException(status_code=303, headers={"Location": "/admin/list"})
+    return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
 @router.post('/edit/{id}', response_class=HTMLResponse)

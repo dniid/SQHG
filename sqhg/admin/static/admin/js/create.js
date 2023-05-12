@@ -2,15 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
   let phoneInput = document.getElementById('phone');
 
   phoneInput.addEventListener('input', (event) => {
-      // Remove all non-digit characters from the input value
       let value = event.target.value.replace(/\D/g, '');
       
-      // Add the mask to the input value
       if (value.length > 0) {
         value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
       }
       
-      // Set the masked value back to the input field
       event.target.value = value;
   });
 
@@ -21,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.location.href = returnBtn.dataset.href;
   });
 
-
   let password = document.getElementById('password');
   let confirmPassword = document.getElementById('confirmPassword');
   let errorMessage = document.getElementById('errorMessage');
@@ -29,11 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
   password.addEventListener('change', (e) => {
     if (!(password.value == confirmPassword.value)){
       sendBtn.setAttribute('disabled', '');
-      console.log(errorMessage.value);
       if (errorMessage.value == undefined) errorMessage.innerHTML = 'Senhas não conferem.'
     } else {
       sendBtn.removeAttribute('disabled');
-      errorMessage.innerHTML = ''
+      errorMessage.innerHTML = '';
     }
   });
 
@@ -43,8 +38,67 @@ document.addEventListener('DOMContentLoaded', function () {
       if (errorMessage.value == undefined) errorMessage.innerHTML = 'Senhas não conferem.'
     } else {
       sendBtn.removeAttribute('disabled');
-      errorMessage.innerHTML = ''
+      errorMessage.innerHTML = '';
     }
   });
+
+  let form = document.querySelector('#adminForm');
+
+  form.onsubmit = function (e) {
+    e.preventDefault();
+
+    let tag = form.querySelector('#tag');
+    let name = form.querySelector('#name');
+    let email = form.querySelector('#email');
+    let phone = form.querySelector('#phone');
+    let password = form.querySelector('#password');
+
+    let [year, month, day] = (form.querySelector('#birthDate').value).split("-").map(Number);
+    let jsDate = new Date(year, month - 1, day);
+    let birthDate = moment(jsDate).format("YYYY-MM-DD");
+
+
+    let url = form.getAttribute('action');
+    let data = JSON.stringify({
+      'tag': tag.value,
+      'name': name.value,
+      'birth_date': birthDate,
+      'email': email.value,
+      'phone': (phone.value).replace(/\D/g, ""),
+      'password': password.value,
+    });
+
+    console.log(data);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': CSRFTOKEN,
+        'Content-Type': 'application/json'
+      },
+      body: data,
+    }).then(response => {
+      if (response.status == 201) {
+        response.json();
+        console.log(response)
+      } else {
+        throw new Error(response.statusText);
+      }
+    }).then(response => {
+      iziToast.success({
+        position: 'topRight',
+        message: response.message,
+      });
+      setTimeout(() => {
+        window.location.href = sendBtn.dataset.href;
+      }, 1000);
+    }).catch(error => {
+      console.error(error);
+      iziToast.error({
+        position: 'topRight',
+        message: 'Erro ao salvar.',
+      });
+    });
+  }
 
 });

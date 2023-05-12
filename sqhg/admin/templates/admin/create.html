@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="form">
-        <form id="admin-form" method="post" action='/admin/create'>
+        <form id="adminForm" action='/admin/create'>
             <div class="form-header">
                 <div class="title">
                     <div class="text-center">
@@ -36,7 +36,7 @@
                     <div class="imput-box">
                         <label class="w-fit text-[var(--flushed-violet)] font-bold" for="birth-date">Data de
                             Nascimento</label>
-                        <input id="birth-date" name="birthDate" type="date"
+                        <input id="birthDate" name="birthDate" type="date"
                             placeholder="Digite sua data de nascimento" required autocomplete="off"
                             class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
                     </div>
@@ -76,7 +76,8 @@
                         </div>
         
                         <div class="save-btn">
-                            <button id="sendBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-10 hover:bg-[var(--honey-flower)]">
+                            <button id="sendBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-10 hover:bg-[var(--honey-flower)]"
+                            data-href="{{ url_for('admin_list_page') }}">
                                 Gravar
                             </button>
                         </div>
