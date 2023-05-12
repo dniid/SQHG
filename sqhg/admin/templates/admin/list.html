@@ -77,7 +77,7 @@
                                                     class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                                                         class="fa-solid fa-pen-to-square"></i></button>
                                             </a>
-                                            <form>
+                                            <form  method="POST" action="{% url 'excluir_usuario' admin.id %}">
                                                 <button type="submit"
                                                     class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
                                                     <i
