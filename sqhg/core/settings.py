@@ -21,6 +21,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = getint('ACCESS_TOKEN_EXPIRE_MINUTES', 60 * 24 * 30
 
 # Superuser constants
 
-ADMIN_EMAIL = getstr('ADMIN_EMAIL', 'admin@admin.com')
-ADMIN_USERNAME = getstr('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = getstr('ADMIN_PASSWORD', 'admin')
+SUPERUSER_EMAIL = getstr('SUPERUSER_EMAIL', 'admin@admin.com')
+SUPERUSER_USERNAME = getstr('SUPERUSER_USERNAME', 'admin')
+SUPERUSER_PASSWORD = getstr('SUPERUSER_PASSWORD', 'admin')

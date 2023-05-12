@@ -13,9 +13,9 @@ from core.logger import LogConfig
 from core.middlewares import AuthMiddleware
 from core.template import Template
 from core.settings import (
-    ADMIN_EMAIL,
-    ADMIN_USERNAME,
-    ADMIN_PASSWORD,
+    SUPERUSER_EMAIL,
+    SUPERUSER_USERNAME,
+    SUPERUSER_PASSWORD,
 )
 
 from auth.utils import get_password_hash
@@ -67,15 +67,15 @@ async def check_superuser():
     database = SessionLocal()
 
     logger.info('Verifying superuser...')
-    admin = database.query(Admin).filter(Admin.email == ADMIN_EMAIL).first()
+    admin = database.query(Admin).filter(Admin.email == SUPERUSER_EMAIL).first()
     if not admin:
         logger.info('Creating superuser...')
-        password = get_password_hash(ADMIN_PASSWORD)
+        password = get_password_hash(SUPERUSER_PASSWORD)
         admin = Admin(
             tag='000000000000',
-            name=ADMIN_USERNAME,
+            name=SUPERUSER_USERNAME,
             birth_date='2000-01-01',
-            email=ADMIN_EMAIL,
+            email=SUPERUSER_EMAIL,
             phone='00000000000',
             password=password
         )

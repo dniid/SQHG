@@ -13,14 +13,12 @@ services:
       LOGS_ROOT: /var/log/sqhg
       SECRET_KEY: 8d7ba1016828942be9bc7887c08cd7637586d73d4cfc3b41c51d51b5328c54ad
       ALGORITHM: HS256
-      ADMIN_USERNAME: admin
-      ADMIN_EMAIL: admin@admin.com
-      ADMIN_PASSWORD: admin
     command: bash ./docker/start.sh
     ports:
       - "8000:8000"
     env_file:
       - ./envs/postgres.env
+      - ./envs/superuser.env
     networks:
       - sqhg
 
