@@ -14,8 +14,8 @@ class BaseDetailException(HTTPException):
 
 
 class CredentialsException(BaseDetailException):
-    STATUS_CODE = status.HTTP_401_UNAUTHORIZED
-    DETAIL = 'Could not validate credentials'
+    STATUS_CODE = status.HTTP_503_SERVICE_UNAVAILABLE
+    DETAIL = 'Não foi possível validar as credenciais'
 
     def __init__(self) -> None:
         super().__init__(headers={'WWW-Authenticate': 'Bearer'})
@@ -23,7 +23,7 @@ class CredentialsException(BaseDetailException):
 
 class InvalidCredentials(BaseDetailException):
     STATUS_CODE = status.HTTP_401_UNAUTHORIZED
-    DETAIL = 'Invalid email or password'
+    DETAIL = 'Email ou senha inválidos'
 
     def __init__(self) -> None:
         super().__init__(headers={'WWW-Authenticate': 'Bearer'})

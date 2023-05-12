@@ -3,7 +3,7 @@
 from datetime import timedelta
 
 from fastapi import APIRouter, Request, Depends, status
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
@@ -44,13 +44,13 @@ async def login_page(
     return template.TemplateResponse('auth/login.html', context)
 
 
-@router.post('/login')
+@router.post('/login', response_class=JSONResponse)
 async def login(credentials: LoginData, database: Session = Depends(Database)):
-    form_user = database.query(Admin).filter(Admin.email == credentials.email).first()
-    if not form_user:
+    user = database.query(Admin).filter(Admin.email == credentials.email).first()
+    if not user:
         raise InvalidCredentials
 
-    user = authenticate_user(form_user, credentials.password)
+    user = authenticate_user(user, credentials.password)
     if not user:
         raise InvalidCredentials
 
@@ -60,6 +60,16 @@ async def login(credentials: LoginData, database: Session = Depends(Database)):
         expires_delta=access_token_expires,
     )
 
-    response = RedirectResponse(url='/', status_code=status.HTTP_302_FOUND)
+    response = JSONResponse(status_code=status.HTTP_200_OK, content={'message': 'Logado com sucesso!'})
     response.set_cookie(key='session_token', value=access_token)
+    return response
+
+
+@router.post('/logout', response_class=JSONResponse)
+async def logout(request: Request):
+    if not request.state.authenticated:
+        raise InvalidCredentials
+
+    response = JSONResponse(status_code=status.HTTP_200_OK, content={'message': 'Deslogado com sucesso!'})
+    response.delete_cookie(key='session_token')
     return response
