@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
+<script src="{% static 'admin/js/form_generals.js' %}"></script>
 <script src="{% static 'admin/js/create.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
     <div class="form">
-        <form id="adminForm" action='/admin/create'>
+        <form id="adminCreateForm" action="{{ url_for('admin_create_page') }}">
             <div class="form-header">
                 <div class="title">
                     <div class="text-center">
@@ -60,7 +61,7 @@
                     </div>
 
                     <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirm-password">Confirme a senha</label>
+                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirmPassword">Confirme a senha</label>
                         <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Digite sua senha" required autocomplete="off" maxlength="128"
                             class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" onchange="onChange()">
                     </div>
@@ -70,7 +71,7 @@
 
                     <div class="flex justify-end py-10">
                         <div class="cancel-btn">
-                            <div id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-href="{{ url_for('home_page') }}">
+                            <div id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-href="{{ url_for('admin_list_page') }}">
                                 Cancelar
                             </div>
                         </div>

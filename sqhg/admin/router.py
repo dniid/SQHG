@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from core.template import Template
 
 from admin.schemas import AdminSchema
+from admin.schemas import AdminUpdate
 from admin.models import Admin
 from core.database import Database
 from auth.utils import get_password_hash
@@ -51,7 +52,7 @@ async def admin_create_page(request: Request, template: Jinja2Templates = Depend
     return template.TemplateResponse('admin/create.html', context)
 
 @router.get('/edit/{id}', response_class=HTMLResponse)
-async def admin_list_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -88,30 +89,42 @@ async def admin_create_page(request: Request, admin_data: AdminSchema, template:
     return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
-@router.post('/edit/{id}', response_class=HTMLResponse)
-async def admin_create_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+@router.post('/edit/{id}', status_code=201)
+async def admin_edit_page(request: Request, id: int, admin_data: AdminUpdate, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
     if not request.state.authenticated:
-        return RedirectResponse('/login')
+        return InvalidCredentials
 
     admin = database.query(Admin).filter(Admin.id == id).first()
 
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
-
-    form_data = await request.form()
-
-    regex = r"\d+"
-    valid_phone = "".join(re.findall(regex, form_data['phone']))
     
-    admin.tag = form_data['tag']
-    admin.name = form_data['name']
-    admin.birth_date = form_data['birthDate']
-    admin.email = form_data['email']
-    admin.phone = valid_phone
+    admin.name=admin_data.name
+    admin.phone=admin_data.phone
 
-    if not (form_data['password'] == ''):
-        admin.password = form_data['password']
+    if (admin_data.password != ''):
+        admin.password=admin_data.password
 
     database.commit()
 
-    raise HTTPException(status_code=303, headers={"Location": "/admin/list"})
+    return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
+
+@router.delete('/delete/{id}', status_code=201)
+async def admin_delete_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        return InvalidCredentials
+
+    admin = database.query(Admin).filter(Admin.id == id).first()
+
+    if not admin:
+        raise HTTPException(status_code=404, detail="Admin not found")
+    
+    admin.name=admin_data.name
+    admin.phone=admin_data.phone
+
+    if (admin_data.password != ''):
+        admin.password=admin_data.password
+
+    database.commit()
+
+    return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}

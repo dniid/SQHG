@@ -72,14 +72,14 @@
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
                                         <div class="flex justify-center">
 
-                                            <a href="edit/{{ user.id }}">
+                                            <a href="{{ url_for('admin_edit_page', id=user.id) }}">
                                                 <button type="button"
                                                     class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                                                         class="fa-solid fa-pen-to-square"></i></button>
                                             </a>
-                                            <form>
+                                            <form id="adminDeleteForm" action="{{ url_for('admin_delete_page', id=user.id) }}">
                                                 <button type="submit"
-                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
+                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300">
                                                     <i
                                                         class="fa-solid fa-trash"></i></button>
                                             </form>
