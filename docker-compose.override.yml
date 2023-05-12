@@ -18,6 +18,7 @@ services:
       - "8000:8000"
     env_file:
       - ./envs/postgres.env
+      - ./envs/superuser.env
     networks:
       - sqhg
 
