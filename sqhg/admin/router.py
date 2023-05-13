@@ -27,7 +27,9 @@ async def dummy_endpoint():
 
 
 @router.get('/list', response_class=HTMLResponse)
-async def admin_list_page(request: Request, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_list_page(request: Request, 
+template: Jinja2Templates = Depends(Template), 
+database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -42,7 +44,8 @@ async def admin_list_page(request: Request, template: Jinja2Templates = Depends(
 
 
 @router.get('/create', response_class=HTMLResponse)
-async def admin_create_page(request: Request, template: Jinja2Templates = Depends(Template)):
+async def admin_create_page(request: Request, 
+template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -52,7 +55,9 @@ async def admin_create_page(request: Request, template: Jinja2Templates = Depend
     return template.TemplateResponse('admin/create.html', context)
 
 @router.get('/edit/{id}', response_class=HTMLResponse)
-async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_edit_page(request: Request, id: int, 
+template: Jinja2Templates = Depends(Template), 
+database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -70,7 +75,8 @@ async def admin_edit_page(request: Request, id: int, template: Jinja2Templates =
 
 
 @router.post('/create', status_code=201)
-async def admin_create_page(request: Request, admin_data: AdminSchema, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_create_local(request: Request, 
+admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
 
@@ -90,7 +96,8 @@ async def admin_create_page(request: Request, admin_data: AdminSchema, template:
 
 
 @router.post('/edit/{id}', status_code=201)
-async def admin_edit_page(request: Request, id: int, admin_data: AdminUpdate, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_edit_local(request: Request, id: int, 
+admin_data: AdminUpdate, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
@@ -102,7 +109,7 @@ async def admin_edit_page(request: Request, id: int, admin_data: AdminUpdate, te
     admin.name=admin_data.name
     admin.phone=admin_data.phone
 
-    if (admin_data.password != ''):
+    if (admin_data.password):
         admin.password=admin_data.password
 
     database.commit()
@@ -110,15 +117,18 @@ async def admin_edit_page(request: Request, id: int, admin_data: AdminUpdate, te
     return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
 
 @router.delete('/delete/{id}', status_code=201)
-async def admin_delete_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_delete_local(request: Request, id: int, 
+database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
-     database.query(Admin).filter(Admin.id == id).delete()
+    admin = database.query(Admin).filter(Admin.id == id).first()
 
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
-    
+
+    database.delete(admin)
     database.commit()
     
     return {'message': f"Admin deletado com sucesso!"}
+    
