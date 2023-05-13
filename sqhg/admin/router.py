@@ -114,17 +114,11 @@ async def admin_delete_page(request: Request, id: int, template: Jinja2Templates
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
+     database.query(Admin).filter(Admin.id == id).delete()
 
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
     
-    admin.name=admin_data.name
-    admin.phone=admin_data.phone
-
-    if (admin_data.password != ''):
-        admin.password=admin_data.password
-
     database.commit()
-
-    return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
+    
+    return {'message': f"Admin deletado com sucesso!"}

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
           message: data.message,
         });
         setTimeout(() => {
-          window.location.href = sendBtn.dataset.href;
+          window.location.href = window.location.href;
         }, 1000);
       } else {
         throw new Error(response.statusText);
