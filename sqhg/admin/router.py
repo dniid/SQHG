@@ -98,7 +98,7 @@ async def admin_edit_local(request: Request, id: int, admin_data: AdminUpdate, d
 
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
-    
+
     admin.name=admin_data.name
     admin.phone=admin_data.phone
 
