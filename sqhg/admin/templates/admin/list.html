@@ -76,9 +76,9 @@
                                             class="fa-solid fa-pen-to-square"></i></button>
                                 </a>
                                 <form id="adminDeleteForm" action="{{ url_for('admin_delete_local', id=user.id) }}">
-                                    <button 
+                                    <div 
                                         id ="btExcluir"
-                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300 showModal">
+                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300 show-Modal">
                                         <i class="fa-solid fa-trash"></i>
                                         <div
                                             class="modal h screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
@@ -94,23 +94,15 @@
                                                 </div>
                                                 <div>
                                                     <button
-                                                        class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1">Excluir</button>
-                                                    <button
-                                                        class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white mr-1">Cancelar</button>
+                                                        class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1" type="submit">Excluir</button>
+                                                    <div
+                                                        class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white mr-1 close-Modal">Cancelar</div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <script>
-                                            const modal = document.querySelector('.modal');
-
-                                            const showModal = document.querySelector('.showModal')
-
-                                            showModal.addEventListener('click', function(){
-                                                modal.classList.remove('hidden')
-                                            })
-                                        </script>
-                                    </button>
+                                    
+                                    </div>
                                 </form>
                             </div>
                         </td>
