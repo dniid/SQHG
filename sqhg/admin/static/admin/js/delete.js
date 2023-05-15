@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
   let forms = document.querySelectorAll('#adminDeleteForm');
 
+  let botao = document.querySelector('#btExcluir');
+
+  botao.addEventListener('click',(e) =>{
+
+  })
+
   forms.forEach(form => {   
     form.onsubmit = function (e) {
       e.preventDefault();

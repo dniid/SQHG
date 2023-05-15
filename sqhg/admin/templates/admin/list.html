@@ -5,107 +5,132 @@
 {% endblock js_import %}
 
 {% block content %}
-    <div class="flex flex-col items-center">
-        <div class="top-bar bg-white h-65 rounded-xl w-full">
-            <div class="title">
-                <div class="text-center">
-                    <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
-                        Lista de Administradores
-                    </h1>
-                </div>
+<div class="flex flex-col items-center">
+    <div class="top-bar bg-white h-65 rounded-xl w-full">
+        <div class="title">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
+                    Lista de Administradores
+                </h1>
             </div>
         </div>
+    </div>
 
-        <div class="pesquisa-box w-full">
-            <div class="flex justify-center py-8 space-x-3 items-center w-full">
-                <input type="text"
-                    class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
-                    placeholder="Pesquisar" required />
-                <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
-                    <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
-                </div>
+    <div class="pesquisa-box w-full">
+        <div class="flex justify-center py-8 space-x-3 items-center w-full">
+            <input type="text"
+                class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
+                placeholder="Pesquisar" required />
+            <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
+                <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
             </div>
         </div>
-        <div class="w-full md:w-2/3">
-            <div
-                class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
-                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
-                    <thead>
-                        <tr>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                N de crachá
-                            </th>
+    </div>
+    <div class="w-full md:w-2/3">
+        <div class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+            <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                <thead>
+                    <tr>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            N de crachá
+                        </th>
 
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Nome
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Telefone
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                E-mail
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Ações
-                            </th>
-                        </tr>
-                    </thead>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Nome
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Telefone
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            E-mail
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
 
-                    <tbody class="divide-y divide-gray-200">
-                            {% for user in users %}
-                                <tr>
-                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                        {{ user.tag }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                        {{ user.name }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                        {{ user.phone }}
-                                    </td>
+                <tbody class="divide-y divide-gray-200">
+                    {% for user in users %}
+                    <tr>
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                            {{ user.tag }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.name }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.phone }}
+                        </td>
 
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                        {{ user.email }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                        <div class="flex justify-center">
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.email }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            <div class="flex justify-center">
 
-                                            <a href="{{ url_for('admin_edit_page', id=user.id) }}">
-                                                <button type="button"
-                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
-                                                        class="fa-solid fa-pen-to-square"></i></button>
-                                            </a>
-                                            <form id="adminDeleteForm" action="{{ url_for('admin_delete_local', id=user.id) }}">
-                                                <button
-                                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300">
-                                                    <i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </form>
+                                <a href="{{ url_for('admin_edit_page', id=user.id) }}">
+                                    <button type="button"
+                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </a>
+                                <form id="adminDeleteForm" action="{{ url_for('admin_delete_local', id=user.id) }}">
+                                    <button 
+                                        id ="btExcluir"
+                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300 showModal">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <div
+                                            class="modal h screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+                                            <!-- modal -->
+                                            <div class="bg-white rounded shadow-lg w-1/3">
+                                                <!--modal title-->
+                                                <div class="border -b px-4 py-2">
+                                                    <h1>Exclusão de Admin</h1>
+                                                </div>
+                                                <!--modal body-->
+                                                <div class="p-3">
+                                                    Deseja excluir este Admin?
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1">Excluir</button>
+                                                    <button
+                                                        class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white mr-1">Cancelar</button>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                                        <script>
+                                            const modal = document.querySelector('.modal');
 
-            <div class="w-fit flex justify-end py-10 w-full">
-                <div class="Criar-button">
-                    <a href="{{ url_for('admin_create_page') }}">
-                        <button
+                                            const showModal = document.querySelector('.showModal')
+
+                                            showModal.addEventListener('click', function(){
+                                                modal.classList.remove('hidden')
+                                            })
+                                        </script>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="w-fit flex justify-end py-10 w-full">
+            <div class="Criar-button">
+                <a href="{{ url_for('admin_create_page') }}">
+                    <button
                         class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
                         Novo Administrador
-                        </button>
-                    </a>
-                </div>
+                    </button>
+                </a>
             </div>
         </div>
-
     </div>
+
+</div>
 {% endblock content %}
