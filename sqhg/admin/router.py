@@ -12,7 +12,7 @@ from admin.schemas import AdminSchema
 from admin.schemas import AdminUpdate
 from admin.models import Admin
 from core.database import Database
-# from auth.utils import get_password_hash
+from auth.utils import get_password_hash
 from auth.exceptions import InvalidCredentials
 from admin.exceptions import AdminException
 
@@ -73,6 +73,8 @@ async def admin_edit_page(request: Request, id: int, template: Jinja2Templates =
 async def admin_create_local(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
+    
+    password = get_password_hash(admin_data.password)
 
     admin = Admin(
         tag=admin_data.tag,
@@ -80,7 +82,7 @@ async def admin_create_local(request: Request, admin_data: AdminSchema, database
         birth_date=admin_data.birth_date,
         email=admin_data.email,
         phone=admin_data.phone,
-        password=admin_data.password,
+        password=password,
     )
 
     database.add(admin)
@@ -103,7 +105,8 @@ async def admin_edit_local(request: Request, id: int, admin_data: AdminUpdate, d
     admin.phone=admin_data.phone
 
     if (admin_data.password):
-        admin.password=admin_data.password
+        password = get_password_hash(admin_data.password)
+        admin.password=password
 
     database.commit()
 

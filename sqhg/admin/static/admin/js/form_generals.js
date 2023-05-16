@@ -42,17 +42,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  const modal = document.querySelector('.modal');
-
-  const showModal = document.querySelector('.show-Modal')
-  const closeModal = document.querySelector('.close-Modal')
-
-  showModal.addEventListener('click', function () {
-    modal.classList.remove('hidden')
-  })
-  closeModal.addEventListener('click', function () {
-    modal.classList.add('hidden')
-  })
-
 
 });

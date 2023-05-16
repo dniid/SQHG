@@ -1,12 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   let forms = document.querySelectorAll('#adminDeleteForm');
 
-  let botao = document.querySelector('#btExcluir');
-
-  botao.addEventListener('click',(e) =>{
-
-  })
-
   forms.forEach(form => {   
     form.onsubmit = function (e) {
       e.preventDefault();
@@ -40,6 +34,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
     }
+
+    let modal = form.querySelector('#modal');
+    let showModal = form.querySelector('#trashBtn');
+    let closeModal = form.querySelector('#closeModal');
+  
+    showModal.addEventListener('click', () => {
+      modal.classList.remove('hidden')
+    })
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden')
+    })
   });
 
 });
