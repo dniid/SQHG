@@ -27,7 +27,8 @@ async def dummy_endpoint():
 
 
 @router.get('/list', response_class=HTMLResponse)
-async def admin_list_page(request: Request, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_list_page(request: Request, template: Jinja2Templates = Depends(Template),
+                          database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -52,7 +53,8 @@ async def admin_create_page(request: Request, template: Jinja2Templates = Depend
     return template.TemplateResponse('admin/create.html', context)
 
 @router.get('/edit/{id}', response_class=HTMLResponse)
-async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template),
+                          database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -73,7 +75,7 @@ async def admin_edit_page(request: Request, id: int, template: Jinja2Templates =
 async def admin_create_local(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
-    
+
     password = get_password_hash(admin_data.password)
 
     admin = Admin(
