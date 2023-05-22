@@ -31,6 +31,7 @@ import admin.router
 import auth.router
 import survey.router
 import user.router
+import report.router
 
 
 logging.config.dictConfig(LogConfig().dict())
@@ -44,8 +45,8 @@ app.add_middleware(AuthMiddleware)
 app.include_router(admin.router.router, prefix='/admin', tags=['Admin'])
 app.include_router(survey.router.router, prefix='/survey', tags=['Survey'])
 app.include_router(user.router.router, prefix='/user', tags=['User'])
+app.include_router(report.router.router, prefix='/report', tags=['Report'])
 app.include_router(auth.router.router, tags=['Auth'])
-
 
 # Searches for directories named 'static' and then mount them dynamically
 for static in find_dirs('.', 'static'):
