@@ -1,40 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-
-    <!-- [Links Partial here] -->
-</head>
-
-<body>
+{% block layout %}
     <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
+        <div class="flex flex-col items-center">
+            <div class="w-96 mb-5 flex justify-center">
+                <img src="{% static '/assets/prati-logo.png' %}" alt="Prati Logo">
+            </div>
 
-        <div>
-            <form action="/#" class="my-1">
-                <div class="w-96  p-1 mx-auto rounded-x1 space-y-1">
-                    <input id="acesso" name="acesso" type="acesso"
-                        class="w-full placeholder-white text-white bg-[var(--white-violet)] px-3 py-1 border border-purple-600 rounded-lg px-3 focus:outline-none focus:border-white hover:shadow"
-                        placeholder="Chave de acesso">
+            <form action="/login" class="my-1">
+                <div class="w-96 grid grid-cols-2 gap-2">
+                    <div class="w-full col-span-2">
+                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-0"
+                               id="accessToken" name="accessToken" placeholder="Chave de acesso">
+                    </div>
+
+                    <div class="w-full col-span-2 flex justify-center">
+                        <button type="submit" class="w-full bg-[var(--vivid-violet)] justify-center px-2 py-1 text-white rounded-lg items-center justify-start">
+                            <span>Entrar</span>
+                        </button>
+                    </div>
                 </div>
-
             </form>
-
-            <form action="/#" class=" w-96 justify-between flex  py-3 m-auto rounded-x1my-1">
-                <button type="button"
-                    class=" w-40 bg-[var(--vivid-violet)] justify-center px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-start">
-                    <span>Entrar</span>
-                </button>
-                <button type="button"
-                    class=" bg-[var(--vivid-violet)] justify-center px-3 py-1  font-medium text-white  rounded-lg  hover:shadow inline-flex space-x-2 items-center justify-end">
-                    <span>Entrar como Admin</span>
-                </button>
-            </form>
+            <div class="w-96 my-4 flex justify-center">
+                <a href="{{ url_for('login_page') }}?admin=True" class="text-xs text-[var(--light-violet)]">Entrar como Admin</a>
+            </div>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock layout %}

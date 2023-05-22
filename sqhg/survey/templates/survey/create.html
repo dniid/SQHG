@@ -1,0 +1,171 @@
+{% extends 'layout.html' %}
+
+{% block js_import %}
+<script src="{% static 'survey/js/create.js' %}"></script>
+{% endblock js_import %}
+
+{% block content %}
+    <div class="flex flex-col items-center">
+        <div class="top-bar bg-white h-65 rounded-xl w-full mb-5">
+            <div class="title">
+                <div class="text-center">
+                    <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
+                        Novo Modelo de Questionário
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div id="surveyForm" class="w-full md:w-2/3 flex flex-col">
+            <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3 space-y-2 h-fit">
+                <div class="w-full flex items-center">
+                    <div class="w-full text-center flex justify-center">
+                        <span id="surveyName" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Questionário</span>
+                        <input id="surveyNameInput" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off">
+                    </div>
+                </div>
+                <div class="w-full flex items-center italic text-lg text-[var(--flash-grey)]">
+                    <div class="w-full text-center flex justify-center">
+                        <div id="surveyDescription" class="cursor-pointer border-b w-full px-5 break-normal" tabindex="0">Descrição do modelo do questionário</div>
+                        <input id="surveyDescriptionInput" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="questions-container">
+                <div class="question-form-template flex gap-1 w-full mb-3 hidden">
+                    <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
+                        <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
+                            <div class="flex flex-col space-y-3">
+                                <div class="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 text-center flex justify-start items-center">
+                                    <div class="flex w-full">
+                                        <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-question">
+                                            <i class="fa-solid fa-square-minus"></i>
+                                        </div>
+                                        <label class="font-bold">
+                                            Questão:
+                                        </label>
+                                        <input class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                            type="text" autocomplete="off">
+                                    </div>
+                                    <select class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
+                                        <option value="likert">De 0 a 10</option>
+                                        <option value="alternative">Alternativas</option>
+                                        <option value="multiple">Múltipla Escolha</option>
+                                        <option value="open">Aberta</option>
+                                    </select>
+                                </div>
+                                <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
+                                    <div class="type likert-type flex justify-center space-x-5 p-5 flex-wrap pointer-events-none opacity-50">
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>0</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>1</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>2</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>3</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>4</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>5</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>6</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>7</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>8</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>9</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox">
+                                            <label>10</label>
+                                        </div>
+                                    </div>
+                                    <div class="type alternative-type hidden w-full p-5 flex flex-col">
+                                        <div class="alternatives-container">
+                                            <div class="alternative-form-template flex justify-between hidden">
+                                                <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
+                                                    <i class="fa-solid fa-square-minus"></i>
+                                                </div>
+                                                <div class="w-full">
+                                                    <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-start w-full mt-5">
+                                            <button class="add-alternative-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="type multiple-type hidden w-full p-5 flex flex-col">
+                                        <div class="multiples-container">
+                                            <div class="multiple-form-template flex justify-between hidden">
+                                                <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
+                                                    <i class="fa-solid fa-square-minus"></i>
+                                                </div>
+                                                <div class="w-full">
+                                                    <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-start w-full mt-5">
+                                            <button class="add-multiple-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-sm">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="type open-type hidden flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
+                                        <textarea class="w-full h-32"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex flex-col mb-3">
+                <div class="flex justify-start w-full">
+                    <button id="addQuestion" class="bg-[var(--vivid-violet)] h-full aspect-w-1 py-2 px-3 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="w-full flex flex-col">
+                <div class="flex gap-4 justify-end w-full">
+                    <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                        Cancelar
+                    </button>
+                    <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                        Gravar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -21,5 +21,6 @@ if [ "$MODE" = "development" ]; then
 else
     mkdir -p $LOGS_ROOT/sqhg_data.log
     gunicorn --workers 4 --timeout 300 \
+    -k uvicorn.workers.UvicornWorker \
     --bind $HOST:$PORT main:app
 fi

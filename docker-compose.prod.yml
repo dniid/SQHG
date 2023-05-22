@@ -11,7 +11,8 @@ services:
       PORT: 8000
       HOST: 0.0.0.0
       LOGS_ROOT: /var/log/sqhg
-      WAIT_HOSTS: sqhg_db:5432
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM}
     command: bash ./docker/start.sh
     ports:
       - "8000:8000"

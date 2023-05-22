@@ -2,49 +2,141 @@
 
 {% block content %}
     <div class="flex flex-col items-center">
-        <div class="top-bar bg-white h-65 rounded-xl w-full">
+        <div class="top-bar bg-white h-65 rounded-xl w-full mb-5">
             <div class="title">
                 <div class="text-center">
                     <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
-                        Lista de Administradores
+                        Enviar Questionário
                     </h1>
                 </div>
             </div>
         </div>
 
-        <div class="pesquisa-box w-full">
-            <div class="flex justify-center py-8 space-x-3 items-center w-full">
-                <input type="text"
-                    class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
-                    placeholder="Pesquisar" required />
-                <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
-                    <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
+        <div class="w-full md:w-2/3 py-1 space-y-5">
+            <div class="w-full flex flex-col md:flex-row bg-white rounded-lg border border-purple-800 justify-between">
+                <div class="p-5">
+                    <h1 class="font-bold text-[var(--vivid-violet)] text-xl mb-2">Área</h1>
+                    <div class="flex flex-col max-h-44 overflow-y-auto px-3">
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h1 class="font-bold text-[var(--vivid-violet)] text-xl mb-2">Cargos</h1>
+                    <div class="flex flex-col overflow-y-auto max-h-44 overflow-y-auto px-3">
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="ml-2">Supervisor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h1 class="font-bold text-[var(--vivid-violet)] text-xl mb-2">Vigência</h1>
+                    <div class="flex flex-col space-y-3">
+                        <div class="imput-box flex flex-col">
+                            <label class="w-fit text-[#853A9E] font-bold" for="dataHoraInicio">Data/Hora Início</label>
+                            <input id="dataHoraInicio" type="datetime-local" required
+                                class="w-50 border border-purple-800 rounded-md">
+                        </div>
+
+                        <div class="imput-box flex flex-col">
+                            <label class="w-fit text-[#853A9E] font-bold" for="dataHoraFim">Data/Hora Fim</label>
+                            <input id="dataHoraFim" type="datetime-local" required
+                                class="w-50 border border-purple-800 rounded-md">
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-end mt-5">
+                        <button
+                            class="bg-[var(--vivid-violet)] w-full py-1.5 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                            Filtrar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="w-full md:w-2/3">
-            <div
-                class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+            <div class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
                 <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
                     <thead>
                         <tr>
                             <th
                                 class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                N de crachá
+                                Área
                             </th>
 
                             <th
                                 class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Cargo
+                            </th>
+                            <th
+                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
                                 Nome
                             </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Telefone
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                E-mail
-                            </th>
+
                             <th
                                 class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
                                 Ações
@@ -55,18 +147,15 @@
                     <tbody class="divide-y divide-gray-200">
                         <tr class="hover:bg-gray-200 hover:text-gray-900">
                             <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                26092022
+                                RH
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Administrador
+                                Supervisor
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                (45)00000-0000
+                                Matheus
                             </td>
 
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                adminstrador@gmail.com
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
                                 <div class="flex justify-center">
@@ -79,8 +168,7 @@
                                     <form>
                                         <button type="submit"
                                             class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
-                                            <i
-                                                class="fa-solid fa-trash"></i></button>
+                                            <i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </div>
                             </td>
@@ -152,15 +240,16 @@
                 </table>
             </div>
 
-            <div class="w-fit flex justify-end py-10 w-full">
-                <div class="Criar-button">
-                    <button
-                        class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
-                        Novo Modelo
-                    </button>
-                </div>
+            <div class="w-fit flex justify-end py-10 w-full space-x-5">
+                <button
+                    class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                    Cancelar
+                </button>
+                <button
+                    class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                    Gerar Chaves
+                </button>
             </div>
         </div>
-
     </div>
-{% endblock content %}
+{% block content %}
