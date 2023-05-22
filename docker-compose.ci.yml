@@ -9,7 +9,6 @@ services:
     environment:
       MODE: ci
       LOGS_ROOT: /var/log/sqhg
-      WAIT_HOSTS: sqhg_db:5432
     command: bash ./docker/ci.sh
     ports:
       - "8000:8000"
