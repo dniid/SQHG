@@ -60,26 +60,3 @@ async def home_page(request: Request, template: Jinja2Templates = Depends(Templa
     context = {'request': request}
 
     return template.TemplateResponse('homepage.html', context)
-
-
-@app.on_event("startup")
-async def check_superuser():
-    database = SessionLocal()
-
-    logger.info('Verifying superuser...')
-    admin = database.query(Admin).filter(Admin.email == SUPERUSER_EMAIL).first()
-    if not admin:
-        logger.info('Creating superuser...')
-        password = get_password_hash(SUPERUSER_PASSWORD)
-        admin = Admin(
-            tag='000000000000',
-            name=SUPERUSER_USERNAME,
-            birth_date='2000-01-01',
-            email=SUPERUSER_EMAIL,
-            phone='00000000000',
-            password=password
-        )
-        database.add(admin)
-        database.commit()
-
-    database.close()

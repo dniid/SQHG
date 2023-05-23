@@ -115,6 +115,20 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_token_id'), 'token', ['id'], unique=False)
     op.create_index(op.f('ix_token_survey_id'), 'token', ['survey_id'], unique=False)
+
+    # ### Creates a superuser ###
+    import os
+
+    from auth.utils import get_password_hash
+
+    SUPERUSER_EMAIL = os.getenv('SUPERUSER_EMAIL', 'admin@admin.com')
+    SUPERUSER_USERNAME = os.getenv('SUPERUSER_USERNAME', 'admin')
+    SUPERUSER_PASSWORD = os.getenv('SUPERUSER_PASSWORD', '')
+
+    password = get_password_hash(SUPERUSER_PASSWORD)
+
+    op.execute(f"INSERT INTO admin (tag, name, birth_date, email, phone, password) VALUES ('000000000000', '{SUPERUSER_USERNAME}', '2000-01-01', '{SUPERUSER_EMAIL}', '00000000000', '{password}')")
+
     # ### end Alembic commands ###
 
 
