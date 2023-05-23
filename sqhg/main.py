@@ -8,17 +8,11 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from core.database import BaseModel, engine, SessionLocal
+from core.database import BaseModel, engine
 from core.logger import LogConfig
 from core.middlewares import AuthMiddleware
 from core.template import Template
-from core.settings import (
-    SUPERUSER_EMAIL,
-    SUPERUSER_USERNAME,
-    SUPERUSER_PASSWORD,
-)
 
-from auth.utils import get_password_hash
 from utils.settings import find_dirs
 
 # Import models for SQLAlchemy's database base metadata
