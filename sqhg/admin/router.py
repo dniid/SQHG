@@ -8,14 +8,11 @@ from sqlalchemy.orm import Session
 
 from core.template import Template
 
-from admin.schemas import AdminSchema
-from admin.schemas import AdminUpdate
+from admin.schemas import AdminSchema, AdminUpdate
 from admin.models import Admin
 from core.database import Database
 from auth.utils import get_password_hash
 from auth.exceptions import InvalidCredentials
-from admin.exceptions import AdminException
-
 
 
 router = APIRouter()
@@ -28,7 +25,7 @@ async def dummy_endpoint():
 
 @router.get('/list', response_class=HTMLResponse)
 async def admin_list_page(request: Request, template: Jinja2Templates = Depends(Template),
-                          database: Session = Depends(Database)):
+    database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -52,9 +49,10 @@ async def admin_create_page(request: Request, template: Jinja2Templates = Depend
 
     return template.TemplateResponse('admin/create.html', context)
 
+
 @router.get('/edit/{id}', response_class=HTMLResponse)
 async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template),
-                          database: Session = Depends(Database)):
+    database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -64,7 +62,7 @@ async def admin_edit_page(request: Request, id: int, template: Jinja2Templates =
     admin = database.query(Admin).filter(Admin.id == id).first()
 
     if not admin:
-        raise AdminException
+        raise HTTPException(status_code=404, detail="Admin not found")
 
     context['user'] = admin
 
@@ -72,7 +70,7 @@ async def admin_edit_page(request: Request, id: int, template: Jinja2Templates =
 
 
 @router.post('/create', status_code=201)
-async def admin_create_local(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
+async def admin_create(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
 
@@ -93,8 +91,8 @@ async def admin_create_local(request: Request, admin_data: AdminSchema, database
     return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
-@router.post('/edit/{id}', status_code=201)
-async def admin_edit_local(request: Request, id: int, admin_data: AdminUpdate, database: Session = Depends(Database)):
+@router.post('/edit/{id}', status_code=202)
+async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
@@ -114,8 +112,9 @@ async def admin_edit_local(request: Request, id: int, admin_data: AdminUpdate, d
 
     return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
 
-@router.delete('/delete/{id}', status_code=201)
-async def admin_delete_local(request: Request, id: int, database: Session = Depends(Database)):
+
+@router.delete('/delete/{id}', status_code=202)
+async def admin_delete(request: Request, id: int, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 

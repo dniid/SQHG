@@ -15,9 +15,6 @@ class AdminSchema(BaseSchema):
     password: str
 
 class AdminUpdate(BaseSchema):
-    tag: Optional[str]
     name: Optional[str]
-    birth_date: Optional[date]
-    email: Optional[str]
     phone: Optional[str]
     password: Optional[str]

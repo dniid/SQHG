@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         }
       }).then(async response => {
-        if (response.status == 201) {
+        if (response.status == 202) {
           let data = await response.json();
           iziToast.success({
             position: 'topRight',
@@ -35,16 +35,23 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    let modal = form.querySelector('#modal');
+    let deleteForm = form.querySelector('#adminDeleteForm');
     let showModal = form.querySelector('#trashBtn');
-    let closeModal = form.querySelector('#closeModal');
   
     showModal.addEventListener('click', () => {
-      modal.classList.remove('hidden')
-    })
-
-    closeModal.addEventListener('click', () => {
-      modal.classList.add('hidden')
+      Swal.fire({
+        title: 'Tem certeza que deseja excluir o admin?',
+        text: "Essa ação não pode ser revertida!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#853A9E',
+        confirmButtonText: 'Sim, desejo excluir!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteForm.submit();
+        }
+      })
     })
   });
 
