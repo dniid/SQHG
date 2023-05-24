@@ -2,7 +2,7 @@
 
 from datetime import timedelta
 
-from fastapi import APIRouter, Request, Depends, status, HTTPException
+from fastapi import APIRouter, Request, Depends, status, HTTPException, BackgroundTasks
 from fastapi.responses import RedirectResponse, JSONResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, MessageType
@@ -104,8 +104,9 @@ async def logout(request: Request):
 async def forgot_password(
     request: Request,
     credentials: ForgotPasswordData,
+    background_tasks: BackgroundTasks,
     database: Session = Depends(Database),
-    email: FastMail = Depends(Email)
+    email: FastMail = Depends(Email),
 ):
     user = database.query(Admin).filter(Admin.email == credentials.email).first()
     if not user:
@@ -118,7 +119,7 @@ async def forgot_password(
 
     email_context = {}
     email_context['user'] = user
-    email_context['link'] = request.url_for('reset_password_page', token=token)
+    email_context['reset_link'] = request.url_for('reset_password_page', token=token)
 
     email_body = MessageSchema(
         subject='SQHG - Recuperação de senha',
@@ -126,6 +127,7 @@ async def forgot_password(
         template_body=email_context,
         subtype=MessageType.html,
     )
-    await email.send_message(email_body, template_name='email_template.html')
+
+    background_tasks.add_task(email.send_message, email_body, template_name='email_template.html')
 
     return {'detail': 'Email enviado com sucesso! Verifique sua caixa de entrada.'}
