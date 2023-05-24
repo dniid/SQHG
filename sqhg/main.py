@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Main FastAPI app for SQHG's backend."""
 
+import os
 import logging
 
 from fastapi import FastAPI, Request, Depends
@@ -40,10 +41,9 @@ app.include_router(survey.router.router, prefix='/survey', tags=['Survey'])
 app.include_router(user.router.router, prefix='/user', tags=['User'])
 app.include_router(auth.router.router, tags=['Auth'])
 
-
 # Searches for directories named 'static' and then mount them dynamically
-for static in find_dirs('.', 'static'):
-    app.mount('/static', StaticFiles(directory=static), name=static)
+static_directories = [(os.path.dirname(static)[2:], 'static') for static in find_dirs('static')]
+app.mount('/static', StaticFiles(packages=static_directories), name='static')
 
 
 @app.get('/', response_class=HTMLResponse)
