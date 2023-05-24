@@ -25,5 +25,5 @@ class StaticFilesExtension(Extension):
         for static_dir in self.static_dirs:
             path = os.path.join(static_dir, url.lstrip('/'))
             if os.path.isfile(path):
-                return Markup(path[1:])
+                return Markup(self.static_url + url)
         raise ValueError(f'File not found: {url}')

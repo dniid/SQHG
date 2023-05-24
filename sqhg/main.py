@@ -43,7 +43,7 @@ app.include_router(auth.router.router, tags=['Auth'])
 
 # Searches for directories named 'static' and then mount them dynamically
 for static in find_dirs('.', 'static'):
-    app.mount(static[1:], StaticFiles(directory=static), name=static)
+    app.mount('/static', StaticFiles(directory=static), name=static)
 
 
 @app.get('/', response_class=HTMLResponse)
