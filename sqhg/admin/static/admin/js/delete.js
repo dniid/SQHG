@@ -1,12 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let forms = document.querySelectorAll('#adminDeleteForm');
 
-  forms.forEach(form => {   
-    form.onsubmit = function (e) {
-      e.preventDefault();
-  
-      let url = form.getAttribute('action');
-  
+  let deleteBtns = document.querySelectorAll('#deleteBtn');
+
+  deleteBtns.forEach(deleteBtn => {
+    let url = deleteBtn.dataset.url;
+    let username = deleteBtn.dataset.usrname;
+
+    deleteBtn.addEventListener('click', () => {
+      Swal.fire({
+        title: `Tem certeza que deseja excluir o admin '${username}'?`,
+        text: "Essa ação não pode ser revertida!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#853A9E',
+        confirmButtonText: 'Sim, desejo excluir!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          submitDelete();
+        }
+      })
+    });
+
+    function submitDelete() {
+
       fetch(url, {
         method: 'DELETE',
         headers: {
@@ -33,26 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
           message: 'Erro ao salvar.',
         });
       });
-    }
-
-    let deleteForm = form.querySelector('#adminDeleteForm');
-    let showModal = form.querySelector('#trashBtn');
-  
-    showModal.addEventListener('click', () => {
-      Swal.fire({
-        title: 'Tem certeza que deseja excluir o admin?',
-        text: "Essa ação não pode ser revertida!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#853A9E',
-        confirmButtonText: 'Sim, desejo excluir!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          deleteForm.submit();
-        }
-      })
-    })
-  });
+    };
+  })
 
 });

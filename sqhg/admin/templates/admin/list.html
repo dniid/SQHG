@@ -75,13 +75,12 @@
                                         class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                                             class="fa-solid fa-pen-to-square"></i></button>
                                 </a>
-                                <form id="adminDeleteForm" action="{{ url_for('admin_delete', id=user.id) }}">
-                                    <div 
-                                        id="trashBtn"
-                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300 cursor-pointer">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </div>
-                                </form>
+                                <div 
+                                    id="deleteBtn"
+                                    class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-url="{{ url_for('admin_delete', id=user.id) }}"
+                                    data-usrname="{{ user.name }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
                             </div>
                         </td>
                     </tr>
