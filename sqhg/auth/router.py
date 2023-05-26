@@ -6,6 +6,7 @@ from fastapi import APIRouter, Request, Depends, status, HTTPException, Backgrou
 from fastapi.responses import RedirectResponse, JSONResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, MessageType
+from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
 from admin.models import Admin
@@ -14,13 +15,16 @@ from core.email import Email
 from core.settings import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
     PASSWORD_RESET_TOKEN_EXPIRE_MINUTES,
+    SECRET_KEY,
+    ALGORITHM,
 )
 from core.template import Template
 
-from auth.schemas import LoginData, ForgotPasswordData
+from auth.schemas import LoginData, ForgotPasswordData, PasswordResetData
 from auth.utils import (
     authenticate_user,
     create_access_token,
+    get_password_hash,
 )
 from auth.exceptions import InvalidCredentials
 
@@ -66,6 +70,15 @@ async def reset_password_page(
 ):
     context = {'request': request}
     context['subtitle'] = 'Redefinir Senha'
+
+    email = None
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email = payload.get('email')
+    except JWTError:
+        pass
+
+    context['email'] = email
 
     return template.TemplateResponse('auth/reset_password.html', context)
 
@@ -131,3 +144,15 @@ async def forgot_password(
     background_tasks.add_task(email.send_message, email_body, template_name='email_template.html')
 
     return {'detail': 'Email enviado com sucesso! Verifique sua caixa de entrada.'}
+
+
+@router.post('/reset_password/', response_class=JSONResponse)
+async def reset_password(credentials: PasswordResetData, database: Session = Depends(Database)):
+    user = database.query(Admin).filter(Admin.email == credentials.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+
+    user.password = get_password_hash(credentials.password)
+    database.commit()
+
+    return {'detail': 'Senha atualizada com sucesso!'}

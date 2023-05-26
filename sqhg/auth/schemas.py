@@ -10,3 +10,8 @@ class LoginData(BaseSchema):
 
 class ForgotPasswordData(BaseSchema):
     email: str
+
+
+class PasswordResetData(BaseSchema):
+    email: str
+    password: str
