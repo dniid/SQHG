@@ -30,18 +30,24 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (selectedType === 'alternative') {
                 (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
                 let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
-                addAlternativeButton.addEventListener('click', function(){
-                    addNewAlternative(alternativesContainer)
-                });
+                if (addAlternativeButton.dataset.clicked == 'false') {
+                    addAlternativeButton.addEventListener('click', function(){
+                        addAlternativeButton.dataset.clicked = 'true';
+                        addNewAlternative(alternativesContainer)
+                    })
+                }
                 if (!(alternativesContainer.querySelector('.alternative-form'))) {
                     addNewAlternative(alternativesContainer);
                 };
             } else if (selectedType === 'multiple') {
                 (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
-                addMultipleButton.addEventListener('click', function(){
-                    addNewMultiple(multiplesContainer)
-                });
+                if (addMultipleButton.dataset.clicked == 'false') {
+                    addMultipleButton.addEventListener('click', function(){
+                        addMultipleButton.dataset.clicked = 'true';
+                        addNewMultiple(multiplesContainer)
+                    });
+                }
                 if (!(multiplesContainer.querySelector('.multiple-form'))) {
                     addNewMultiple(multiplesContainer);
                 };
