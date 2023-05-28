@@ -19,7 +19,7 @@ router = APIRouter()
 
 @router.get('/list', response_class=HTMLResponse)
 async def admin_list_page(
-    request: Request, 
+    request: Request,
     template: Jinja2Templates = Depends(Template),
     database: Session = Depends(Database),
 ):
