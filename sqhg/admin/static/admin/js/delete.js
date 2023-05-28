@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         }
       }).then(async response => {
-        if (response.status == 202) {
+        if (response.status == 200) {
           let data = await response.json();
           iziToast.success({
             position: 'topRight',

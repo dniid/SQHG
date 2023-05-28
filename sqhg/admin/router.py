@@ -1,9 +1,8 @@
 """Admin's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from core.template import Template
@@ -18,24 +17,18 @@ from auth.exceptions import InvalidCredentials
 router = APIRouter()
 
 
-@router.get('/')
-async def dummy_endpoint():
-    return {'message': 'admin'}
-
-
 @router.get('/list', response_class=HTMLResponse)
-async def admin_list_page(request: Request, template: Jinja2Templates = Depends(Template),
-    database: Session = Depends(Database)):
+async def admin_list_page(
+    request: Request, 
+    template: Jinja2Templates = Depends(Template),
+    database: Session = Depends(Database),
+):
     if not request.state.authenticated:
         return RedirectResponse('/login')
-
     context = {'request': request}
     context['subtitle'] = 'Admin'
-
     users = database.query(Admin).all()
-
     context['users'] = users
-
     return template.TemplateResponse('admin/list.html', context)
 
 
@@ -51,8 +44,12 @@ async def admin_create_page(request: Request, template: Jinja2Templates = Depend
 
 
 @router.get('/edit/{id}', response_class=HTMLResponse)
-async def admin_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template),
-    database: Session = Depends(Database)):
+async def admin_edit_page(
+    request: Request,
+    id: int,
+    template: Jinja2Templates = Depends(Template),
+    database: Session = Depends(Database),
+):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -75,7 +72,6 @@ async def admin_create(request: Request, admin_data: AdminSchema, database: Sess
         raise InvalidCredentials
 
     password = get_password_hash(admin_data.password)
-
     admin = Admin(
         tag=admin_data.tag,
         name=admin_data.name,
@@ -91,7 +87,7 @@ async def admin_create(request: Request, admin_data: AdminSchema, database: Sess
     return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
-@router.post('/edit/{id}', status_code=202)
+@router.post('/edit/{id}', status_code=200)
 async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
@@ -101,8 +97,10 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
 
-    admin.name=admin_data.name
-    admin.phone=admin_data.phone
+    for key, value in admin_data.dict(exclude_unset=True).items():
+        if key == 'password':
+            continue
+        setattr(admin, key, value)
 
     if (admin_data.password):
         password = get_password_hash(admin_data.password)
@@ -113,7 +111,7 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
 
 
-@router.delete('/delete/{id}', status_code=202)
+@router.delete('/delete/{id}', status_code=200)
 async def admin_delete(request: Request, id: int, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials

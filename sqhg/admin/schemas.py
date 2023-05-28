@@ -14,6 +14,7 @@ class AdminSchema(BaseSchema):
     phone: str
     password: str
 
+
 class AdminUpdate(BaseSchema):
     name: Optional[str]
     phone: Optional[str]
