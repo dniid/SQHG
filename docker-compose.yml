@@ -7,26 +7,21 @@ services:
     volumes:
       - ./sqhg:/usr/src/app
     env_file:
-      - ./envs/postgres.env
+      - ./envs/mysql.env
     depends_on:
-      sqhg_db:
-        condition: service_healthy
+      - sqhg_db
 
   sqhg_db:
-    image: postgres:14
+    image: mysql:8.0.33
     container_name: sqhg_db
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "pg_isready", "--host=localhost", "--username=sqhg", "--port=5432"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+    command: mysqld
     ports:
-      - 5432:5432
+      - 3306:3306
     env_file:
-      - envs/postgres.env
+      - envs/mysql.env
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  postgres_data:
+  mysql_data:

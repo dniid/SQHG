@@ -9,13 +9,13 @@ ENVIRONMENT = getstr('MODE', 'development')
 
 # Postgres settings
 
-POSTGRES_USERNAME = getstr('POSTGRES_USERNAME', 'sqhg')
-POSTGRES_PASSWORD = getstr('POSTGRES_PASSWORD', 'sqhg')
+MYSQL_USERNAME = getstr('MYSQL_USER', 'sqhg')
+MYSQL_PASSWORD = getstr('MYSQL_PASSWORD', 'sqhg')
 
-POSTGRES_HOST = getstr('POSTGRES_HOST', 'localhost')
-POSTGRES_PORT = getint('POSTGRES_PORT', 5432)
+MYSQL_HOST = getstr('MYSQL_HOST', 'localhost')
+MYSQL_PORT = getint('MYSQL_PORT', 5432)
 
-POSTGRES_DATABASE = getstr('POSTGRES_DATABASE', 'sqhg')
+MYSQL_DATABASE = getstr('MYSQL_DATABASE', 'sqhg')
 
 # Security settings
 

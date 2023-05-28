@@ -4,17 +4,17 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 from core.settings import (
-    POSTGRES_USERNAME,
-    POSTGRES_PASSWORD,
-    POSTGRES_HOST,
-    POSTGRES_PORT,
-    POSTGRES_DATABASE
+    MYSQL_USERNAME,
+    MYSQL_PASSWORD,
+    MYSQL_HOST,
+    MYSQL_PORT,
+    MYSQL_DATABASE
 )
 
 
-POSTGRES_URL = f'{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}'
+MYSQL_URL = f'{MYSQL_USERNAME}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}'
 
-engine = create_engine(f'postgresql+psycopg2://{POSTGRES_URL}')
+engine = create_engine(f'mysql+pymysql://{MYSQL_URL}?charset=utf8mb4')
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 BaseModel = declarative_base()
 

@@ -37,13 +37,13 @@ target_metadata = BaseModel.metadata
 # ... etc.
 
 # gets the database url from the environment
-user = os.getenv('POSTGRES_USER', 'postgres')
-password = os.getenv('POSTGRES_PASSWORD', '')
-host = os.getenv('POSTGRES_HOST', '')
-port = os.getenv('POSTGRES_PORT', '')
-db = os.getenv('POSTGRES_DATABASE', 'app')
+user = os.getenv('MYSQL_USER', 'postgres')
+password = os.getenv('MYSQL_PASSWORD', '')
+host = os.getenv('MYSQL_HOST', '')
+port = os.getenv('MYSQL_PORT', '')
+db = os.getenv('MYSQL_DATABASE', 'app')
 
-config.set_main_option('sqlalchemy.url', f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}')
+config.set_main_option('sqlalchemy.url', f'mysql+pymysql://{user}:{password}@{host}:{port}/{db}?charset=utf8mb4')
 
 
 def run_migrations_offline() -> None:

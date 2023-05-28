@@ -54,3 +54,7 @@ async def home_page(request: Request, template: Jinja2Templates = Depends(Templa
     context = {'request': request}
 
     return template.TemplateResponse('homepage.html', context)
+
+
+# from utils.fake_data import generate_data
+# generate_data(10)
