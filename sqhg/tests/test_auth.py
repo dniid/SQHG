@@ -172,7 +172,7 @@ async def test_auth_admin_reset_password_valid(client: TestClient, admin: Admin)
 
 @pytest.mark.asyncio
 async def test_auth_admin_reset_password_invalid(client: TestClient, admin: Admin) -> None:
-    response = await client.post(f'/reset-password/invalid-token', json={
+    response = await client.post('/reset-password/invalid-token', json={
         'password': 'newpass',
     })
 
