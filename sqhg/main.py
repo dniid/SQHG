@@ -2,7 +2,7 @@
 """Main FastAPI app for SQHG's backend."""
 
 import os
-import logging
+import logging.config
 
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse

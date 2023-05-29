@@ -31,8 +31,8 @@ class FastMailConfig(FastMail):
             MAIL_STARTTLS=True,
             MAIL_SSL_TLS=False,
             TEMPLATE_FOLDER=find_dirs('email', root_dir='auth')[0],
-            SUPPRESS_SEND=1 if ENVIRONMENT == 'development' else 0,
-            MAIL_DEBUG=1 if ENVIRONMENT == 'development' else 0,
+            SUPPRESS_SEND=0 if ENVIRONMENT == 'production' else 1,
+            MAIL_DEBUG=0 if ENVIRONMENT == 'production' else 1,
         )
 
     async def send_message(
@@ -52,12 +52,12 @@ class FastMailConfig(FastMail):
         ]
         attachment_message = MessageSchema(**message)
 
-        if ENVIRONMENT == 'development':
+        if ENVIRONMENT == 'production':
+            await super().send_message(attachment_message, template_name)
+        else:
             with self.record_messages() as outbox:
                 await super().send_message(attachment_message, template_name)
                 logger.debug(outbox[0])
-        else:
-            await super().send_message(attachment_message, template_name)
 
 
 async def Email():  # noqa: N802
