@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (response.status == 200){
         Swal.fire({
           title: 'Sucesso!',
-          text: data.detail,
+          text: data.message,
           icon: 'success',
           confirmButtonText: 'OK'
         }).then((result) => {

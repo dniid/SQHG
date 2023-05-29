@@ -51,7 +51,7 @@ async def login_page(
     return template.TemplateResponse('auth/login.html', context)
 
 
-@router.get('/forgot_password', response_class=HTMLResponse)
+@router.get('/forgot-password', response_class=HTMLResponse)
 async def forgot_password_page(
     request: Request,
     template: Jinja2Templates = Depends(Template),
@@ -62,7 +62,7 @@ async def forgot_password_page(
     return template.TemplateResponse('auth/forgot_password.html', context)
 
 
-@router.get('/reset_password/{token}', response_class=HTMLResponse)
+@router.get('/reset-password/{token}', response_class=HTMLResponse)
 async def reset_password_page(
     request: Request,
     token: str,
@@ -79,6 +79,7 @@ async def reset_password_page(
         pass
 
     context['email'] = email
+    context['token'] = token
 
     return template.TemplateResponse('auth/reset_password.html', context)
 
@@ -113,7 +114,7 @@ async def logout(request: Request):
     return response
 
 
-@router.post('/forgot_password', status_code=status.HTTP_200_OK, response_class=JSONResponse)
+@router.post('/forgot-password', status_code=status.HTTP_200_OK, response_class=JSONResponse)
 async def forgot_password(
     request: Request,
     credentials: ForgotPasswordData,
@@ -143,16 +144,22 @@ async def forgot_password(
 
     background_tasks.add_task(email.send_message, email_body, template_name='email_template.html')
 
-    return {'detail': 'Email enviado com sucesso! Verifique sua caixa de entrada.'}
+    return {'message': 'Email enviado com sucesso! Verifique sua caixa de entrada.'}
 
 
-@router.post('/reset_password/', response_class=JSONResponse)
-async def reset_password(credentials: PasswordResetData, database: Session = Depends(Database)):
-    user = database.query(Admin).filter(Admin.email == credentials.email).first()
+@router.post('/reset-password/{token}', response_class=JSONResponse)
+async def reset_password(credentials: PasswordResetData, token: str, database: Session = Depends(Database)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email = payload.get('email')
+    except JWTError:
+        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+
+    user = database.query(Admin).filter(Admin.email == email).first()
     if not user:
         raise HTTPException(status_code=404, detail='Usuário não encontrado')
 
     user.password = get_password_hash(credentials.password)
     database.commit()
 
-    return {'detail': 'Senha atualizada com sucesso!'}
+    return {'message': 'Senha atualizada com sucesso!'}

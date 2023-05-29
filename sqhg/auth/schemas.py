@@ -13,5 +13,4 @@ class ForgotPasswordData(BaseSchema):
 
 
 class PasswordResetData(BaseSchema):
-    email: str
     password: str

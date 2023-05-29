@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from sqlalchemy.orm import Session
 
 from admin.models import Admin
+from core.database import SessionLocal
 from core.settings import (
     SECRET_KEY,
     ALGORITHM
@@ -39,7 +39,8 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-async def get_current_user(token: str, database: Session):
+async def get_current_user(token: str):
+    database = SessionLocal()
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get('sub')

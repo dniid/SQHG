@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let redirectUrl = submitButton.dataset.href;
 
     let url = form.getAttribute('action');
-    let email = form.dataset.email;
     let password = form.querySelector('#password');
     let confirmPassword = form.querySelector('#confirmPassword');
 
@@ -20,8 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    if (password.value == '') {
+      iziToast.error({
+        position: 'topRight',
+        message: 'A senha não pode ser vazia',
+      });
+      return;
+    }
+
     let data = JSON.stringify({
-      'email': email,
       'password': password.value,
     });
 
@@ -38,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (response.status == 200){
         Swal.fire({
           title: 'Sucesso!',
-          text: data.detail,
+          text: data.message,
           icon: 'success',
           confirmButtonText: 'OK'
         }).then((result) => {
