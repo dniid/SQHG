@@ -1,13 +1,13 @@
 """SAP's FastAPI router endpoints for SQHG's backend."""
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from core.template import Template
 
+from sqlalchemy.orm import Session
 from core.database import Database
 
 from sap.models import (
@@ -22,22 +22,17 @@ from sap.schemas import (
 
 router = APIRouter()
 
-@router.get('/')
-async def dummy_endpoint():
-    return {'message': 'settings'}
 
-
-@router.get('/view', response_class=HTMLResponse)
+@router.get('/settings', response_class=HTMLResponse)
 async def report_page(request: Request, template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
-
     context = {'request': request}
     context['subtitle'] = 'settings'
 
+    return template.TemplateResponse('sap/settings.html', context)
 
-    return template.TemplateResponse('settings/settings.html', context)
 
 @router.post('/create', response_model=AreaSchema)
 async def create_area(area: AreaCreate, database: Session = Depends(Database)):
