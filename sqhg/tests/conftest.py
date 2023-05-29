@@ -43,7 +43,6 @@ async def client(database: Session, monkeypatch: MonkeyPatch) -> AsyncGenerator[
     scope = {'client': ('0.0.0.0', '9000')}  # noqa: S104
 
     monkeypatch.setattr('sqlalchemy.orm.Session.query', database.query)
-    monkeypatch.setenv('ENVIRONMENT', 'test')
 
     async with TestClient(app, scope=scope) as client:
         yield client
