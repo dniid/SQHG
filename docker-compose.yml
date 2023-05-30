@@ -12,7 +12,7 @@ services:
       - sqhg_db
 
   sqhg_db:
-    image: mysql:8.0.33
+    image: mysql:latest
     container_name: sqhg_db
     restart: unless-stopped
     command: mysqld
@@ -24,4 +24,4 @@ services:
       - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql_data:
+  mysql_data: {}

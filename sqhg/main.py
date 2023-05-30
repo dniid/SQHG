@@ -56,5 +56,53 @@ async def home_page(request: Request, template: Jinja2Templates = Depends(Templa
     return template.TemplateResponse('homepage.html', context)
 
 
-# from utils.fake_data import generate_data
-# generate_data(10)
+@app.on_event('startup')
+def start_population():
+    import multiprocessing
+
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.sql import text
+
+    from core.database import engine
+    from utils import fake_data
+
+    SessionLocal = sessionmaker(bind=engine)
+    session = SessionLocal()
+    session.execute(text('SET FOREIGN_KEY_CHECKS=0'))
+
+    for _ in range(100):
+        pool = multiprocessing.Pool(processes=6)
+
+        area_data = pool.map(fake_data.generate_area_data, range(6))
+        admin_data = pool.map(fake_data.generate_admin_data, range(6))
+        answer_data = pool.map(fake_data.generate_answer_data, range(6))
+        survey_data = pool.map(fake_data.generate_survey_model_data, range(6))
+        model_data = pool.map(fake_data.generate_survey_data, range(6))
+        question_data = pool.map(fake_data.generate_question_data, range(6))
+        superior_data = pool.map(fake_data.generate_superior_data, range(6))
+        token_data = pool.map(fake_data.generate_token_data, range(6))
+        option_data = pool.map(fake_data.generate_option_data, range(6))
+
+        db_data = []
+        db_data.extend(area_data[0])
+        db_data.extend(admin_data[0])
+        db_data.extend(answer_data[0])
+        db_data.extend(survey_data[0])
+        db_data.extend(model_data[0])
+        db_data.extend(question_data[0])
+        db_data.extend(superior_data[0])
+        db_data.extend(token_data[0])
+        db_data.extend(option_data[0])
+
+        pool.close()
+
+        for index in range(0, len(db_data), 1000):
+            chunk = db_data[index:index+1000]
+            print(f'Bulk saving... current index: {index}', flush=True)
+            session.bulk_save_objects(chunk)
+
+    session.execute(text('SET FOREIGN_KEY_CHECKS=1'))
+    logger.info('Commiting changes')
+    session.commit()
+
+    session.close()

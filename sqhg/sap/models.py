@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 
 from core.database import BaseModel
+from survey.models import Survey
 
 
 class Superior(BaseModel):
