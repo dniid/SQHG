@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% import 'import.js' %}
+{% block js_import %}
+<script src="{% static 'settings/js/import.js' %}"></script>
+{% endblock js_import %}
 
 {% block content %}
 <div class="conteiner">
