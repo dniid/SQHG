@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
                 let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
                 if (addAlternativeButton.dataset.viewed == 'false') {
-                    console.log('entrou no alternative');
                     addAlternativeButton.dataset.viewed = 'true';
                     addAlternativeButton.addEventListener('click', function(){
                         addNewAlternative(alternativesContainer)
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
                 if (addMultipleButton.dataset.viewed == 'false') {
-                    console.log('entrou no multiple');
                     addMultipleButton.dataset.viewed = 'true';
                     addMultipleButton.addEventListener('click', function(){
                         addNewMultiple(multiplesContainer)
@@ -107,9 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
     addNewQuestion();
 
     let saveBtn = document.querySelector('#saveBtn');
-    let surveyModelUrl = saveBtn.dataset.surveyModelUrl;
-    let questionUrl = saveBtn.dataset.questionUrl;
-    let optionUrl = saveBtn.dataset.optionUrl;
+    let surveyModelUrl = saveBtn.dataset.surveymodelurl;
+    let questionUrl = saveBtn.dataset.questionurl;
+    let optionUrl = saveBtn.dataset.optionurl;
 
     saveBtn.addEventListener('click', ()=> {
         // dialog

@@ -53,7 +53,11 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
     return template.TemplateResponse('survey/send.html', context)
 
 @router.post('/create_model', response_class=HTMLResponse, status_code=201)
-async def survey_model_create(request: Request, survey_model_data: SurveyModelSchema, database: Session = Depends(Database)):
+async def survey_model_create(
+    request: Request,
+    survey_model_data: SurveyModelSchema,
+    database: Session = Depends(Database)
+):
     if not request.state.authenticated:
         raise InvalidCredentials
 
