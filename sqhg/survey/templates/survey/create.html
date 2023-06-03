@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="flex justify-start w-full mt-5">
                                             <button class="add-alternative-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md
-                                             text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-clicked="false">
+                                             text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="false">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </div>
@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="flex justify-start w-full mt-5">
                                             <button class="add-multiple-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md
-                                             text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-clicked="false">
+                                             text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="false">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </div>
@@ -165,8 +165,8 @@
                     </button>
                     <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
                     rounded-md text-gray-50 hover:bg-[var(--honey-flower)]"
-                    data-surveyModelUrl="" data-questionUrl="" data-optionUrl=""
-                    data-href="">
+                    data-surveyModelUrl="{{ url_for('survey_model_create') }}" data-questionUrl="{{ url_for('question_create') }}"
+                    data-optionUrl="{{ url_for('option_create') }}" data-href="{{ url_for('survey_send_page') }}">
                         Gravar
                     </button>
                 </div>

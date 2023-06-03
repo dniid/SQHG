@@ -1,6 +1,6 @@
 """Survey's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -8,7 +8,8 @@ from sqlalchemy.orm import Session
 from core.template import Template
 from core.database import Database
 
-from survey.schemas import SurveySchema
+from survey.schemas import SurveyModelSchema, QuestionSchema, OptionSchema
+from survey.models import SurveyModel, Question, Option
 from auth.exceptions import InvalidCredentials
 
 router = APIRouter()
@@ -51,14 +52,14 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
 
     return template.TemplateResponse('survey/send.html', context)
 
-@router.post('/create', response_class=HTMLResponse, status_code=201)
-async def survey_create(request: Request, survey_model_data: SurveyModelSchema, database: Session = Depends(Database)):
+@router.post('/create_model', response_class=HTMLResponse, status_code=201)
+async def survey_model_create(request: Request, survey_model_data: SurveyModelSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
 
-    survey_model = Survey_Model(
-        name=survey_data.name,
-        description=survey_data.description,
+    survey_model = SurveyModel(
+        name=survey_model_data.name,
+        description=survey_model_data.description,
     )
 
     database.add(survey_model)
@@ -66,7 +67,7 @@ async def survey_create(request: Request, survey_model_data: SurveyModelSchema, 
 
     return {
         'message': f"Modelo de questionário '{survey_model_data.name}' criado com sucesso!",
-        'survey_model_id': {database.query(Survey_Model).order_by(Survey_Model.id.desc()).first()}
+        'survey_model_id': {database.query(SurveyModel).order_by(SurveyModel.id.desc()).first()}
     }
 
 @router.post('/create_question', response_class=HTMLResponse, status_code=201)
@@ -75,9 +76,9 @@ async def question_create(request: Request, question_data: QuestionSchema, datab
         raise InvalidCredentials
 
     question = Question(
-        description=survey_data.description,
-        type=survey_data.type,
-        survey_model_id=survey_data.survey_model_id,
+        description=question_data.description,
+        type=question_data.type,
+        survey_model_id=question_data.survey_model_id,
     )
 
     database.add(question)
@@ -89,7 +90,7 @@ async def question_create(request: Request, question_data: QuestionSchema, datab
     }
 
 @router.post('/create_option', response_class=HTMLResponse, status_code=201)
-async def question_create(request: Request, option_data: OptionSchema, database: Session = Depends(Database)):
+async def option_create(request: Request, option_data: OptionSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
 
@@ -98,7 +99,7 @@ async def question_create(request: Request, option_data: OptionSchema, database:
         question_id=option_data.question_id,
     )
 
-    database.add(question)
+    database.add(option)
     database.commit()
 
     return {'message': f"Opção '{option_data.description}' criada com sucesso!"}

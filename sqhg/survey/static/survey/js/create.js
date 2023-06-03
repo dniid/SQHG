@@ -30,9 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (selectedType === '2') {
                 (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
                 let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
-                if (addAlternativeButton.dataset.clicked == 'false') {
+                if (addAlternativeButton.dataset.viewed == 'false') {
+                    console.log('entrou no alternative');
+                    addAlternativeButton.dataset.viewed = 'true';
                     addAlternativeButton.addEventListener('click', function(){
-                        addAlternativeButton.dataset.clicked = 'true';
                         addNewAlternative(alternativesContainer)
                     })
                 }
@@ -42,9 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (selectedType === '3') {
                 (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
-                if (addMultipleButton.dataset.clicked == 'false') {
+                if (addMultipleButton.dataset.viewed == 'false') {
+                    console.log('entrou no multiple');
+                    addMultipleButton.dataset.viewed = 'true';
                     addMultipleButton.addEventListener('click', function(){
-                        addMultipleButton.dataset.clicked = 'true';
                         addNewMultiple(multiplesContainer)
                     });
                 }
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    let questionHead = document.querySelectorAll('#surveyName, #surveyDescription');
+    let questionHead = document.querySelectorAll('#surveyNameTitle, #surveyDescriptionTitle');
     questionHead.forEach(el => {
         el.addEventListener('focus', () => {
             let input = el.parentNode.querySelector('input');
@@ -112,14 +114,14 @@ document.addEventListener('DOMContentLoaded', function () {
     saveBtn.addEventListener('click', ()=> {
         // dialog
 
-        let surveyName = document.querySelector('#surveyName');
-        let surveyDescription = document.querySelector('#surveyDescription');
+        let surveyNameTitle = document.querySelector('#surveyNameTitle');
+        let surveyDescriptionTitle = document.querySelector('#surveyDescriptionTitle');
         let questionsContainer = document.querySelector('#questions-container');
         let containerQuestions = questionsContainer.querySelectorAll('.question-form');
 
         let surveyModelData = JSON.stringify({
-            'name': surveyName.value,
-            'description': surveyDescription.value,
+            'name': surveyNameTitle.value,
+            'description': surveyDescriptionTitle.value,
         });
 
         fetch(surveyModelUrl, {

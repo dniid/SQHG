@@ -1,7 +1,7 @@
 """Survey's Pydantic schemas for SQHG's backend."""
 
-from typing import Optional
-from datetime import date
+# from typing import Optional
+# from datetime import date
 
 from core.schemas import BaseSchema
 
