@@ -20,19 +20,19 @@
             <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3 space-y-2 h-fit">
                 <div class="w-full flex items-center">
                     <div class="w-full text-center flex justify-center">
-                        <span id="surveyName" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Questionário</span>
-                        <input id="surveyNameInput" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off">
+                        <span id="surveyNameTitle" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Questionário</span>
+                        <input id="surveyName" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off">
                     </div>
                 </div>
                 <div class="w-full flex items-center italic text-lg text-[var(--flash-grey)]">
                     <div class="w-full text-center flex justify-center">
-                        <div id="surveyDescription" class="cursor-pointer border-b w-full px-5 break-normal" tabindex="0">Descrição do modelo do questionário</div>
-                        <input id="surveyDescriptionInput" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off">
+                        <div id="surveyDescriptionTitle" class="cursor-pointer border-b w-full px-5 break-normal" tabindex="0">Descrição do modelo do questionário</div>
+                        <input id="surveyDescription" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off">
                     </div>
                 </div>
             </div>
 
-            <div class="questions-container">
+            <div id="questions-container">
                 <div class="question-form-template flex gap-1 w-full mb-3 hidden">
                     <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
                         <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
@@ -45,14 +45,14 @@
                                         <label class="font-bold">
                                             Questão:
                                         </label>
-                                        <input class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                        <input id="questionDescription" class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
                                             type="text" autocomplete="off">
                                     </div>
-                                    <select class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                                        <option value="likert">De 0 a 10</option>
-                                        <option value="alternative">Alternativas</option>
-                                        <option value="multiple">Múltipla Escolha</option>
-                                        <option value="open">Aberta</option>
+                                    <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
+                                        <option value="1">De 0 a 10</option>
+                                        <option value="2">Alternativas</option>
+                                        <option value="3">Múltipla Escolha</option>
+                                        <option value="4">Aberta</option>
                                     </select>
                                 </div>
                                 <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
@@ -109,7 +109,7 @@
                                                     <i class="fa-solid fa-square-minus"></i>
                                                 </div>
                                                 <div class="w-full">
-                                                    <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                    <input id="questionAlternative" class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
                                                 type="text" autocomplete="off">
                                                 </div>
                                             </div>
@@ -128,7 +128,7 @@
                                                     <i class="fa-solid fa-square-minus"></i>
                                                 </div>
                                                 <div class="w-full">
-                                                    <input class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
+                                                    <input id="questionMultiple" class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
                                                 type="text" autocomplete="off">
                                                 </div>
                                             </div>
@@ -163,7 +163,10 @@
                     <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
                         Cancelar
                     </button>
-                    <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
+                    <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
+                    rounded-md text-gray-50 hover:bg-[var(--honey-flower)]"
+                    data-surveyModelUrl="" data-questionUrl="" data-optionUrl=""
+                    data-href="">
                         Gravar
                     </button>
                 </div>

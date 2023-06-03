@@ -1,11 +1,15 @@
 """Survey's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.orm import Session
 
 from core.template import Template
+from core.database import Database
 
+from survey.schemas import SurveySchema
+from auth.exceptions import InvalidCredentials
 
 router = APIRouter()
 
@@ -46,3 +50,55 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
     context['subtitle'] = 'Send Survey'
 
     return template.TemplateResponse('survey/send.html', context)
+
+@router.post('/create', response_class=HTMLResponse, status_code=201)
+async def survey_create(request: Request, survey_model_data: SurveyModelSchema, database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        raise InvalidCredentials
+
+    survey_model = Survey_Model(
+        name=survey_data.name,
+        description=survey_data.description,
+    )
+
+    database.add(survey_model)
+    database.commit()
+
+    return {
+        'message': f"Modelo de questionário '{survey_model_data.name}' criado com sucesso!",
+        'survey_model_id': {database.query(Survey_Model).order_by(Survey_Model.id.desc()).first()}
+    }
+
+@router.post('/create_question', response_class=HTMLResponse, status_code=201)
+async def question_create(request: Request, question_data: QuestionSchema, database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        raise InvalidCredentials
+
+    question = Question(
+        description=survey_data.description,
+        type=survey_data.type,
+        survey_model_id=survey_data.survey_model_id,
+    )
+
+    database.add(question)
+    database.commit()
+
+    return {
+        'message': f"Questão '{question_data.description}' criada com sucesso!",
+        'question_id': {database.query(Question).order_by(Question.id.desc()).first()}
+    }
+
+@router.post('/create_option', response_class=HTMLResponse, status_code=201)
+async def question_create(request: Request, option_data: OptionSchema, database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        raise InvalidCredentials
+
+    option = Option(
+        description=option_data.description,
+        question_id=option_data.question_id,
+    )
+
+    database.add(question)
+    database.commit()
+
+    return {'message': f"Opção '{option_data.description}' criada com sucesso!"}
