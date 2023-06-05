@@ -5,41 +5,41 @@
 {% endblock js_import %}
 
 {% block layout %}
-    <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
-        <div class="flex flex-col items-center">
-            <div class="w-96 mb-5 flex justify-center">
-                <img src="{% static '/assets/prati-logo.png' %}" alt="Prati Logo">
-            </div>
+  <div class="flex flex-col h-screen justify-center items-center bg-[var(--honey-flower)]">
+    <div class="flex flex-col items-center">
+      <div class="w-96 mb-5 flex justify-center">
+        <img src="{% static 'assets/prati-logo.png' %}" alt="Prati Logo">
+      </div>
 
-            <form action="{{ url_for('login') }}" method="POST" id="loginForm">
-                <div class="w-96 p-1 mx-auto rounded-x1 my-1 grid grid-cols-2 gap-2">
-                    <div class="w-full col-span-2">
-                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
-                               id="email" name="email" type="email" placeholder="Login">
-                    </div>
+      <form action="{{ url_for('login') }}" method="POST" id="loginForm">
+        <div class="w-96 p-1 mx-auto rounded-x1 my-1 grid grid-cols-2 gap-2">
+          <div class="w-full col-span-2">
+            <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
+                   id="email" name="email" type="email" placeholder="Login">
+          </div>
 
-                    <div class="w-full col-span-2">
-                        <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
-                               id="password" name="password" type="password" placeholder="Senha">
-                    </div>
+          <div class="w-full col-span-2">
+            <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
+                   id="password" name="password" type="password" placeholder="Senha">
+          </div>
 
-                    <div class="w-full col-span-2 flex justify-center">
-                        <button class="w-full bg-[var(--vivid-violet)] px-2 py-1 text-white rounded-lg items-center"
-                                type="submit">
-                            <span>Entrar</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <div class="w-96 my-1 px-2 flex justify-center">
-                <div class="w-full text-left">
-                    <a href="{{ url_for('login_page') }}" class="text-xs text-[var(--light-violet)]">Voltar</a>
-                </div>
-
-                <div class="w-full text-right">
-                    <a href="#" class="text-xs text-[var(--light-violet)]">Esqueceu a senha?</a>
-                </div>
-            </div>
+          <div class="w-full col-span-2 flex justify-center">
+            <button class="w-full bg-[var(--vivid-violet)] px-2 py-1 text-white rounded-lg items-center"
+                    type="submit" data-href="{{ url_for('home_page') }}">
+              <span>Entrar</span>
+            </button>
+          </div>
         </div>
+      </form>
+      <div class="w-96 my-1 px-2 flex justify-center">
+        <div class="w-full text-left">
+          <a href="{{ url_for('login_page') }}" class="text-xs text-[var(--light-violet)]">Voltar</a>
+        </div>
+
+        <div class="w-full text-right">
+          <a href="{{ url_for('forgot_password_page') }}" class="text-xs text-[var(--light-violet)]">Esqueceu a senha?</a>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock layout %}

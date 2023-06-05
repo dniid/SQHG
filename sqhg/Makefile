@@ -1,10 +1,10 @@
-.PHONY: tests prospector safety
+.PHONY: tests lint safety
 
 tests:
 	pytest
 
-prospector:
-	prospector .
+lint:
+	ruff check .
 
 safety:
 	safety check

@@ -1,18 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let form = document.querySelector('#loginForm');
+  let form = document.querySelector('#adminEditForm');
 
-  form.onsubmit = function(e) {
+  form.onsubmit = function (e) {
     e.preventDefault();
 
-    let email = form.querySelector('#email');
+    let name = form.querySelector('#name');
+    let phone = form.querySelector('#phone');
     let password = form.querySelector('#password');
 
-    let redirectUrl = form.querySelector('button[type=submit]').dataset.href;
     let url = form.getAttribute('action');
     let data = JSON.stringify({
-      'email': email.value,
+      'name': name.value,
+      'phone': (phone.value).replace(/\D/g, ""),
       'password': password.value,
-    })
+    });
 
     fetch(url, {
       method: 'POST',
@@ -22,23 +23,25 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       body: data,
     }).then(async response => {
-      let data = await response.json();
-
-      if (response.status == 200){
-        window.location.href = redirectUrl;
-      } else {
-        iziToast.error({
+      if (response.status == 200) {
+        let data = await response.json();
+        iziToast.success({
           position: 'topRight',
-          message: data.detail,
+          message: data.message,
         });
+        setTimeout(() => {
+          window.location.href = sendBtn.dataset.href;
+        }, 1000);
+      } else {
+        throw new Error(response.statusText);
       }
     }).catch(error => {
       console.error(error);
       iziToast.error({
         position: 'topRight',
-        message: 'Erro interno do servidor',
+        message: 'Erro ao salvar.',
       });
     });
-  };
+  }
 
 });
