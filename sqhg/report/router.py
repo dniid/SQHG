@@ -22,3 +22,10 @@ async def report_page(request: Request, template: Jinja2Templates = Depends(Temp
     context['subtitle'] = 'Relatório'
 
     return template.TemplateResponse('report/report.html', context)
+
+@router.get('/view', response_class=HTMLResponse)
+async def graphic_generation(
+    request: Request, template: Jinja2Templates = Depends(Template),
+):
+    context = {'request': request}
+    context['subtitle'] = 'Geração gráfico'

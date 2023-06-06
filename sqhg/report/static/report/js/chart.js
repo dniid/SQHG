@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var xValues = ['Média dos supervisores', 'Média do avaliado', 'Maior média']
+    var yValues = [];
+    var backgroudColors = ['rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)']
+    var borderColors = ['rgb(153, 102, 255)', 'rgb(153, 102, 255)', 'rgb(153, 102, 255)']
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Média dos supervisores', 'Média do avaliado', 'Maior média'],
+            labels: [xValues],
             datasets: [{
                 label: 'Resultado corporativo',
-                data: [7.9, 8.5, 8.8],
+                data: [yValues],
                 borderWidth: 1,
-                backgroundColor: ['rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                borderColor: ['rgb(153, 102, 255)', 'rgb(153, 102, 255)', 'rgb(153, 102, 255)'],
+                backgroundColor: backgroudColors,
+                borderColor: borderColors,
                 borderWidth: 1
             }]
         },
