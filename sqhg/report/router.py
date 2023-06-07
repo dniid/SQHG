@@ -3,6 +3,7 @@
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from static.report.js import yValues
 
 from core.template import Template
 
@@ -29,3 +30,8 @@ async def graphic_generation(
 ):
     context = {'request': request}
     context['subtitle'] = 'Geração gráfico'
+
+    yValues = [5, 8, 9]
+    context['yValues'] = yValues
+
+    return template.TemplateResponse('report/report.html', context)

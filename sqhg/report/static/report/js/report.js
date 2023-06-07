@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     var xValues = ['Média dos supervisores', 'Média do avaliado', 'Maior média']
-    var yValues = [];
+    var yValues =  []
     var backgroudColors = ['rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)']
     var borderColors = ['rgb(153, 102, 255)', 'rgb(153, 102, 255)', 'rgb(153, 102, 255)']
     var ctx = document.getElementById('myChart').getContext('2d');
