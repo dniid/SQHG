@@ -52,7 +52,7 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
 
     return template.TemplateResponse('survey/send.html', context)
 
-@router.post('/create_model', response_class=HTMLResponse, status_code=201)
+@router.post('/createmodel', response_class=HTMLResponse, status_code=201)
 async def survey_model_create(
     request: Request,
     survey_model_data: SurveyModelSchema,
@@ -74,7 +74,7 @@ async def survey_model_create(
         'survey_model_id': {database.query(SurveyModel).order_by(SurveyModel.id.desc()).first()}
     }
 
-@router.post('/create_question', response_class=HTMLResponse, status_code=201)
+@router.post('/createquestion', response_class=HTMLResponse, status_code=201)
 async def question_create(request: Request, question_data: QuestionSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
@@ -93,7 +93,7 @@ async def question_create(request: Request, question_data: QuestionSchema, datab
         'question_id': {database.query(Question).order_by(Question.id.desc()).first()}
     }
 
-@router.post('/create_option', response_class=HTMLResponse, status_code=201)
+@router.post('/createoption', response_class=HTMLResponse, status_code=201)
 async def option_create(request: Request, option_data: OptionSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials

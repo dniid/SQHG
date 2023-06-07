@@ -118,9 +118,11 @@ document.addEventListener('DOMContentLoaded', function () {
         let containerQuestions = questionsContainer.querySelectorAll('.question-form');
 
         let surveyModelData = JSON.stringify({
-            'name': surveyNameTitle.value,
-            'description': surveyDescriptionTitle.value,
+            'name': surveyNameTitle.textContent,
+            'description': surveyDescriptionTitle.textContent,
         });
+
+        console.log(surveyModelData);
 
         fetch(surveyModelUrl, {
             method: 'POST',
@@ -130,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: surveyModelData,
           }).then(async response => {
+            console.log('then...')
             if (response.status == 201) {
               let data = await response.json();
               let surveyModelId = data.survey_model_id;
@@ -139,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let questionType = question.querySelector('#questionType').value;
 
                     let questionData = JSON.stringify({
-                        'description': questionDescription.value,
+                        'description': questionDescription.textContent,
                         'type': parseInt(questionType),
                         'survey_model_id': parseInt(surveyModelId),
                     });
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 questionAlternatives.forEach(questionAlternative =>{
                                     let optionData = JSON.stringify({
-                                        'description': questionAlternative.value,
+                                        'description': questionAlternative.textContent,
                                         'question_id': parseInt(questionId),
                                     });
                                     fetch(optionUrl, {
