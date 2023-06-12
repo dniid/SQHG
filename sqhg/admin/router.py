@@ -1,6 +1,6 @@
 """Admin's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends, HTTPException, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -57,9 +57,8 @@ async def admin_edit_page(
     context['subtitle'] = 'Admin'
 
     admin = database.query(Admin).filter(Admin.id == id).first()
-
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
     context['user'] = admin
 
@@ -93,9 +92,8 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
         return InvalidCredentials
 
     admin = database.query(Admin).filter(Admin.id == id).first()
-
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
     for key, value in admin_data.dict(exclude_unset=True).items():
         if key == 'password':
@@ -117,11 +115,10 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
         return InvalidCredentials
 
     admin = database.query(Admin).filter(Admin.id == id).first()
-
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
     database.delete(admin)
     database.commit()
 
-    return {'message': "Admin deletado com sucesso!"}
+    return {'message': 'Admin deletado com sucesso!'}
