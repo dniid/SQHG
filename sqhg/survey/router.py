@@ -129,8 +129,8 @@ async def send_survey(
     if not request.state.authenticated:
         raise InvalidCredentials
 
-    for superior in survey_data.superiors:
-        superior = database.query(Superior).filter(Superior.id == superior).first()
+    for superior_id in survey_data.superiors:
+        superior = database.query(Superior).filter(Superior.id == superior_id).first()
         tokens = []
 
         #############################################
