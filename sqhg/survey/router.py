@@ -63,7 +63,7 @@ async def survey_create_page(request: Request, template: Jinja2Templates = Depen
     return template.TemplateResponse('survey/models.html', context)
 
 @router.post('/createmodel', response_class=HTMLResponse, status_code=201)
-async def survey_model_create(
+async def model_create(
     request: Request,
     survey_model_data: SurveyModelSchema,
     database: Session = Depends(Database)
