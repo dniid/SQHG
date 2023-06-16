@@ -1,6 +1,6 @@
 """Survey's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -52,14 +52,31 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
 
     return template.TemplateResponse('survey/send.html', context)
 
-@router.get('/models', response_class=HTMLResponse)
-async def survey_create_page(request: Request, template: Jinja2Templates = Depends(Template)):
+@router.get('/editmodels/{id}', response_class=HTMLResponse)
+async def models_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
     context = {'request': request}
-    context['subtitle'] = 'List Survey Model'
+    context['subtitle'] = 'Models'
+    
+    surveymodel = database.query(SurveyModel),filter(id == id).first()
+    
+    if not surveymodel :
+        raise HTTPException(status_code = 404, detail = "surveymodel not found")
+    
+    context['models'] = surveymodel
+    
+    return template.TemplateResponse('survey/edit.html', context)
 
+@router.get('/models', response_class=HTMLResponse)
+async def models_list_page(request: Request, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        return RedirectResponse('/login')
+    context = {'request': request}
+    context['subtitle'] = 'List Survey Model'
+    models = database.query(SurveyModel).all()
+    context['models'] = models
     return template.TemplateResponse('survey/models.html', context)
 
 @router.post('/createmodel', response_class=HTMLResponse, status_code=201)

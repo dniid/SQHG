@@ -41,26 +41,26 @@
               </th>
             </tr>
           </thead>
-
           <tbody class="divide-y divide-gray-200">
+            {% for model in models %}
             <tr class="hover:bg-gray-200 hover:text-gray-900">
               <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                1
+                {{model.id}}
               </td>
               <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                Avaliação de supervisores
+                {{model.name}}
               </td>
               <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                Relatório para avaliar supervisores
+                {{model.description}}
               </td>
               <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
                 <div class="flex justify-center">
-                  <a>
+                  <a href="{{ url_for('survey_send_page', id=models.id) }}">>
                     <button type="button"
                       class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                         class="fa-solid fa-paper-plane"></i></button>
                   </a>
-                  <a>
+                  <a href="{{ url_for('models_edit_page', id=models.id) }}">>
                     <button type="button"
                       class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                         class="fa-solid fa-pen-to-square"></i></button>
@@ -73,69 +73,7 @@
                 </div>
               </td>
             </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
-
-            <tr class="hover:bg-gray-200 hover:text-gray-900">
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
