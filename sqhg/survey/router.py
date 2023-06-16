@@ -52,6 +52,16 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
 
     return template.TemplateResponse('survey/send.html', context)
 
+@router.get('/models', response_class=HTMLResponse)
+async def survey_create_page(request: Request, template: Jinja2Templates = Depends(Template)):
+    if not request.state.authenticated:
+        return RedirectResponse('/login')
+
+    context = {'request': request}
+    context['subtitle'] = 'List Survey Model'
+
+    return template.TemplateResponse('survey/models.html', context)
+
 @router.post('/createmodel', response_class=HTMLResponse, status_code=201)
 async def survey_model_create(
     request: Request,
