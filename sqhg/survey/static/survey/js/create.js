@@ -105,151 +105,63 @@ document.addEventListener('DOMContentLoaded', function () {
     addNewQuestion();
 
     let saveBtn = document.querySelector('#saveBtn');
-    let surveyModelUrl = saveBtn.dataset.surveymodelurl;
-    let questionUrl = saveBtn.dataset.questionurl;
-    let optionUrl = saveBtn.dataset.optionurl;
+    let createModelUrl = saveBtn.dataset.surveymodelurl;
 
     saveBtn.addEventListener('click', ()=> {
         // dialog
 
         let surveyNameTitle = document.querySelector('#surveyNameTitle');
         let surveyDescriptionTitle = document.querySelector('#surveyDescriptionTitle');
+
+        let modelObject = {
+            name: surveyNameTitle.textContent,
+            description: surveyDescriptionTitle.textContent,
+            questions: [],
+        }
+
         let questionsContainer = document.querySelector('#questions-container');
-        let containerQuestions = questionsContainer.querySelectorAll('.question-form');
+        let questionForm = questionsContainer.querySelectorAll('.question-form');
 
-        let surveyModelData = JSON.stringify({
-            'name': surveyNameTitle.textContent,
-            'description': surveyDescriptionTitle.textContent,
-        });
+        questionForm.forEach(question => {
+            let questionDescription = question.querySelector('#questionDescription').value;
+            let questionType = question.querySelector('#questionType').value;
 
-        console.log(surveyModelData);
-
-        fetch(surveyModelUrl, {
-            method: 'POST',
-            headers: {
-              'X-CSRFToken': CSRFTOKEN,
-              'Content-Type': 'application/json'
-            },
-            body: surveyModelData,
-          }).then(async response => {
-            console.log('then...')
-            if (response.status == 201) {
-              let data = await response.json();
-              let surveyModelId = data.survey_model_id;
-
-                containerQuestions.forEach(question => {
-                    let questionDescription = question.querySelector('#questionDescription');
-                    let questionType = question.querySelector('#questionType').value;
-
-                    let questionData = JSON.stringify({
-                        'description': questionDescription.textContent,
-                        'type': parseInt(questionType),
-                        'survey_model_id': parseInt(surveyModelId),
-                    });
-                    
-                    fetch(questionUrl, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': CSRFTOKEN,
-                            'Content-Type': 'application/json'
-                        },
-                        body: questionData,
-                      }).then(async response => {
-                        if (response.status == 201) {
-                            let data = await response.json();
-                            let questionId = data.question_id;
-                            
-                            if (questionType == '2') {
-                                let questionAlternatives = question.querySelectorAll('#questionAlternative');
-
-                                questionAlternatives.forEach(questionAlternative =>{
-                                    let optionData = JSON.stringify({
-                                        'description': questionAlternative.textContent,
-                                        'question_id': parseInt(questionId),
-                                    });
-                                    fetch(optionUrl, {
-                                        method: 'POST',
-                                        headers: {
-                                            'X-CSRFToken': CSRFTOKEN,
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: optionData,
-                                    }).then(async response => {
-                                        if (response.status == 201) {
-                                            let data = await response.json();
-                                        } else {
-                                            throw new Error(response.statusText);
-                                        }
-                                    }).catch(error => {
-                                        console.error(error);
-                                        iziToast.error({
-                                            position: 'topRight',
-                                            message: 'Erro ao gravar opções.',
-                                        });
-                                    });
-                                });
-
-                            } else if (questionType == '3') {
-
-                                let questionMultiples = question.querySelectorAll('#questionMultiple');
-
-                                questionMultiples.forEach(questionMultiple =>{
-                                    let optionData = JSON.stringify({
-                                        'description': questionMultiple.value,
-                                        'question_id': parseInt(questionId),
-                                    });
-                                    fetch(optionUrl, {
-                                        method: 'POST',
-                                        headers: {
-                                            'X-CSRFToken': CSRFTOKEN,
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: optionData,
-                                    }).then(async response => {
-                                        if (response.status == 201) {
-                                            let data = await response.json();
-                                        } else {
-                                            throw new Error(response.statusText);
-                                        }
-                                    }).catch(error => {
-                                        console.error(error);
-                                        iziToast.error({
-                                            position: 'topRight',
-                                            message: 'Erro ao gravar opções.',
-                                        });
-                                    });
-                                });
-
-                            }
- 
-                        } else {
-                            throw new Error(response.statusText);
-                        }
-                      }).catch(error => {
-                        console.error(error);
-                        iziToast.error({
-                          position: 'topRight',
-                          message: 'Erro ao gravar questões.',
-                        });
-                    });
-                });
-                iziToast.success({
-                    position: 'topRight',
-                    message: data.message,
-                });
-                setTimeout(() => {
-                    window.location.href = sendBtn.dataset.href;
-                }, 1000);
-
-            } else {
-              throw new Error(response.statusText);
+            let questionObject = {
+                description: questionDescription,
+                type: questionType,
+                options: [],
             }
-          }).catch(error => {
-            console.error(error);
-            iziToast.error({
-              position: 'topRight',
-              message: 'Erro ao criar modelo de questionário.',
-            });
+
+            if (questionType == '2') {
+                let alternativesContainer = question.querySelector('.alternatives-container');
+                let alternativeForm = alternativesContainer.querySelectorAll('.alternative-form');
+
+                alternativeForm.forEach(option => {
+                    let optionDescription = option.querySelector('#questionAlternative').value;
+                    let optionObject = {
+                        description: optionDescription,
+                    }
+                    questionObject.options.push(optionObject);
+                });
+
+            } else if (questionType == '3') {
+                let multiplesContainer = question.querySelector('.multiples-container');
+                let multipleForm = multiplesContainer.querySelectorAll('.multiple-form');
+                
+                multipleForm.forEach(option => {
+                    let optionDescription = option.querySelector('#questionMultiple').value;
+                    let optionObject = {
+                        description: optionDescription,
+                    }
+                    questionObject.options.push(optionObject);
+                });
+
+            }
+            modelObject.questions.push(questionObject);
         });
+
+        console.log(modelObject);
+
+        
     });
 });
