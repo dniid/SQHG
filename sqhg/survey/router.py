@@ -49,29 +49,38 @@ async def survey_send_page(request: Request, template: Jinja2Templates = Depends
 
 
 @router.get('/model/edit/{id}', response_class=HTMLResponse)
-async def models_edit_page(request: Request, id: int, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def models_edit_page(
+    request: Request,
+    id: int,
+    template: Jinja2Templates = Depends(Template),
+    database: Session = Depends(Database)
+):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
     context = {'request': request}
     context['subtitle'] = 'Models'
-    
+
     survey_model = database.query(SurveyModel).filter(id == id).first()
-    
+
     if not survey_model:
         raise HTTPException(status_code = 404, detail = "Survey model not found")
-    
+
     survey_model.questions
     for question in survey_model.questions:
         question.options
 
     context['model'] = survey_model
-    
+
     return template.TemplateResponse('survey/edit_model.html', context)
 
 
 @router.get('/model', response_class=HTMLResponse)
-async def models_list_page(request: Request, template: Jinja2Templates = Depends(Template), database: Session = Depends(Database)):
+async def models_list_page(
+    request: Request,
+    template: Jinja2Templates = Depends(Template),
+    database: Session = Depends(Database)
+):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
@@ -90,6 +99,9 @@ async def model_create(
     model_data: SurveyModelSchema,
     database: Session = Depends(Database)
 ):
+
+    if not request.state.authenticated:
+        raise InvalidCredentials
 
     survey_model = SurveyModel(
         name=model_data.name,

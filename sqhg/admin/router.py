@@ -31,7 +31,7 @@ async def admin_list_page(
 
     users = database.query(Admin).all()
     context['users'] = users
-    
+
     return template.TemplateResponse('admin/list.html', context)
 
 
