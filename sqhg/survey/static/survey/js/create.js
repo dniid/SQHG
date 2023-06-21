@@ -160,7 +160,33 @@ document.addEventListener('DOMContentLoaded', function () {
             modelObject.questions.push(questionObject);
         });
 
-        console.log(modelObject);
+        fetch(createModelUrl, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': CSRFTOKEN,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(modelObject),
+        }).then(async response => {
+            if (response.status == 201) {
+                let data = await response.json();
+                iziToast.success({
+                    position: 'topRight',
+                    message: data.message,
+                });
+                setTimeout(() => {
+                    window.location.href = saveBtn.dataset.href;
+                }, 1000);
+            } else {
+                throw new Error(response.statusText);
+            }
+        }).catch(error => {
+            console.error(error);
+            iziToast.error({
+                position: 'topRight',
+                message: 'Erro ao salvar.',
+            });
+        });
 
         
     });

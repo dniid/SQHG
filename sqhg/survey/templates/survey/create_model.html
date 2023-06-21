@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
-<script src="{% static 'survey/js/copy.js' %}"></script>
+<script src="{% static 'survey/js/create.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
@@ -20,14 +20,14 @@
             <div class="w-full flex flex-col p-5 rounded-xl bg-white text-2xl text-[var(--vivid-violet)] border-t-8 border-[var(--vivid-violet)] mb-3 space-y-2 h-fit">
                 <div class="w-full flex items-center">
                     <div class="w-full text-center flex justify-center">
-                        <span id="surveyNameTitle" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Questionário</span>
-                        <input id="surveyName" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off">
+                        <span id="surveyNameTitle" class="font-bold cursor-pointer border-b-2 w-full break-normal px-5" tabindex="0">Nome do Modelo de Questionário</span>
+                        <input id="surveyName" class="font-bold text-center hidden border-b-2 focus:outline-0 px-5 w-full" type="text" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="w-full flex items-center italic text-lg text-[var(--flash-grey)]">
                     <div class="w-full text-center flex justify-center">
                         <div id="surveyDescriptionTitle" class="cursor-pointer border-b w-full px-5 break-normal" tabindex="0">Descrição do modelo do questionário</div>
-                        <input id="surveyDescription" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off">
+                        <input id="surveyDescription" class="text-center italic hidden border-b focus:outline-0 px-5 w-full h-fit" type="text" autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                                             Questão:
                                         </label>
                                         <input id="questionDescription" class="w-full mx-4 px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
-                                            type="text" autocomplete="off">
+                                            type="text" autocomplete="off" value="Questão" required>
                                     </div>
                                     <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
                                         <option value="1">De 0 a 10</option>
@@ -110,7 +110,7 @@
                                                 </div>
                                                 <div class="w-full">
                                                     <input id="questionAlternative" class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
-                                                type="text" autocomplete="off">
+                                                type="text" autocomplete="off" value="Alternativa">
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +129,7 @@
                                                 </div>
                                                 <div class="w-full">
                                                     <input id="questionMultiple" class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
-                                                type="text" autocomplete="off">
+                                                type="text" autocomplete="off" value="Multipla">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@
                     </button>
                     <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
                     rounded-md text-gray-50 hover:bg-[var(--honey-flower)]"
-                    data-surveymodelurl="{{ url_for('model_create') }}" data-href="{{ url_for('survey_send_page') }}">
+                    data-surveymodelurl="{{ url_for('model_create') }}" data-href="{{ url_for('models_list_page') }}">
                         Gravar
                     </button>
                 </div>
