@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
-<script src="{% static 'survey/js/create.js' %}"></script>
+<script src="{% static 'survey/js/edit_model.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 {% for question in model.questions %}
-                    <div class="question-form flex gap-1 w-full mb-3 hidden">
+                    <div class="question-form flex gap-1 w-full mb-3">
                         <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
                             <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
                                 <div class="flex flex-col space-y-3">
@@ -231,7 +231,7 @@
                                                 </div>
                                                 {% if question.type == 2 %}
                                                     {% for option in question.options %}
-                                                        <div class="alternative-form flex justify-between hidden">
+                                                        <div class="alternative-form flex justify-between">
                                                             <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
                                                                 <i class="fa-solid fa-square-minus"></i>
                                                             </div>
@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="flex justify-start w-full mt-5">
                                                 <button class="add-alternative-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md
-                                                text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="false">
+                                                text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="{% if question.type == 2 %}true{% else %}false{% endif %}">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
@@ -263,7 +263,7 @@
                                                 </div>
                                                 {% if question.type == 3 %}
                                                     {% for option in question.options %}
-                                                        <div class="multiple-form flex justify-between hidden">
+                                                        <div class="multiple-form flex justify-between">
                                                             <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
                                                                 <i class="fa-solid fa-square-minus"></i>
                                                             </div>
@@ -277,7 +277,7 @@
                                             </div>
                                             <div class="flex justify-start w-full mt-5">
                                                 <button class="add-multiple-btn bg-[var(--vivid-violet)] h-full aspect-w-1 py-1 px-2 rounded-md
-                                                text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="false">
+                                                text-gray-50 hover:bg-[var(--honey-flower)] text-sm" data-viewed="{% if question.type == 3 %}true{% else %}false{% endif %}">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
