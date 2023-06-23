@@ -25,10 +25,13 @@ async def admin_list_page(
 ):
     if not request.state.authenticated:
         return RedirectResponse('/login')
+
     context = {'request': request}
     context['subtitle'] = 'Admin'
+
     users = database.query(Admin).all()
     context['users'] = users
+
     return template.TemplateResponse('admin/list.html', context)
 
 
