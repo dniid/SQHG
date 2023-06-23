@@ -126,8 +126,9 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
 
     return {'message': "Admin deletado com sucesso!"}
 
+
 @router.get('/logout')
-async def admin_logout(request: Request):
+async def admin_logout():
     response = RedirectResponse(url="/login?admin=True")
     response.delete_cookie("session_token")
     return response
