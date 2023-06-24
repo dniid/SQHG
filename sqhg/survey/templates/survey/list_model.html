@@ -55,12 +55,12 @@
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
               <div class="flex justify-center">
-                <a href="#">
+                <a href="{{ url_for('survey_send_page', id=models.id) }}">
                   <button type="button"
                     class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                       class="fa-solid fa-paper-plane"></i></button>
                 </a>
-                <a href="#">
+                <a href="{{ url_for('models_edit_page', id=models.id) }}">
                   <button type="button"
                     class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                       class="fa-solid fa-pen-to-square"></i></button>
