@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
-<script src="{% static 'survey/js/edit_model.js' %}"></script>
+<script src="{% static 'survey/js/survey_model.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
@@ -226,7 +226,7 @@
                                                     </div>
                                                     <div class="w-full">
                                                         <input id="questionAlternative" class="w-full px-2 text-start text-base text-black border-b border-[var(--flushed-violet)] focus:outline-0"
-                                                    type="text" autocomplete="off">
+                                                    type="text" autocomplete="off" value="Alternativa">
                                                     </div>
                                                 </div>
                                                 {% if question.type == 2 %}
@@ -307,8 +307,8 @@
                         Cancelar
                     </button>
                     <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
-                    rounded-md text-gray-50 hover:bg-[var(--honey-flower)]"
-                    data-surveymodelurl="{{ url_for('model_create') }}" data-href="{{ url_for('models_list_page') }}">
+                    rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-screen="edit"
+                    data-surveymodelurl="{{ url_for('model_edit', id=model.id) }}" data-href="{{ url_for('models_list_page') }}">
                         Gravar
                     </button>
                 </div>

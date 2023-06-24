@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
-<script src="{% static 'survey/js/create_model.js' %}"></script>
+<script src="{% static 'survey/js/survey_model.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
@@ -164,7 +164,7 @@
                         Cancelar
                     </button>
                     <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
-                    rounded-md text-gray-50 hover:bg-[var(--honey-flower)]"
+                    rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-screen="create"
                     data-surveymodelurl="{{ url_for('model_create') }}" data-href="{{ url_for('models_list_page') }}">
                         Gravar
                     </button>

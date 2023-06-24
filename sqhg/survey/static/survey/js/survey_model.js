@@ -14,35 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
     
             let questionType = question.querySelector('.question-type');
             let questionTypeBody = question.querySelector('.question-type-body');
-            let selectedType = questionType.target.value;
-            if (selectedType == '1') {
-                (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
-            } else if (selectedType === '2') {
-                (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
+            let selectedType = questionType.options[questionType.selectedIndex].value;
+            let alternativesContainer = questionTypeBody.querySelector('.alternatives-container');
+            let multiplesContainer = questionTypeBody.querySelector('.multiples-container');
+
+            if (selectedType === '2') {
                 let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
-                if (addAlternativeButton.dataset.viewed == 'false') {
-                    addAlternativeButton.dataset.viewed = 'true';
-                    addAlternativeButton.addEventListener('click', function(){
-                        addNewAlternative(alternativesContainer)
-                    })
-                }
-                if (!(alternativesContainer.querySelector('.alternative-form'))) {
-                    addNewAlternative(alternativesContainer);
-                };
+                addAlternativeButton.addEventListener('click', function(){
+                    addNewAlternative(alternativesContainer)
+                })
             } else if (selectedType === '3') {
-                (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
                 let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
-                if (addMultipleButton.dataset.viewed == 'false') {
-                    addMultipleButton.dataset.viewed = 'true';
-                    addMultipleButton.addEventListener('click', function(){
-                        addNewMultiple(multiplesContainer)
-                    });
-                }
-                if (!(multiplesContainer.querySelector('.multiple-form'))) {
-                    addNewMultiple(multiplesContainer);
-                };
-            } else if (selectedType === '4') {
-                (questionTypeBody.querySelector('.open-type')).classList.remove('hidden');
+                addMultipleButton.addEventListener('click', function(){
+                    addNewMultiple(multiplesContainer)
+                });
             }
 
             questionType.addEventListener('change', (qt) => {
@@ -190,7 +175,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     let saveBtn = document.querySelector('#saveBtn');
-    let createModelUrl = saveBtn.dataset.surveymodelurl;
+    let surveyModelUrl = saveBtn.dataset.surveymodelurl;
+
+    if (saveBtn.dataset.screen == 'create'){
+        addNewQuestion();
+    }
 
     saveBtn.addEventListener('click', ()=> {
         // dialog
@@ -245,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             modelObject.questions.push(questionObject);
         });
 
-        fetch(createModelUrl, {
+        fetch(surveyModelUrl, {
             method: 'POST',
             headers: {
               'X-CSRFToken': CSRFTOKEN,
