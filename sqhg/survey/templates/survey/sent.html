@@ -61,22 +61,23 @@
                     </thead>
 
                     <tbody class="divide-y divide-gray-200">
+                        {% for survey in surveys %}
                         <tr class="hover:bg-gray-200 hover:text-gray-900">
                             <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                1
+                                {{survey.id}}
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Avaliação de Supervisores
+                                {{survey.name}}
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Produção
+                                {{survey.superior.area.name}}
                             </td>
 
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                01/01/2022
+                                {{survey.start_date}}
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                01/05/2022
+                                {{survey.end_date}}
                             </td>
 
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
@@ -99,136 +100,7 @@
                                 </form>
                             </td>
                         </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                                2
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Avaliação dos Lideres
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                RH
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                02/04/2022
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                17/04/2022
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <div class="flex justify-center">
-                                    <label class="inline-flex">
-                                        <span class="ml-2"><i class="fa-solid fa-square-check"></i>
-                                            Encerrado</span>
-                                    </label>
-                                </div>
-
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <form>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-comment-slash"></i></button>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-trash"></i></button>
-                                </form>
-                            </td>
-
-
-                            </td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                3
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Avaliação de Diretores
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Administrativo
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                01/01/2023
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                01/05/2023
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <label class="inline-flex">
-                                    <span class="ml-2"><i class="fa-solid fa-calendar"></i> Agendado</span>
-                                </label>
-
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <form>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-comment-slash"></i></button>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td
-                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center"></td>
-                        </tr>
+                        {{ %endfor% }}
                     </tbody>
                 </table>
             </div>

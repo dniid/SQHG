@@ -15,17 +15,6 @@ from auth.exceptions import InvalidCredentials
 router = APIRouter()
 
 
-@router.get('/', response_class=HTMLResponse)
-async def survey_sent_page(request: Request, template: Jinja2Templates = Depends(Template)):
-    if not request.state.authenticated:
-        return RedirectResponse('/login')
-
-    context = {'request': request}
-    context['subtitle'] = 'Sent Surveys'
-
-    return template.TemplateResponse('survey/sent.html', context)
-
-
 @router.get('/model/create', response_class=HTMLResponse)
 async def survey_create_page(request: Request, template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
@@ -91,6 +80,24 @@ async def models_list_page(
     context['models'] = models
 
     return template.TemplateResponse('survey/list_model.html', context)
+
+
+@router.get('/',response_class=HTMLResponse)
+async def survey_sent_page(
+    request: Request,
+    template: Jinja2Templates = Depends(template),
+    database: Session = Depends(Database)
+):
+    if not request.state.authenticated:
+        return RedirectResponse('/login')
+
+    context = {'request' : request}
+    context['subtitle'] = 'List Survey Sent'
+
+    surveys = database.query(Survey).all()
+    context['surveys'] = surveys
+
+    return template.TemplateResponse('survey/sent.html', context)
 
 
 @router.post('/model/create', status_code=201)
