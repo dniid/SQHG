@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   deleteBtns.forEach(deleteBtn => {
     let url = deleteBtn.dataset.url;
-    let model_name = deleteBtn.dataset.model;
+    let modelName = deleteBtn.dataset.model;
 
     deleteBtn.addEventListener('click', () => {
       Swal.fire({
-        title: `Tem certeza que deseja excluir o modelo '${model_name}'?`,
+        title: `Tem certeza que deseja excluir o modelo '${modelName}'?`,
         text: "Essa ação não pode ser revertida!",
         icon: 'warning',
         showCancelButton: true,

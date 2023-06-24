@@ -64,7 +64,7 @@ async def models_edit_page(
     return template.TemplateResponse('survey/edit_model.html', context)
 
 
-@router.get('/model', response_class=HTMLResponse)
+@router.get('/model/list', response_class=HTMLResponse)
 async def models_list_page(
     request: Request,
     template: Jinja2Templates = Depends(Template),
@@ -82,7 +82,7 @@ async def models_list_page(
     return template.TemplateResponse('survey/list_model.html', context)
 
 
-@router.get('/',response_class=HTMLResponse)
+@router.get('/list',response_class=HTMLResponse)
 async def survey_sent_page(
     request: Request,
     template: Jinja2Templates = Depends(Template),
