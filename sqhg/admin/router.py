@@ -120,10 +120,11 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id==id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
+
+    admin = admin.first()
 
     database.delete(admin)
     database.commit()

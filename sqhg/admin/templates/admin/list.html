@@ -91,14 +91,12 @@
         </div>
 
         <div class="w-fit flex justify-end py-10 w-full">
-            <div id="createBtn">
-                <a href="{{ url_for('admin_create_page') }}">
-                    <button
-                        class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer">
-                        Novo Administrador
-                    </button>
+            <button
+                class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center">
+                <a id="createBtn" class="block" href="{{ url_for('admin_create_page') }}">
+                    Novo Administrador
                 </a>
-            </div>
+            </button>
         </div>
     </div>
 

@@ -9,7 +9,7 @@ from core.template import Template
 from core.database import Database
 
 from survey.schemas import SurveyModelSchema
-from survey.models import SurveyModel, Question, Option
+from survey.models import Survey, SurveyModel, Question, Option
 from auth.exceptions import InvalidCredentials
 
 router = APIRouter()
@@ -106,7 +106,6 @@ async def model_create(
     model_data: SurveyModelSchema,
     database: Session = Depends(Database)
 ):
-
     if not request.state.authenticated:
         raise InvalidCredentials
 
@@ -142,50 +141,74 @@ async def model_create(
     }
 
 
-@router.post('/model/edit/{id}', status_code=201)
+@router.post('/model/edit/{id}', status_code=200)
 async def model_edit(
     request: Request,
     id: int,
     model_data: SurveyModelSchema,
     database: Session = Depends(Database)
 ):
-
     if not request.state.authenticated:
         raise InvalidCredentials
 
     db_survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
     if not db_survey_model:
         raise HTTPException(status_code = 404, detail = "Survey model not found")
-    else:
-        db_survey_model = db_survey_model.first()
 
-        db_survey_model.name = model_data.name
-        db_survey_model.description = model_data.description
+    db_survey_model = db_survey_model.first()
 
-        if model_data.questions:
-            db_survey_model.questions.clear()
-            for question_data in model_data.questions:
-                question = Question(
-                    description=question_data['description'],
-                    type=question_data['type'],
-                    survey_model=db_survey_model
-                )
+    db_survey_model.name = model_data.name
+    db_survey_model.description = model_data.description
 
-                if 'options' in question_data:
-                    for option_data in question_data['options']:
-                        option = Option(
-                            description=option_data['description'],
-                            question=question
-                        )
-                        question.options.append(option)
+    if model_data.questions:
+        for question in db_survey_model.questions:
+            for option in question.options:
+                database.delete(option)
+            database.delete(question)
 
-                db_survey_model.questions.append(question)
-                database.add(question)
+        for question_data in model_data.questions:
+            question = Question(
+                description=question_data['description'],
+                type=question_data['type'],
+                survey_model_id=db_survey_model.id
+            )
+
+            database.add(question)
+            database.flush()
+
+            if 'options' in question_data:
+                for option_data in question_data['options']:
+                    option = Option(
+                        description=option_data['description'],
+                        question_id=question.id
+                    )
+                    database.add(option)
 
     database.commit()
-    database.refresh(db_survey_model)
 
     return {
         'message': f"Modelo de questionário '{db_survey_model.name}' editado com sucesso!",
         'survey_model_id': {database.query(SurveyModel).order_by(SurveyModel.id.desc()).first()}
     }
+
+
+@router.delete('/model/delete/{id}', status_code=200)
+async def model_delete(request: Request, id: int, database: Session = Depends(Database)):
+    if not request.state.authenticated:
+        return InvalidCredentials
+
+    survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
+    if not survey_model:
+        raise HTTPException(status_code = 404, detail = "Survey model not found")
+
+    survey_model = survey_model.first()
+
+    for question in survey_model.questions:
+        for option in question.options:
+            database.delete(option)
+        database.delete(question)
+
+    database.delete(survey_model)
+    database.commit()
+
+    return {'message': "Modelo deletado com sucesso!"}

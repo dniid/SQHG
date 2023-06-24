@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block js_import %}
-<script src="{% static 'survey/js/survey_model.js' %}"></script>
+<script src="{% static 'survey/js/model_generals.js' %}"></script>
+<script src="{% static 'survey/js/edit_model.js' %}"></script>
 {% endblock js_import %}
 
 {% block content %}
@@ -304,7 +305,9 @@
             <div class="w-full flex flex-col">
                 <div class="flex gap-4 justify-end w-full">
                     <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-                        Cancelar
+                        <a class="block" href="{{ url_for('models_list_page') }}">
+                            Cancelar
+                        </a>
                     </button>
                     <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
                     rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-screen="edit"

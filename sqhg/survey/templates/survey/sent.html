@@ -62,45 +62,45 @@
 
                     <tbody class="divide-y divide-gray-200">
                         {% for survey in surveys %}
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                {{survey.id}}
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                {{survey.name}}
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                {{survey.superior.area.name}}
-                            </td>
+                            <tr class="hover:bg-gray-200 hover:text-gray-900">
+                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                    {{survey.id}}
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    {{survey.name}}
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    {{survey.superior.area.name}}
+                                </td>
 
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                {{survey.start_date}}
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                {{survey.end_date}}
-                            </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    {{survey.start_date}}
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    {{survey.end_date}}
+                                </td>
 
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <div class="flex justify-center">
-                                    <label class="inline-flex">
-                                        <span>
-                                            <i class="fa-solid fa-paper-plane"></i>
-                                            Enviado
-                                        </span>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    <div class="flex justify-center">
+                                        <label class="inline-flex">
+                                            <span>
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                                Enviado
+                                            </span>
 
-                                    </label>
+                                        </label>
 
-                                </div>
-                            </td>
+                                    </div>
+                                </td>
 
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <form>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-comment-slash"></i></button>
-                                    <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        {{ %endfor% }}
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                    <form>
+                                        <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-comment-slash"></i></button>
+                                        <button type="submit" class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
