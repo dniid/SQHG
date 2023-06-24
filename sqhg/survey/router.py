@@ -85,7 +85,7 @@ async def models_list_page(
 @router.get('/',response_class=HTMLResponse)
 async def survey_sent_page(
     request: Request,
-    template: Jinja2Templates = Depends(template),
+    template: Jinja2Templates = Depends(Template),
     database: Session = Depends(Database)
 ):
     if not request.state.authenticated:
