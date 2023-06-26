@@ -59,9 +59,11 @@ async def admin_edit_page(
     context = {'request': request}
     context['subtitle'] = 'Admin'
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
+
+    admin = admin.first()
 
     context['user'] = admin
 
@@ -94,7 +96,8 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
+    admin = database.query(Admin).filter(Admin.id==id).first()
+
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
@@ -117,9 +120,11 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
+
+    admin = admin.first()
 
     database.delete(admin)
     database.commit()
