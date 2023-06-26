@@ -17,7 +17,6 @@ from user.models import Token
 
 from survey.schemas import SurveyModelSchema, SurveySchema
 from survey.models import Survey, SurveyModel, Question, Option
-from auth.exceptions import InvalidCredentials
 
 router = APIRouter()
 
