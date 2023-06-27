@@ -19,8 +19,15 @@
           </div>
 
           <div class="w-full col-span-2">
-            <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-lg focus:outline-none"
+            
+            <div class="w-full flex flex-row items-center">
+              <input class="w-full placeholder-white text-white bg-[var(--light-violet)] px-2 py-1 rounded-l-lg focus:outline-none"
                    id="password" name="password" type="password" placeholder="Senha">
+              <div id="passwordToggle" class="h-fit px-3 py-1 bg-[var(--light-violet)] rounded-r-lg text-white">
+                <i class="fa-solid fa-eye"></i>
+                <i class="hidden fa-solid fa-eye-slash"></i>
+              </div>  
+            </div>
           </div>
 
           <div class="w-full col-span-2 flex justify-center">
