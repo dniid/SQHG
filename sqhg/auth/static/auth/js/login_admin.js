@@ -41,4 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+  function showPassword() {
+    var inputPass = document.getElementById('password')
+    var btnShowPass = document.getElementById('btn-senha')
+
+    if(inputPass.type === '´password'){
+      inputPass.setAttribute('type', 'text')
+      btnShowPass.classList.add(hide)
+      btnShowPass.classlist.replace('fa-eye','fa-eye-slash')
+
+    }else{
+      inputPass.setAttribute('type', 'password')
+      btnShowPass.classlist.replace('fa-eye-slash ','fa-eye')
+    }
+
+  }
+
 });
