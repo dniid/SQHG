@@ -41,20 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
-  function showPassword() {
+  let toogleBtn = document.getElementById('passwordToggle');
+
+  toogleBtn.addEventListener('click', () => {
     var inputPass = document.getElementById('password')
     var btnShowPass = document.getElementById('btn-senha')
 
-    if(inputPass.type === '´password'){
+    if (inputPass.type === 'password'){
       inputPass.setAttribute('type', 'text')
-      btnShowPass.classList.add(hide)
-      btnShowPass.classlist.replace('fa-eye','fa-eye-slash')
+      btnShowPass.classList.replace('fa-eye','fa-eye-slash')
 
-    }else{
+    } else {
       inputPass.setAttribute('type', 'password')
-      btnShowPass.classlist.replace('fa-eye-slash ','fa-eye')
+      btnShowPass.classList.replace('fa-eye-slash','fa-eye')
     }
-
-  }
+  });
 
 });
