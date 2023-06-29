@@ -1,166 +1,106 @@
 {% extends 'layout.html' %}
 
+{% block js_import %}
+<script src="{% static 'admin/js/delete.js' %}"></script>
+{% endblock js_import %}
+
 {% block content %}
-    <div class="flex flex-col items-center">
-        <div class="top-bar bg-white h-65 rounded-xl w-full">
-            <div class="title">
-                <div class="text-center">
-                    <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
-                        Lista de Administradores
-                    </h1>
-                </div>
+<div class="flex flex-col items-center">
+    <div class="top-bar bg-white h-65 rounded-xl w-full">
+        <div class="title">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
+                    Lista de Administradores
+                </h1>
             </div>
         </div>
-
-        <div class="pesquisa-box w-full">
-            <div class="flex justify-center py-8 space-x-3 items-center w-full">
-                <input type="text"
-                    class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
-                    placeholder="Pesquisar" required />
-                <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
-                    <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
-                </div>
-            </div>
-        </div>
-        <div class="w-full md:w-2/3">
-            <div
-                class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
-                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
-                    <thead>
-                        <tr>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                N de crachá
-                            </th>
-
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Nome
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Telefone
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                E-mail
-                            </th>
-                            <th
-                                class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
-                                Ações
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                                26092022
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                Administrador
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                (45)00000-0000
-                            </td>
-
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                adminstrador@gmail.com
-                            </td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                                <div class="flex justify-center">
-
-                                    <a>
-                                        <button type="button"
-                                            class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
-                                                class="fa-solid fa-pen-to-square"></i></button>
-                                    </a>
-                                    <form>
-                                        <button type="submit"
-                                            class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 hover:bg-gray-300">
-                                            <i
-                                                class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-200 hover:text-gray-900">
-                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="w-fit flex justify-end py-10 w-full">
-                <div class="Criar-button">
-                    <button
-                        class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
-                        Novo Modelo
-                    </button>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <div class="pesquisa-box w-full hidden">
+        <div class="flex justify-center py-8 space-x-3 items-center w-full">
+            <input type="text"
+                class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
+                placeholder="Pesquisar" required />
+            <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
+                <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
+            </div>
+        </div>
+    </div>
+    <div class="w-full md:w-2/3 pt-10">
+        <div class="mx-auto overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+            <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                <thead>
+                    <tr>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            N de crachá
+                        </th>
+
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Nome
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Telefone
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            E-mail
+                        </th>
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-200">
+                    {% for user in users %}
+                    <tr class="hover:bg-gray-200">
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                            {{ user.tag }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.name }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.phone }}
+                        </td>
+
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {{ user.email }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            <div class="flex justify-center">
+
+                                <a href="{{ url_for('admin_edit_page', id=user.id) }}">
+                                    <button type="button"
+                                        class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </a>
+                                <div 
+                                    id="deleteBtn"
+                                    class="text-[var(--vivid-violet)] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg 
+                                    text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-gray-300 cursor-pointer" data-url="{{ url_for('admin_delete', id=user.id) }}"
+                                    data-usrname="{{ user.name }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="w-fit flex justify-end py-10 w-full">
+            <div id="createBtn">
+                <a href="{{ url_for('admin_create_page') }}">
+                    <button
+                        class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer">
+                        Novo Administrador
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock content %}

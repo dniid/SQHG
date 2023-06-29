@@ -1,17 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let form = document.querySelector('#loginForm');
+  let form = document.querySelector('#forgotPasswordForm');
+  let cancelButton = document.querySelector('#cancelButton');
+
+  cancelButton.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = cancelButton.dataset.href;
+  });
 
   form.onsubmit = function(e) {
     e.preventDefault();
 
-    let email = form.querySelector('#email');
-    let password = form.querySelector('#password');
+    let redirectUrl = cancelButton.dataset.href;
 
-    let redirectUrl = form.querySelector('button[type=submit]').dataset.href;
+    let email = form.querySelector('#email');
     let url = form.getAttribute('action');
     let data = JSON.stringify({
       'email': email.value,
-      'password': password.value,
     })
 
     fetch(url, {
@@ -25,7 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
       let data = await response.json();
 
       if (response.status == 200){
-        window.location.href = redirectUrl;
+        Swal.fire({
+          title: 'Sucesso!',
+          text: data.message,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = redirectUrl;
+          }
+        });
       } else {
         iziToast.error({
           position: 'topRight',
