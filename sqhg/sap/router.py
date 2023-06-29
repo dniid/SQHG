@@ -29,7 +29,7 @@ async def report_page(request: Request, template: Jinja2Templates = Depends(Temp
         return RedirectResponse('/login')
 
     context = {'request': request}
-    context['subtitle'] = 'settings'
+    context['subtitle'] = 'Settings'
 
     return template.TemplateResponse('sap/settings.html', context)
 
