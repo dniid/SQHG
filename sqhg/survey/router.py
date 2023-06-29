@@ -1,16 +1,22 @@
 """Survey's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends, BackgroundTasks, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi_mail import FastMail, MessageSchema, MessageType
 from sqlalchemy.orm import Session
 
 from core.template import Template
 from core.database import Database
+from core.email import Email
 
-from survey.schemas import SurveyModelSchema
-from survey.models import Survey, SurveyModel, Question, Option
 from auth.exceptions import InvalidCredentials
+from auth.utils import generate_random_token
+from sap.models import Superior
+from user.models import Token
+
+from survey.schemas import SurveyModelSchema, SurveySchema
+from survey.models import Survey, SurveyModel, Question, Option
 
 router = APIRouter()
 
@@ -212,3 +218,52 @@ async def model_delete(request: Request, id: int, database: Session = Depends(Da
     database.commit()
 
     return {'message': "Modelo deletado com sucesso!"}
+
+
+@router.post('/send', response_class=HTMLResponse, status_code=200)
+async def send_survey(
+    request: Request,
+    survey_data: SurveySchema,
+    background_tasks: BackgroundTasks,
+    database: Session = Depends(Database),
+    email: FastMail = Depends(Email)
+):
+    if not request.state.authenticated:
+        raise InvalidCredentials
+
+    for superior_id in survey_data.superiors:
+        superior = database.query(Superior).filter(Superior.id == superior_id).first()
+        tokens = []
+
+        #############################################
+        ###
+        ### Inserir lógica para envio de questionário
+        ###
+        #############################################
+
+        for _ in superior.subordinates:
+            token = Token(
+                survey_id=0,  # Placeholder / ID do questionário criado acima
+                token=generate_random_token()
+            )
+
+            tokens.append(token.token)
+            database.add(token)
+
+        email_context = {}
+        email_context['user'] = request.state.user
+        email_context['survey'] = None  # Entidade do questionário
+        email_context['tokens'] = tokens
+
+        email_body = MessageSchema(
+            subject='SQHG - Chaves de Acesso',
+            recipients=[request.state.user.email],
+            template_body=email_context,
+            subtype=MessageType.html,
+        )
+
+        background_tasks.add_task(email.send_message, email_body, template_name='token_list.html')
+
+    database.commit()
+
+    return {'message': 'Questionários enviados com sucesso!'}
