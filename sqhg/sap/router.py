@@ -24,7 +24,7 @@ router = APIRouter()
 
 
 @router.get('/settings', response_class=HTMLResponse)
-async def report_page(request: Request, template: Jinja2Templates = Depends(Template)):
+async def settings_page(request: Request, template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
