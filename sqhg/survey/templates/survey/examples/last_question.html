@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Title</title>
-
-    <!-- [Links Partial here] -->
-    
-</head>
-
-<body>
+{% block content %}
     <!-- Basic website structure -->
     <div class="w-full h-screen">
         <div class="w-full h-full flex flex-col sm:flex-row p-3 sm:space-x-3">
@@ -79,7 +68,5 @@
             </section>
         </div>
     </div>
-    <!-- [Scripts Partial here] -->
-</body>
 
-</html>
+{% endblock content %}
