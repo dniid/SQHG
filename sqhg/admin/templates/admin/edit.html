@@ -6,85 +6,90 @@
 {% endblock js_import %}
 
 {% block content %}
-    <div class="form">
-        <form id="adminEditForm" action="{{ url_for('admin_edit', id=user.id) }}">
-            <div class="form-header">
-                <div class="title">
-                    <div class="text-center">
-                        <h1 class="text-2xl font-bold py-3 text-[var(--flushed-violet)]">
-                            Edição de Administradores
-                        </h1>
-                    </div>
-                </div>
+  <div class="form">
+    <form id="adminEditForm" action="{{ url_for('admin_edit', id=user.id) }}">
+      <div class="form-header">
+        <div class="title">
+          <div class="text-center">
+            <h1 class="text-2xl font-bold py-3 text-[var(--flushed-violet)]">
+              Edição de Administradores
+            </h1>
+          </div>
+        </div>
 
+      </div>
+      <div class="flex justify-center">
+        <div class="flex flex-col input w-full p-5 xl:p-0 xl:w-1/2 space-y-5">
+          <div>
+            <label class="text-[var(--flushed-violet)] font-bold" for="tag">
+              <span>Crachá</span>
+            </label>
+            <input id="tag" name="tag" value="{{ user.tag }}" type="text" placeholder="Digite seu número de crachá" maxlength="12"
+              required autocomplete="off" class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
+          </div>
+          <div>
+            <div class="w-fit text-[var(--flushed-violet)] font-bold" for="name">
+              <span>Nome Completo</span>
             </div>
-            <div class="flex justify-center">
-                <div class="flex flex-col input w-full p-5 xl:p-0 xl:w-1/2 space-y-5">
-                    <div class="imput-box">
-                        <label class="text-[var(--flushed-violet)] font-bold" for="tag">Crachá</label>
-                        <input id="tag" name="tag" value="{{ user.tag }}" type="text" placeholder="Digite seu número de crachá" maxlength="12"
-                            required autocomplete="off" class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
-                    </div>
+            <input id="name" name="name" value="{{ user.name }}" type="text" placeholder="Digite seu nome completo" maxlength="255"
+              required autocomplete="off" class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
+          </div>
+          <div>
+            <label class="w-fit text-[var(--flushed-violet)] font-bold" for="birth-date">
+              <span>Data de Nascimento</span>
+            </label>
+            <input id="birth-date" name="birthDate" value="{{ user.birth_date }}" type="date"
+              placeholder="Digite sua data de nascimento" required autocomplete="off"
+              class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
+          </div>
+          <div>
+            <label class="w-fit text-[var(--flushed-violet)] font-bold" for="email">
+              <span>E-mail</span>
+            </label>
+            <input id="email" name="email" value="{{ user.email }}" type="email" placeholder=" Digite seu E-mail" required autocomplete="off" maxlength="255"
+              class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
+          </div>
+          <div>
+            <label class="w-fit text-[var(--flushed-violet)] font-bold" for="phone">
+              <span>Telefone</span>
+            </label>
+            <input id="phone" name="phone" value="{{ user.phone }}" type="tel" placeholder="(xx) xxxxx-xxxx" required autocomplete="off" maxlength="15"
+              class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" pattern="\(\d{2}\) \d{5}-\d{4}">
+          </div>
+          <div>
+            <label class="w-fit text-[var(--flushed-violet)] font-bold" for="password">
+              <span>Senha</span>
+            </label>
+            <input id="password" name="password" type="password" placeholder="Digite sua senha" autocomplete="off" maxlength="128"
+              class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
+          </div>
+          <div>
+            <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirmPassword">
+              <span>Confirme a senha</span>
+            </label>
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Digite sua senha" autocomplete="off" maxlength="128"
+              class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
+          </div>
+          <div>
+            <span id="errorMessage" class="text-red-500 font-bold"></span>
+          </div>
 
-                    <div class="imput-box">
-                        <div class="w-fit text-[var(--flushed-violet)] font-bold" for="name">
-                            <span>Nome Completo</span>
-                        </div>
-                        <input id="name" name="name" value="{{ user.name }}" type="text" placeholder="Digite seu nome completo" maxlength="255"
-                            required autocomplete="off" class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md">
-                    </div>
-
-                    <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="birth-date">Data de
-                            Nascimento</label>
-                        <input id="birth-date" name="birthDate" value="{{ user.birth_date }}" type="date"
-                            placeholder="Digite sua data de nascimento" required autocomplete="off"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
-                    </div>
-
-                    <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="email">E-mail</label>
-                        <input id="email" name="email" value="{{ user.email }}" type="email" placeholder=" Digite seu E-mail" required autocomplete="off" maxlength="255"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" disabled>
-                    </div>
-
-                    <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="phone">Telefone</label>
-                        <input id="phone" name="phone" value="{{ user.phone }}" type="tel" placeholder="(xx) xxxxx-xxxx" required autocomplete="off" maxlength="15"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" pattern="\(\d{2}\) \d{5}-\d{4}">
-                    </div>
-
-                    <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="password">Senha</label>
-                        <input id="password" name="password" type="password" placeholder="Digite sua senha" autocomplete="off" maxlength="128"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" onchange="onChange()">
-                    </div>
-
-                    <div class="imput-box">
-                        <label class="w-fit text-[var(--flushed-violet)] font-bold" for="confirmPassword">Confirme a senha</label>
-                        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Digite sua senha" autocomplete="off" maxlength="128"
-                            class="w-full h-12 px-2 border border-[var(--flushed-violet)] rounded-md" onchange="onChange()">
-                    </div>
-                    <div class="">
-                        <span id="errorMessage" class="text-red-500 font-bold"></span>
-                    </div>
-
-                    <div class="flex justify-end py-10">
-                        <div class="cancel-btn">
-                            <div id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-href="{{ url_for('admin_list_page') }}">
-                                Cancelar
-                            </div>
-                        </div>
-        
-                        <div class="save-btn">
-                            <button id="sendBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-10 hover:bg-[var(--honey-flower)]"
-                            data-href="{{ url_for('admin_list_page') }}">
-                                Gravar
-                            </button>
-                        </div>
-                    </div>
-                </div>
+          <div class="flex justify-end py-10">
+            <div class="cancel-btn">
+              <div id="returnBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)] text-center cursor-pointer" data-href="{{ url_for('admin_list_page') }}">
+                Cancelar
+              </div>
             </div>
-        </form>
-    </div>
+
+            <div class="save-btn">
+              <button id="sendBtn" class="bg-[var(--flushed-violet)] w-40 py-2 rounded-md text-gray-50 ml-10 hover:bg-[var(--honey-flower)]"
+              data-href="{{ url_for('admin_list_page') }}">
+                Gravar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock content %}

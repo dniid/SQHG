@@ -1,7 +1,7 @@
 """Admin's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi import APIRouter, Request, Depends, HTTPException, status
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
@@ -25,10 +25,11 @@ async def admin_list_page(
 ):
     if not request.state.authenticated:
         return RedirectResponse('/login')
+
     context = {'request': request}
     context['subtitle'] = 'Admin'
-    users = database.query(Admin).all()
-    context['users'] = users
+    context['users'] = database.query(Admin).all()
+
     return template.TemplateResponse('admin/list.html', context)
 
 
@@ -56,29 +57,26 @@ async def admin_edit_page(
     context = {'request': request}
     context['subtitle'] = 'Admin'
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
-
-    context['user'] = admin
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
+    context['user'] = admin.first()
 
     return template.TemplateResponse('admin/edit.html', context)
 
 
-@router.post('/create', status_code=201)
+@router.post('/create', status_code=status.HTTP_201_CREATED, response_class=JSONResponse)
 async def admin_create(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
 
-    password = get_password_hash(admin_data.password)
     admin = Admin(
         tag=admin_data.tag,
         name=admin_data.name,
         birth_date=admin_data.birth_date,
         email=admin_data.email,
         phone=admin_data.phone,
-        password=password,
+        password=get_password_hash(admin_data.password),
     )
 
     database.add(admin)
@@ -87,41 +85,37 @@ async def admin_create(request: Request, admin_data: AdminSchema, database: Sess
     return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
-@router.post('/edit/{id}', status_code=200)
+@router.post('/edit/{id}', status_code=status.HTTP_200_OK, response_class=JSONResponse)
 async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
+    admin = admin.first()
 
     for key, value in admin_data.dict(exclude_unset=True).items():
         if key == 'password':
+            setattr(admin, key, get_password_hash(value))
             continue
         setattr(admin, key, value)
-
-    if (admin_data.password):
-        password = get_password_hash(admin_data.password)
-        admin.password=password
 
     database.commit()
 
     return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
 
 
-@router.delete('/delete/{id}', status_code=200)
+@router.delete('/delete/{id}', status_code=status.HTTP_200_OK, response_class=JSONResponse)
 async def admin_delete(request: Request, id: int, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
-    database.delete(admin)
+    database.delete(admin.first())
     database.commit()
 
-    return {'message': "Admin deletado com sucesso!"}
+    return {'message': 'Admin deletado com sucesso!'}

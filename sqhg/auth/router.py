@@ -86,11 +86,11 @@ async def reset_password_page(
 
 @router.post('/login', response_class=JSONResponse)
 async def login(credentials: LoginData, database: Session = Depends(Database)):
-    user = database.query(Admin).filter(Admin.email == credentials.email).first()
+    user = database.query(Admin).filter(Admin.email == credentials.email)
     if not user:
         raise InvalidCredentials
 
-    user = authenticate_user(user, credentials.password)
+    user = authenticate_user(user.first(), credentials.password)
     if not user:
         raise InvalidCredentials
 
@@ -124,7 +124,7 @@ async def forgot_password(
 ):
     user = database.query(Admin).filter(Admin.email == credentials.email).first()
     if not user:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Usuário não encontrado')
 
     token = create_access_token(
         data={'email': user.email},
@@ -142,7 +142,7 @@ async def forgot_password(
         subtype=MessageType.html,
     )
 
-    background_tasks.add_task(email.send_message, email_body, template_name='email_template.html')
+    background_tasks.add_task(email.send_message, email_body, template_name='reset_password.html')
 
     return {'message': 'Email enviado com sucesso! Verifique sua caixa de entrada.'}
 
@@ -153,11 +153,11 @@ async def reset_password(credentials: PasswordResetData, token: str, database: S
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email = payload.get('email')
     except JWTError:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Usuário não encontrado')
 
     user = database.query(Admin).filter(Admin.email == email).first()
     if not user:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Usuário não encontrado')
 
     user.password = get_password_hash(credentials.password)
     database.commit()

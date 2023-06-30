@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let saveBtn = document.querySelector('#saveBtn');
   let surveyModelUrl = saveBtn.dataset.surveymodelurl;
 
-  saveBtn.addEventListener('click', () => {
+  saveBtn.addEventListener('click', ()=> {
+    // dialog
 
     let surveyNameTitle = document.querySelector('#surveyNameTitle');
     let surveyDescriptionTitle = document.querySelector('#surveyDescriptionTitle');
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       body: JSON.stringify(modelObject),
     }).then(async response => {
-      if (response.status == 201) {
+      if (response.status == 200) {
         let data = await response.json();
         iziToast.success({
           position: 'topRight',
@@ -81,7 +82,5 @@ document.addEventListener('DOMContentLoaded', function () {
         message: 'Erro ao salvar.',
       });
     });
-
-
   });
 });

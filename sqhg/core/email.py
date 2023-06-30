@@ -30,7 +30,7 @@ class FastMailConfig(FastMail):
             MAIL_FROM=SMTP_MAIL_FROM,
             MAIL_STARTTLS=True,
             MAIL_SSL_TLS=False,
-            TEMPLATE_FOLDER=find_dirs('email', root_dir='auth')[0],
+            TEMPLATE_FOLDER=find_dirs('email', root_dir='core')[0],
             SUPPRESS_SEND=0 if ENVIRONMENT == 'production' else 1,
             MAIL_DEBUG=0 if ENVIRONMENT == 'production' else 1,
         )
