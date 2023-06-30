@@ -66,8 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    let logoutBtn = document.getElementById('logoutBtn');
+    let logoutBtns = document.querySelectorAll('#logoutBtn');
     
+    logoutBtns.forEach(logoutBtn => {
         logoutBtn.addEventListener('click', () => {
             Swal.fire({
               title: `Tem certeza que deseja sair?`,
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
               }
             })
         });
+    })
 
 // Mobile Functions
     // Open Menu
