@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let saveBtn = document.querySelector('#saveBtn');
   let surveyModelUrl = saveBtn.dataset.surveymodelurl;
 
-  saveBtn.addEventListener('click', ()=> {
-    // dialog
+  saveBtn.addEventListener('click', () => {
 
     let surveyNameTitle = document.querySelector('#surveyNameTitle');
     let surveyDescriptionTitle = document.querySelector('#surveyDescriptionTitle');
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         options: [],
       }
 
-      if (questionType == '2') {
+      if (questionType == 'alternatives') {
         let alternativesContainer = question.querySelector('.alternatives-container');
         let alternativeForm = alternativesContainer.querySelectorAll('.alternative-form');
 
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
           questionObject.options.push(optionObject);
         });
 
-      } else if (questionType == '3') {
+      } else if (questionType == 'multiple') {
         let multiplesContainer = question.querySelector('.multiples-container');
         let multipleForm = multiplesContainer.querySelectorAll('.multiple-form');
 
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       body: JSON.stringify(modelObject),
     }).then(async response => {
-      if (response.status == 201 || response.status == 200) {
+      if (response.status == 201) {
         let data = await response.json();
         iziToast.success({
           position: 'topRight',

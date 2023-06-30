@@ -1,6 +1,6 @@
 """Survey's FastAPI router endpoints for SQHG's backend."""
 
-from fastapi import APIRouter, Request, Depends, BackgroundTasks, HTTPException
+from fastapi import APIRouter, Request, Depends, BackgroundTasks, HTTPException, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, MessageType
@@ -16,12 +16,28 @@ from sap.models import Superior
 from user.models import Token
 
 from survey.schemas import SurveyModelSchema, SurveySchema
-from survey.models import Survey, SurveyModel, Question, Option
+from survey.models import Survey, Question, Option, SurveyModel, QuestionModel, OptionModel
 
 router = APIRouter()
 
 
-@router.get('/model/create', response_class=HTMLResponse)
+@router.get('/list', response_class=HTMLResponse)
+async def survey_list_page(
+    request: Request,
+    template: Jinja2Templates = Depends(Template),
+    database: Session = Depends(Database)
+):
+    if not request.state.authenticated:
+        return RedirectResponse('/login')
+
+    context = {'request': request}
+    context['subtitle'] = 'List Survey Model'
+    context['models'] = database.query(SurveyModel).filter(SurveyModel.is_archived==False).all()
+
+    return template.TemplateResponse('survey/list.html', context)
+
+
+@router.get('/create', response_class=HTMLResponse)
 async def survey_create_page(request: Request, template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
@@ -29,22 +45,11 @@ async def survey_create_page(request: Request, template: Jinja2Templates = Depen
     context = {'request': request}
     context['subtitle'] = 'Create Survey Model'
 
-    return template.TemplateResponse('survey/create_model.html', context)
+    return template.TemplateResponse('survey/create.html', context)
 
 
-@router.get('/model/send', response_class=HTMLResponse)
-async def survey_send_page(request: Request, template: Jinja2Templates = Depends(Template)):
-    if not request.state.authenticated:
-        return RedirectResponse('/login')
-
-    context = {'request': request}
-    context['subtitle'] = 'Send Survey'
-
-    return template.TemplateResponse('survey/send_model.html', context)
-
-
-@router.get('/model/edit/{id}', response_class=HTMLResponse)
-async def models_edit_page(
+@router.get('/edit/{id}', response_class=HTMLResponse)
+async def survey_edit_page(
     request: Request,
     id: int,
     template: Jinja2Templates = Depends(Template),
@@ -58,37 +63,24 @@ async def models_edit_page(
 
     survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
     if not survey_model:
-        raise HTTPException(status_code = 404, detail = "Survey model not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Survey model not found')
+    context['model'] = survey_model.first()
 
-    survey_model = survey_model.first()
-
-    for question in survey_model.questions:
-        question.options
-
-    context['model'] = survey_model
-
-    return template.TemplateResponse('survey/edit_model.html', context)
+    return template.TemplateResponse('survey/edit.html', context)
 
 
-@router.get('/model/list', response_class=HTMLResponse)
-async def models_list_page(
-    request: Request,
-    template: Jinja2Templates = Depends(Template),
-    database: Session = Depends(Database)
-):
+@router.get('/send', response_class=HTMLResponse)
+async def survey_send_page(request: Request, template: Jinja2Templates = Depends(Template)):
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
     context = {'request': request}
-    context['subtitle'] = 'List Survey Model'
+    context['subtitle'] = 'Send Survey'
 
-    models = database.query(SurveyModel).all()
-    context['models'] = models
-
-    return template.TemplateResponse('survey/list_model.html', context)
+    return template.TemplateResponse('survey/send.html', context)
 
 
-@router.get('/list',response_class=HTMLResponse)
+@router.get('/sent',response_class=HTMLResponse)
 async def survey_sent_page(
     request: Request,
     template: Jinja2Templates = Depends(Template),
@@ -99,15 +91,13 @@ async def survey_sent_page(
 
     context = {'request' : request}
     context['subtitle'] = 'List Survey Sent'
-
-    surveys = database.query(Survey).all()
-    context['surveys'] = surveys
+    context['surveys'] = database.query(Survey).all()
 
     return template.TemplateResponse('survey/sent.html', context)
 
 
-@router.post('/model/create', status_code=201)
-async def model_create(
+@router.post('/create', status_code=status.HTTP_201_CREATED)
+async def survey_create(
     request: Request,
     model_data: SurveyModelSchema,
     database: Session = Depends(Database)
@@ -122,7 +112,7 @@ async def model_create(
 
     if model_data.questions:
         for question_data in model_data.questions:
-            question = Question(
+            question = QuestionModel(
                 description=question_data['description'],
                 type=question_data['type'],
                 survey_model=survey_model
@@ -130,25 +120,22 @@ async def model_create(
 
             if 'options' in question_data:
                 for option_data in question_data['options']:
-                    option = Option(
+                    option = OptionModel(
                         description=option_data['description'],
-                        question=question
+                        question_model=question
                     )
-                    question.options.append(option)
+                    question.options_model.append(option)
 
-            survey_model.questions.append(question)
+            survey_model.questions_model.append(question)
 
     database.add(survey_model)
     database.commit()
 
-    return {
-        'message': f"Modelo de questionário '{survey_model.name}' criado com sucesso!",
-        'survey_model_id': {database.query(SurveyModel).order_by(SurveyModel.id.desc()).first()}
-    }
+    return {'message': f"Modelo de questionário '{survey_model.name}' criado com sucesso!"}
 
 
-@router.post('/model/edit/{id}', status_code=200)
-async def model_edit(
+@router.post('/edit/{id}', status_code=status.HTTP_200_OK)
+async def survey_edit(
     request: Request,
     id: int,
     model_data: SurveyModelSchema,
@@ -159,7 +146,7 @@ async def model_edit(
 
     db_survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
     if not db_survey_model:
-        raise HTTPException(status_code = 404, detail = "Survey model not found")
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Survey model not found")
 
     db_survey_model = db_survey_model.first()
 
@@ -167,13 +154,13 @@ async def model_edit(
     db_survey_model.description = model_data.description
 
     if model_data.questions:
-        for question in db_survey_model.questions:
-            for option in question.options:
+        for question in db_survey_model.questions_model:
+            for option in question.options_model:
                 database.delete(option)
             database.delete(question)
 
         for question_data in model_data.questions:
-            question = Question(
+            question = QuestionModel(
                 description=question_data['description'],
                 type=question_data['type'],
                 survey_model_id=db_survey_model.id
@@ -184,43 +171,35 @@ async def model_edit(
 
             if 'options' in question_data:
                 for option_data in question_data['options']:
-                    option = Option(
+                    option = OptionModel(
                         description=option_data['description'],
-                        question_id=question.id
+                        question_model_id=question.id
                     )
                     database.add(option)
 
     database.commit()
 
-    return {
-        'message': f"Modelo de questionário '{db_survey_model.name}' editado com sucesso!",
-        'survey_model_id': {database.query(SurveyModel).order_by(SurveyModel.id.desc()).first()}
-    }
+    return {'message': f"Modelo de questionário '{db_survey_model.name}' editado com sucesso!"}
 
 
-@router.delete('/model/delete/{id}', status_code=200)
-async def model_delete(request: Request, id: int, database: Session = Depends(Database)):
+@router.delete('/delete/{id}', status_code=status.HTTP_200_OK)
+async def survey_delete(request: Request, id: int, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
 
     survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
     if not survey_model:
-        raise HTTPException(status_code = 404, detail = "Survey model not found")
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Survey model not found")
 
     survey_model = survey_model.first()
+    survey_model.is_archived = True
 
-    for question in survey_model.questions:
-        for option in question.options:
-            database.delete(option)
-        database.delete(question)
-
-    database.delete(survey_model)
     database.commit()
 
-    return {'message': "Modelo deletado com sucesso!"}
+    return {'message': "Modelo arquivado com sucesso!"}
 
 
-@router.post('/send', response_class=HTMLResponse, status_code=200)
+@router.post('/send', response_class=HTMLResponse, status_code=status.HTTP_200_OK)
 async def send_survey(
     request: Request,
     survey_data: SurveySchema,

@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
       let alternativesContainer = questionTypeBody.querySelector('.alternatives-container');
       let multiplesContainer = questionTypeBody.querySelector('.multiples-container');
 
-      if (selectedType === '2') {
+      if (selectedType === 'alternatives') {
         let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
         addAlternativeButton.addEventListener('click', function(){
           addNewAlternative(alternativesContainer)
         })
-      } else if (selectedType === '3') {
+      } else if (selectedType === 'multiple') {
         let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
         addMultipleButton.addEventListener('click', function(){
           addNewMultiple(multiplesContainer)
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let alternativesContainer = questionTypeBody.querySelector('.alternatives-container');
         let multiplesContainer = questionTypeBody.querySelector('.multiples-container');
 
-        if (selectedType == '1') {
+        if (selectedType == 'likert') {
           (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
-        } else if (selectedType === '2') {
+        } else if (selectedType === 'alternatives') {
           (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
           let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
           if (addAlternativeButton.dataset.viewed == 'false') {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!(alternativesContainer.querySelector('.alternative-form'))) {
             addNewAlternative(alternativesContainer);
           };
-        } else if (selectedType === '3') {
+        } else if (selectedType === 'multiple') {
           (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
           let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
           if (addMultipleButton.dataset.viewed == 'false') {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!(multiplesContainer.querySelector('.multiple-form'))) {
             addNewMultiple(multiplesContainer);
           };
-        } else if (selectedType === '4') {
+        } else if (selectedType === 'open_ended') {
           (questionTypeBody.querySelector('.open-type')).classList.remove('hidden');
         }
       });
@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
       let alternativesContainer = questionTypeBody.querySelector('.alternatives-container');
       let multiplesContainer = questionTypeBody.querySelector('.multiples-container');
 
-      if (selectedType == '1') {
+      if (selectedType == 'likert') {
         (questionTypeBody.querySelector('.likert-type')).classList.remove('hidden');
-      } else if (selectedType === '2') {
+      } else if (selectedType === 'alternatives') {
         (questionTypeBody.querySelector('.alternative-type')).classList.remove('hidden');
         let addAlternativeButton = questionTypeBody.querySelector('.add-alternative-btn');
         if (addAlternativeButton.dataset.viewed == 'false') {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!(alternativesContainer.querySelector('.alternative-form'))) {
           addNewAlternative(alternativesContainer);
         };
-      } else if (selectedType === '3') {
+      } else if (selectedType === 'multiple') {
         (questionTypeBody.querySelector('.multiple-type')).classList.remove('hidden');
         let addMultipleButton = questionTypeBody.querySelector('.add-multiple-btn');
         if (addMultipleButton.dataset.viewed == 'false') {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!(multiplesContainer.querySelector('.multiple-form'))) {
           addNewMultiple(multiplesContainer);
         };
-      } else if (selectedType === '4') {
+      } else if (selectedType === 'open_ended') {
         (questionTypeBody.querySelector('.open-type')).classList.remove('hidden');
       }
     });

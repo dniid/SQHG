@@ -86,11 +86,11 @@ async def reset_password_page(
 
 @router.post('/login', response_class=JSONResponse)
 async def login(credentials: LoginData, database: Session = Depends(Database)):
-    user = database.query(Admin).filter(Admin.email == credentials.email).first()
+    user = database.query(Admin).filter(Admin.email == credentials.email)
     if not user:
         raise InvalidCredentials
 
-    user = authenticate_user(user, credentials.password)
+    user = authenticate_user(user.first(), credentials.password)
     if not user:
         raise InvalidCredentials
 

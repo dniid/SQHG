@@ -50,10 +50,10 @@
                       type="text" autocomplete="off" value="Questão" required>
                   </div>
                   <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                    <option value="1">De 0 a 10</option>
-                    <option value="2">Alternativas</option>
-                    <option value="3">Múltipla Escolha</option>
-                    <option value="4">Aberta</option>
+                    <option value="likert">De 0 a 10</option>
+                    <option value="alternatives">Alternativas</option>
+                    <option value="multiple">Múltipla Escolha</option>
+                    <option value="open_ended">Aberta</option>
                   </select>
                 </div>
                 <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
@@ -166,10 +166,10 @@
                         type="text" autocomplete="off" value="{{ question.description }}" required>
                     </div>
                     <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                      <option value="1" {% if question.type == 1 %}selected{% endif %}>De 0 a 10</option>
-                      <option value="2" {% if question.type == 2 %}selected{% endif %}>Alternativas</option>
-                      <option value="3" {% if question.type == 3 %}selected{% endif %}>Múltipla Escolha</option>
-                      <option value="4" {% if question.type == 4 %}selected{% endif %}>Aberta</option>
+                      <option value="likert" {% if question.type == 'likert' %}selected{% endif %}>De 0 a 10</option>
+                      <option value="alternatives" {% if question.type == 'alternatives' %}selected{% endif %}>Alternativas</option>
+                      <option value="multiple" {% if question.type == 'multiple' %}selected{% endif %}>Múltipla Escolha</option>
+                      <option value="open_ended" {% if question.type == 'open_ended' %}selected{% endif %}>Aberta</option>
                     </select>
                   </div>
                   <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
@@ -230,7 +230,7 @@
                           type="text" autocomplete="off" value="Alternativa">
                           </div>
                         </div>
-                        {% if question.type == 2 %}
+                        {% if question.type == 'alternatives' %}
                           {% for option in question.options %}
                             <div class="alternative-form flex justify-between">
                               <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
@@ -262,7 +262,7 @@
                           type="text" autocomplete="off" value="Multipla">
                           </div>
                         </div>
-                        {% if question.type == 3 %}
+                        {% if question.type == 'multiple' %}
                           {% for option in question.options %}
                             <div class="multiple-form flex justify-between">
                               <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
@@ -305,13 +305,13 @@
       <div class="w-full flex flex-col">
         <div class="flex gap-4 justify-end w-full">
           <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-            <a class="block" href="{{ url_for('models_list_page') }}">
+            <a class="block" href="{{ url_for('survey_list_page') }}">
               Cancelar
             </a>
           </button>
           <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
           rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-screen="edit"
-          data-surveymodelurl="{{ url_for('model_edit', id=model.id) }}" data-href="{{ url_for('models_list_page') }}">
+          data-surveymodelurl="{{ url_for('survey_edit', id=model.id) }}" data-href="{{ url_for('survey_list_page') }}">
             Gravar
           </button>
         </div>

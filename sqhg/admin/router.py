@@ -1,7 +1,7 @@
 """Admin's FastAPI router endpoints for SQHG's backend."""
 
 from fastapi import APIRouter, Request, Depends, HTTPException, status
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
@@ -65,7 +65,7 @@ async def admin_edit_page(
     return template.TemplateResponse('admin/edit.html', context)
 
 
-@router.post('/create', status_code=201)
+@router.post('/create', status_code=status.HTTP_201_CREATED, response_class=JSONResponse)
 async def admin_create(request: Request, admin_data: AdminSchema, database: Session = Depends(Database)):
     if not request.state.authenticated:
         raise InvalidCredentials
@@ -85,7 +85,7 @@ async def admin_create(request: Request, admin_data: AdminSchema, database: Sess
     return {'message': f"Admin '{admin_data.name}' criado com sucesso!"}
 
 
-@router.post('/edit/{id}', status_code=200)
+@router.post('/edit/{id}', status_code=status.HTTP_200_OK, response_class=JSONResponse)
 async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials
@@ -93,10 +93,12 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
+    admin = admin.first()
 
     for key, value in admin_data.dict(exclude_unset=True).items():
         if key == 'password':
-            value = get_password_hash(value)
+            setattr(admin, key, get_password_hash(value))
+            continue
         setattr(admin, key, value)
 
     database.commit()
@@ -104,7 +106,7 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     return {'message': f"Admin '{admin_data.name}' alterado com sucesso!"}
 
 
-@router.delete('/delete/{id}', status_code=200)
+@router.delete('/delete/{id}', status_code=status.HTTP_200_OK, response_class=JSONResponse)
 async def admin_delete(request: Request, id: int, database: Session = Depends(Database)):
     if not request.state.authenticated:
         return InvalidCredentials

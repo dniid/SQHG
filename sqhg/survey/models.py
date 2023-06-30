@@ -2,7 +2,7 @@
 
 import enum
 
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum, Boolean
 from sqlalchemy.orm import relationship
 
 from core.database import BaseModel
@@ -69,6 +69,7 @@ class SurveyModel(BaseModel):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
     description = Column(String(255), nullable=False)
+    is_archived = Column(Boolean, nullable=False, default=False)
 
     surveys = relationship('Survey', back_populates='survey_model')
     questions_model = relationship('QuestionModel', back_populates='survey_model')

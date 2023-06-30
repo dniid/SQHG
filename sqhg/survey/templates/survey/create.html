@@ -50,10 +50,10 @@
                       type="text" autocomplete="off" value="Questão" required>
                   </div>
                   <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                    <option value="1">De 0 a 10</option>
-                    <option value="2">Alternativas</option>
-                    <option value="3">Múltipla Escolha</option>
-                    <option value="4">Aberta</option>
+                    <option value="likert">De 0 a 10</option>
+                    <option value="alternatives">Alternativas</option>
+                    <option value="multiple">Múltipla Escolha</option>
+                    <option value="open_ended">Aberta</option>
                   </select>
                 </div>
                 <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
@@ -162,13 +162,13 @@
       <div class="w-full flex flex-col">
         <div class="flex gap-4 justify-end w-full">
           <button class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 hover:bg-[var(--honey-flower)]">
-            <a class="block" href="{{ url_for('models_list_page') }}">
+            <a class="block" href="{{ url_for('survey_list_page') }}">
               Cancelar
             </a>
           </button>
           <button id="saveBtn" class="bg-[var(--vivid-violet)] w-40 py-2
           rounded-md text-gray-50 hover:bg-[var(--honey-flower)]" data-screen="create"
-          data-surveymodelurl="{{ url_for('model_create') }}" data-href="{{ url_for('models_list_page') }}">
+          data-surveymodelurl="{{ url_for('survey_create') }}" data-href="{{ url_for('survey_list_page') }}">
             Gravar
           </button>
         </div>
