@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let deleteBtns = document.querySelectorAll('#deleteBtn');
+  let deleteBtns = document.querySelectorAll('#deleteBtn');
 
   deleteBtns.forEach(deleteBtn => {
     let url = deleteBtn.dataset.url;

@@ -28,9 +28,7 @@ async def admin_list_page(
 
     context = {'request': request}
     context['subtitle'] = 'Admin'
-
-    users = database.query(Admin).all()
-    context['users'] = users
+    context['users'] = database.query(Admin).all()
 
     return template.TemplateResponse('admin/list.html', context)
 
@@ -62,10 +60,7 @@ async def admin_edit_page(
     admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
-
-    admin = admin.first()
-
-    context['user'] = admin
+    context['user'] = admin.first()
 
     return template.TemplateResponse('admin/edit.html', context)
 
@@ -75,14 +70,13 @@ async def admin_create(request: Request, admin_data: AdminSchema, database: Sess
     if not request.state.authenticated:
         raise InvalidCredentials
 
-    password = get_password_hash(admin_data.password)
     admin = Admin(
         tag=admin_data.tag,
         name=admin_data.name,
         birth_date=admin_data.birth_date,
         email=admin_data.email,
         phone=admin_data.phone,
-        password=password,
+        password=get_password_hash(admin_data.password),
     )
 
     database.add(admin)
@@ -96,19 +90,14 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id==id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
     for key, value in admin_data.dict(exclude_unset=True).items():
         if key == 'password':
-            continue
+            value = get_password_hash(value)
         setattr(admin, key, value)
-
-    if (admin_data.password):
-        password = get_password_hash(admin_data.password)
-        admin.password=password
 
     database.commit()
 
@@ -124,9 +113,7 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
     if not admin:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Admin não encontrado')
 
-    admin = admin.first()
-
-    database.delete(admin)
+    database.delete(admin.first())
     database.commit()
 
     return {'message': 'Admin deletado com sucesso!'}
