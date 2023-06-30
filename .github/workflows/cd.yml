@@ -15,8 +15,8 @@ jobs:
       - name: Run Production Deploy
         run: |
           export
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+          docker compose -f docker-compose.yml -f docker-compose.prod.yml down
+          docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ALGORITHM: ${{ secrets.ALGORITHM }}
