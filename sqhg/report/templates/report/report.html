@@ -1,0 +1,278 @@
+{% extends 'layout.html' %}
+
+{% block js_import %}
+<script src="{% static 'report/js/chart.js' %}"></script>
+{% endblock js_import %}
+
+{% block content %}
+    <div class="flex flex-col items-center">
+        <div class="top-bar bg-white h-65 rounded-xl w-full">
+            <div class="title">
+                <div class="text-center">
+                    <h1 class="text-2xl font-bold py-3 text-[var(--vivid-violet)]">
+                        Relatório de Avaliações
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="pesquisa-box w-full">
+            <div class="flex justify-center py-8 space-x-3 items-center w-full">
+                <input type="text"
+                    class="search-txt w-full md:w-1/2 border border-[var(--vivid-violet)] rounded-md px-3 h-8"
+                    placeholder="Pesquisar Avaliado" required />
+                <div class="hover:bg-gray-200 py-1 px-2 rounded-md">
+                    <i class="fa-solid fa-magnifying-glass text-xl text-[var(--vivid-violet)]"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-2/3 py-4 flex flex-col space-y-3">
+            <div class="overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                    <thead>
+                        <tr>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Avaliação Respondidas
+                            </th>
+
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Colaboradores Da Equipe
+                            </th>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Conclusão
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                18
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                27
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                66%
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class=" overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                    <thead>
+                        <tr>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Pergunta
+                            </th>
+
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Média
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                Meu superior esta no setor diariamente quando preciso.
+                            </td>
+
+
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                10
+                            </td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 ">
+                                Meu superior coloca a mão na massa.
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                8,8
+                            </td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text">
+                                Meu superior garante que eu tenha informações suficiente para realizar meu
+                                trabalho.
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                8,6
+                            </td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 ">
+                                Meu superior me ouve e valoriza minhas opiniões.
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                8,4
+                            </td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 ">
+                                Meu superior é um exemplo positivo para mim.
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                8,2
+                            </td>
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8">
+                                Meu superior ajuda no meu crescimento profissional.
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                                7,2
+                            </td>
+
+
+                        </tr>
+
+                        <tr class="hover:bg-gray-200 hover:text-gray-900 border border-[var(--vivid-violet)]">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
+                                MEDIA TOTAL
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
+                                8,5
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class=" overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                    <thead>
+                        <tr>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                HABILIDADES TÉCNICAS
+                            </th>
+
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                HABILIDADES INTERPESSOAIS
+                            </th>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                HABILIDADES INTERPESSOAIS
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                8,4
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
+                                7,9
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 h-8 text-center">
+                                7.6
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class=" overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                    <thead>
+                        <tr>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                Qual a caracterísca mais forte do seu superior imediato
+                            </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Capacidade de absorver as informações e transmitir com clareza.
+                            </td>
+
+                        </tr>
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Empatia
+                            </td>
+
+                        </tr>
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Inteligente
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class=" overflow-x-auto rounded-lg border border border-[var(--vivid-violet)] late-50">
+                <table class="min-w-full divide-y-2 divide-purple-800 text-sm bg-white">
+                    <thead>
+                        <tr>
+                            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 text-center">
+                                COMO SEU SUPERIOR PODERIA MELHORAR O DESEMPENHO DELE?
+                            </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Aprender mais sobre nossas funções dentro do setor.
+                            </td>
+
+                        </tr>
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Melhorar a comunicação entre a equipe.
+                            </td>
+
+                        </tr>
+                        <tr class="hover:bg-gray-200 hover:text-gray-900">
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
+                                Está com bom desempenho.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container mx-auto py-2">
+                <canvas id="myChart" class="w-full"
+                    style="max-height: 350px; background-color:rgb(255, 255, 255); border: 1px solid #853A9E; border-radius: 10px;"></canvas>
+            </div>
+
+            <div class="w-fit flex justify-end py-10 w-full">
+                <div class="Criar-button">
+                    <button
+                        class="bg-[var(--vivid-violet)] w-40 py-2 rounded-md text-gray-50 ml-5 hover:bg-[var(--honey-flower)]">
+                        Exportar Relatório
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
