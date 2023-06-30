@@ -10,14 +10,14 @@
   </div>
 </nav>
 <!-- Desktop Nav -->
-<nav id="nav" class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full sm:flex flex-col px-3 py-5 items-center space-y-7 ease-in duration-300">
+<nav id="nav" class="hidden sm:w-2/6 lg:w-1/6 xl:w-[13%] bg-[var(--honey-flower)] h-full sm:flex flex-col px-3 py-3 items-center space-y-7 ease-in duration-300">
   <a class="p-2 flex justify-center" href="{{ url_for('home_page') }}">
     <img class="w-32" src="{% static 'assets/prati-logo.png' %}" alt="">
   </a>
   <div class="flex flex-col w-full h-full space-y-3">
     <!-- Items 1 -->
     <div class="w-full h-fit">
-      <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+      <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer flex justify-between">
         <a class="w-full flex" href="{{ url_for('home_page') }}">
           <div class="w-1/6">
             <i class="fa-solid fa-house"></i>
@@ -28,7 +28,7 @@
     </div>
     <!-- Items 2 -->
     <div class="w-full h-fit overflow-hidden relative">
-      <div id="openUserSubItems" class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+      <div id="openUserSubItems" class="w-full bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer flex justify-between">
         <div>
           <i class="fa-solid fa-user"></i>
         </div>
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div id="userSubItems" class="w-full flex flex-col justify-end duration-500 transition-y-0">
-        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
+        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-1 px-3 cursor-pointer">
           <a class="flex" href="{{ url_for('admin_create_page') }}">
             <div class="w-1/6">
               <i class="fa-solid fa-plus"></i>
@@ -49,7 +49,7 @@
             <span class="select-none w-4/6">Criar</span>
           </a>
         </div>
-        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
+        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-1 px-3 cursor-pointer rounded-b-md">
           <a class="flex" href="{{ url_for('admin_list_page') }}">
             <div class="w-1/6">
               <i class="fa-solid fa-list"></i>
@@ -62,7 +62,7 @@
     <!-- Items 3 -->
     <div class=" w-full h-fit">
       <div id="openQuestionnairesSubItems"
-        class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
+        class="w-full bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer flex justify-between">
         <div>
           <i class="fa-solid fa-question"></i>
         </div>
@@ -75,28 +75,36 @@
         </div>
       </div>
       <div id="questionnairesSubItems" class="w-full flex flex-col justify-center">
-        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer">
+        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-1 px-3 cursor-pointer">
           <a class="flex" href="{{ url_for('survey_create_page') }}">
             <div class="w-1/6">
               <i class="fa-solid fa-object-ungroup"></i>
             </div>
-            <span class="select-none w-4/6">Criar</span>
+            <span class="select-none w-4/6">Criar Modelo</span>
           </a>
         </div>
-        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-2 px-3 cursor-pointer rounded-b-md">
-          <a class="flex" href="{{ url_for('survey_sent_page') }}">
+        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-1 px-3 cursor-pointer">
+          <a class="flex" href="{{ url_for('models_list_page') }}">
             <div class="w-1/6">
               <i class="fa-solid fa-list"></i>
             </div>
-            <span class="select-none w-4/6">Listar</span>
+            <span class="select-none w-4/6">Listar Modelos</span>
+          </a>
+        </div>
+        <div class="w-11/12 mx-2 bg-[var(--vivid-violet)] text-center text-white py-1 px-3 cursor-pointer rounded-b-md">
+          <a class="flex" href="{{ url_for('survey_sent_page') }}">
+            <div class="w-1/6">
+              <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <span class="select-none w-4/6">Listar Envios</span>
           </a>
         </div>
       </div>
     </div>
     <!-- Items 4 -->
     <div class="w-full h-fit">
-      <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-        <a class="w-full flex" href="#">
+      <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer flex justify-between">
+        <a class="w-full flex block" href="#">
           <div class="w-1/6">
             <i class="fa-solid fa-file-lines"></i>
           </div>
@@ -105,14 +113,24 @@
       </div>
     </div>
   </div>
-  <div class="w-full h-full items-center flex flex-col justify-end">
-    <div class="bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
-      <div class=" flex justify-center" href="#">
-        <img class="w-24" src="{% static 'assets/atendimento-geral.svg' %}" alt="Telefone">
+  <!-- Items 5 -->
+  <div class="w-full h-fit">
+    <div class="w-full text-center text-white py-1 px-3 rounded-md cursor-pointer flex flex-col justify-between space-y-3">
+      <div class="bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer">
+        <a id="settingBtn" class="w-full flex block" href="#">
+          <div class="w-1/6">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+          <span class="select-none w-4/6">Configurações</span>
+        </a>
       </div>
-      <div class="flex flex-col items-center text-xl space-y-2">
-        <span class="w-40 text-center">Atendimento Geral</span>
-        <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+      <div class="bg-[var(--flushed-violet)] text-center text-white py-1 px-3 rounded-md cursor-pointer">
+        <a id="logoutBtn" class="w-full flex block" data-href="{{ url_for('admin_logout') }}">
+          <div class="w-1/6">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+          <span class="select-none w-4/6">Logout</span>
+        </a>
       </div>
     </div>
   </div>
@@ -176,14 +194,19 @@
         </div>
       </div>
       <div id="mobileQuestionnairesSubItems" class="w-full flex justify-center space-x-3">
-        <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-          <a href="{{ url_for('survey_create_page') }}">
+        <div class="w-1/3 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+          <a class="block" href="{{ url_for('survey_create_page') }}">
             <i class="fa-solid fa-object-ungroup"></i>
           </a>
         </div>
-        <div class="w-1/2 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
-          <a href="#">
+        <div class="w-1/3 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+          <a class="block" href="{{ url_for('models_list_page') }}">
             <i class="fa-solid fa-list"></i>
+          </a>
+        </div>
+        <div class="w-1/3 bg-[var(--vivid-violet)] text-center text-white py-2 px-5 rounded-md cursor-pointer">
+          <a class="block" href="{{ url_for('survey_sent_page') }}">
+            <i class="fa-solid fa-paper-plane"></i>
           </a>
         </div>
       </div>
@@ -191,7 +214,7 @@
     <!-- Items 4 -->
     <div class="w-full space-y-3">
       <div class="w-full bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer flex justify-between">
-        <a href="#" class="w-full flex">
+        <a href="#" class="w-full flex block">
           <div class="w-1/6">
             <i class="fa-solid fa-file-lines"></i>
           </div>
@@ -200,14 +223,24 @@
       </div>
     </div>
   </div>
-  <div class="w-full h-full space-x-3 items-center flex flex-col">
-    <div class="fixed bottom-10 px-2 flex flex-col items-center text-white space-y-3 text-xl">
-      <div class=" flex justify-center" href="#">
-        <img class="w-24" src="{% static 'assets/atendimento-geral.svg' %}" alt="Telefone">
+  <!-- Items 5 -->
+  <div class="w-full h-fit">
+    <div class="w-full text-center text-white rounded-md cursor-pointer flex flex-col justify-between space-y-3">
+      <div class="bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer">
+        <a id="settingBtn" class="w-full flex block" href="#">
+          <div class="w-1/6">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+          <span class="select-none w-4/6">Configurações</span>
+        </a>
       </div>
-      <div class="flex flex-col items-center text-xl space-y-2">
-        <span class="w-40 text-center">Atendimento Geral</span>
-        <span class="border border-white rounded-md py-1 px-5">45 2103-1166</span>
+      <div class="bg-[var(--flushed-violet)] text-center text-white py-2 px-3 rounded-md cursor-pointer">
+        <a id="logoutBtn" class="w-full flex block" data-href="{{ url_for('admin_logout') }}">
+          <div class="w-1/6">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+          <span class="select-none w-4/6">Logout</span>
+        </a>
       </div>
     </div>
   </div>

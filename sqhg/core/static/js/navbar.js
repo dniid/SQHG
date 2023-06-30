@@ -66,6 +66,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    let logoutBtns = document.querySelectorAll('#logoutBtn');
+    
+    logoutBtns.forEach(logoutBtn => {
+        logoutBtn.addEventListener('click', () => {
+            Swal.fire({
+              title: `Tem certeza que deseja sair?`,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#853A9E',
+              confirmButtonText: 'Sim'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = logoutBtn.dataset.href;
+              }
+            })
+        });
+    })
+
 // Mobile Functions
     // Open Menu
     mobileOpenMenu.addEventListener("click", (event) => {

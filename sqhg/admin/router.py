@@ -25,10 +25,13 @@ async def admin_list_page(
 ):
     if not request.state.authenticated:
         return RedirectResponse('/login')
+
     context = {'request': request}
     context['subtitle'] = 'Admin'
+
     users = database.query(Admin).all()
     context['users'] = users
+
     return template.TemplateResponse('admin/list.html', context)
 
 
@@ -56,10 +59,11 @@ async def admin_edit_page(
     context = {'request': request}
     context['subtitle'] = 'Admin'
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
+
+    admin = admin.first()
 
     context['user'] = admin
 
@@ -92,7 +96,7 @@ async def admin_edit(request: Request, id: int, admin_data: AdminUpdate, databas
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
+    admin = database.query(Admin).filter(Admin.id==id).first()
 
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
@@ -116,12 +120,20 @@ async def admin_delete(request: Request, id: int, database: Session = Depends(Da
     if not request.state.authenticated:
         return InvalidCredentials
 
-    admin = database.query(Admin).filter(Admin.id == id).first()
-
+    admin = database.query(Admin).filter(Admin.id==id)
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
+
+    admin = admin.first()
 
     database.delete(admin)
     database.commit()
 
     return {'message': "Admin deletado com sucesso!"}
+
+
+@router.get('/logout')
+async def admin_logout():
+    response = RedirectResponse(url="/login?admin=True")
+    response.delete_cookie("session_token")
+    return response
