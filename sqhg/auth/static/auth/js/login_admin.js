@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let email = form.querySelector('#email');
     let password = form.querySelector('#password');
 
+    let redirectUrl = form.querySelector('button[type=submit]').dataset.href;
     let url = form.getAttribute('action');
     let data = JSON.stringify({
       'email': email.value,
@@ -20,19 +21,37 @@ document.addEventListener('DOMContentLoaded', function () {
         'Content-Type': 'application/json'
       },
       body: data,
-    }).then(response => {
-      if (response.status == 200) {
-        window.location.href = response.url;
+    }).then(async response => {
+      let data = await response.json();
+
+      if (response.status == 200){
+        window.location.href = redirectUrl;
       } else {
-        throw new Error(response.statusText);
+        iziToast.error({
+          position: 'topRight',
+          message: data.detail,
+        });
       }
     }).catch(error => {
       console.error(error);
       iziToast.error({
         position: 'topRight',
-        message: 'Credenciais inválidas',
+        message: 'Erro interno do servidor',
       });
     });
   };
 
+  let toogleBtn = document.getElementById('passwordToggle');
+  toogleBtn.addEventListener('click', () => {
+    let inputPass = document.getElementById('password')
+    let btnShowPass = document.getElementById('btn-senha')
+
+    if (inputPass.type === 'password') {
+      inputPass.setAttribute('type', 'text')
+      btnShowPass.classList.replace('fa-eye','fa-eye-slash')
+    } else {
+      inputPass.setAttribute('type', 'password')
+      btnShowPass.classList.replace('fa-eye-slash','fa-eye')
+    }
+  });
 });

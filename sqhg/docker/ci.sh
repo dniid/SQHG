@@ -3,4 +3,4 @@
 set -e
 set -x
 
-make tests
+pytest .

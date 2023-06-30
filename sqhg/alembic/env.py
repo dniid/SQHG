@@ -12,7 +12,7 @@ from core.database import BaseModel
 # Import models for SQLAlchemy's database base metadata
 from admin.models import Admin  # noqa: F401
 from sap.models import Area, Superior  # noqa: F401
-from survey.models import Survey, SurveyModel, Question, Option, Answer  # noqa: F401
+from survey.models import Survey, Question, Option, SurveyModel, QuestionModel, OptionModel, Answer  # noqa: F401
 from user.models import Token  # noqa: F401
 
 
