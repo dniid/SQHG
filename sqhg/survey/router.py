@@ -16,7 +16,7 @@ from sap.models import Superior
 from user.models import Token
 
 from survey.schemas import SurveyModelSchema, SurveySchema
-from survey.models import Survey, Question, Option, SurveyModel, QuestionModel, OptionModel
+from survey.models import Survey, SurveyModel, QuestionModel, OptionModel, QuestionType
 
 router = APIRouter()
 
@@ -31,8 +31,8 @@ async def survey_list_page(
         return RedirectResponse('/login')
 
     context = {'request': request}
-    context['subtitle'] = 'List Survey Model'
-    context['models'] = database.query(SurveyModel).filter(SurveyModel.is_archived==False).all()
+    context['subtitle'] = 'Survey Model List'
+    context['models'] = database.query(SurveyModel).filter(SurveyModel.is_archived==False).all()  # noqa: E712
 
     return template.TemplateResponse('survey/list.html', context)
 
@@ -59,7 +59,8 @@ async def survey_edit_page(
         return RedirectResponse('/login')
 
     context = {'request': request}
-    context['subtitle'] = 'Models'
+    context['subtitle'] = 'Edit Survey Model'
+    context['question_type'] = QuestionType
 
     survey_model = database.query(SurveyModel).filter(SurveyModel.id==id)
     if not survey_model:
@@ -89,8 +90,8 @@ async def survey_sent_page(
     if not request.state.authenticated:
         return RedirectResponse('/login')
 
-    context = {'request' : request}
-    context['subtitle'] = 'List Survey Sent'
+    context = {'request': request}
+    context['subtitle'] = 'Sent Surveys'
     context['surveys'] = database.query(Survey).all()
 
     return template.TemplateResponse('survey/sent.html', context)
@@ -196,7 +197,7 @@ async def survey_delete(request: Request, id: int, database: Session = Depends(D
 
     database.commit()
 
-    return {'message': "Modelo arquivado com sucesso!"}
+    return {'message': 'Modelo arquivado com sucesso!'}
 
 
 @router.post('/send', response_class=HTMLResponse, status_code=status.HTTP_200_OK)

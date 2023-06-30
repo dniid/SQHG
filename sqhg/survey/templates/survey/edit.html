@@ -149,7 +149,7 @@
             </div>
           </div>
         </div>
-        {% for question in model.questions %}
+        {% for question in model.questions_model %}
           <div class="question-form flex gap-1 w-full mb-3">
             <div class="grow flex flex-col p-5 rounded-xl bg-white text-center text-xl">
               <div class="items-center text-xl text-[var(--vivid-violet)] mb-5">
@@ -166,14 +166,14 @@
                         type="text" autocomplete="off" value="{{ question.description }}" required>
                     </div>
                     <select id="questionType" class="w-full md:w-fit question-type border rounded border-[var(--flushed-violet)] bg-white text-base text-black px-2 py-0.5 focus:outline-0">
-                      <option value="likert" {% if question.type == 'likert' %}selected{% endif %}>De 0 a 10</option>
-                      <option value="alternatives" {% if question.type == 'alternatives' %}selected{% endif %}>Alternativas</option>
-                      <option value="multiple" {% if question.type == 'multiple' %}selected{% endif %}>Múltipla Escolha</option>
-                      <option value="open_ended" {% if question.type == 'open_ended' %}selected{% endif %}>Aberta</option>
+                      <option value="likert" {% if question.type == question_type.likert %}selected{% endif %}>De 0 a 10</option>
+                      <option value="alternatives" {% if question.type == question_type.alternatives %}selected{% endif %}>Alternativas</option>
+                      <option value="multiple" {% if question.type == question_type.multiple %}selected{% endif %}>Múltipla Escolha</option>
+                      <option value="open_ended" {% if question.type == question_type.open_ended %}selected{% endif %}>Aberta</option>
                     </select>
                   </div>
                   <div class="question-type-body w-full flex justify-center bg-gray-100 rounded">
-                    <div class="type likert-type {% if question.type != 1 %}hidden{% endif %} flex justify-center space-x-5 p-5 flex-wrap pointer-events-none opacity-50">
+                    <div class="type likert-type {% if question.type != question_type.likert %}hidden{% endif %} flex justify-center space-x-5 p-5 flex-wrap pointer-events-none opacity-50">
                       <div>
                         <input type="checkbox">
                         <label>0</label>
@@ -219,7 +219,7 @@
                         <label>10</label>
                       </div>
                     </div>
-                    <div class="type alternative-type {% if question.type != 2 %}hidden{% endif %} w-full p-5 flex flex-col">
+                    <div class="type alternative-type {% if question.type != question_type.alternatives %}hidden{% endif %} w-full p-5 flex flex-col">
                       <div class="alternatives-container">
                         <div class="alternative-form-template flex justify-between hidden">
                           <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
@@ -230,8 +230,8 @@
                           type="text" autocomplete="off" value="Alternativa">
                           </div>
                         </div>
-                        {% if question.type == 'alternatives' %}
-                          {% for option in question.options %}
+                        {% if question.type == question_type.alternatives %}
+                          {% for option in question.options_model %}
                             <div class="alternative-form flex justify-between">
                               <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-alternative w-fit">
                                 <i class="fa-solid fa-square-minus"></i>
@@ -251,7 +251,7 @@
                         </button>
                       </div>
                     </div>
-                    <div class="type multiple-type {% if question.type != 3 %}hidden{% endif %} w-full p-5 flex flex-col">
+                    <div class="type multiple-type {% if question.type != question_type.multiple %}hidden{% endif %} w-full p-5 flex flex-col">
                       <div class="multiples-container">
                         <div class="multiple-form-template flex justify-between hidden">
                           <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
@@ -262,8 +262,8 @@
                           type="text" autocomplete="off" value="Multipla">
                           </div>
                         </div>
-                        {% if question.type == 'multiple' %}
-                          {% for option in question.options %}
+                        {% if question.type == question_type.multiple %}
+                          {% for option in question.options_model %}
                             <div class="multiple-form flex justify-between">
                               <div class="text-2xl font-bold text-[var(--vivid-violet)] mr-4 cursor-pointer btn-remove-multiple w-fit">
                                 <i class="fa-solid fa-square-minus"></i>
@@ -283,7 +283,7 @@
                         </button>
                       </div>
                     </div>
-                    <div class="type open-type {% if question.type != 4 %}hidden{% endif %} flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
+                    <div class="type open-type {% if question.type != question_type.open_ended %}hidden{% endif %} flex justify-center w-full items-center p-5 pointer-events-none opacity-50">
                       <textarea class="w-full h-32"></textarea>
                     </div>
                   </div>
