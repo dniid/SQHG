@@ -68,7 +68,7 @@ async def test_auth_admin_login_succeeds(client: TestClient, admin: Admin) -> No
 
 
 @pytest.mark.asyncio
-async def test_auth_admin_login_fails(client: TestClient) -> None:
+async def test_auth_admin_login_fails(client: TestClient, admin: Admin) -> None:
     response = await client.post('/login', json={
         'email': 'mock@admin.com',
         'password': 'wrongpass',
