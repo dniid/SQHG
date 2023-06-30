@@ -102,4 +102,38 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileQuestionnairesChevronDown.classList.remove("hidden");
         }
     });
+
+    let logoutBtn = document.getElementById('logoutBtn');
+
+    logoutBtn.addEventListener('click', () => {
+        Swal.fire({
+            title: `Tem certeza que deseja sair?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#853A9E',
+            cancelButtonColor: '#dddddd',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Sim'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(logoutBtn.dataset.href, {
+                    method: 'POST',
+                    headers: {
+                      'X-CSRFToken': CSRFTOKEN,
+                      'Content-Type': 'application/json'
+                    },
+                }).then(response => {
+                    if (response.ok ) {
+                        window.location.href = logoutBtn.dataset.redirect;
+                    }
+                }).catch(error => {
+                    console.error(error);
+                    iziToast.error({
+                        position: 'topRight',
+                        message: 'Erro ao salvar.',
+                    });
+                });
+            }
+        })
+    });
 });
